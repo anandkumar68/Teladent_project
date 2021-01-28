@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "teladent-web"
+  "defaultProject": "teladent-web",
+  "cli": {
+    "analytics": false
+  }
 }
