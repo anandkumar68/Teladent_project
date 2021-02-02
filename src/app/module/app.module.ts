@@ -8,6 +8,7 @@ import { IndexComponent } from './index/index.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { NgOtpInputModule } from  'ng-otp-input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     CoreModule,
     NgxIntlTelInputModule,
     BsDropdownModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    NgOtpInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

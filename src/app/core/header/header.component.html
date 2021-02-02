@@ -108,7 +108,8 @@
                 <div class="login-image">
                     <img src="../../../assets/img/teladent.png" alt="">
                 </div>
-                <div class="login-form">
+                <!-- FOR LOGIN -->
+                <!-- <div class="login-form">
                     <form>
                         <div class="form-group">
                             <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
@@ -126,13 +127,61 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Login</button>
                         </div>
                     </form>
+                    <div class="button-group text-center margin-top10">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sign Up</button>
+                    </div>
+                    <div class="margin-top10 text-center">
+                        <a href="javascript:void(0);">Forgot password?</a>
+                    </div>
+                </div> -->
+
+
+
+
+                <!-- FOR SIGNUP -->
+                <!-- <div class="login-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Fullname">
+                        </div>
+                        <div class="form-group">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
+                                [enablePlaceholder]="true" [searchCountryFlag]="true"
+                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
+                                [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                [separateDialCode]="separateDialCode" name="phone">
+                            </ngx-intl-tel-input>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="button-group text-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sign Up</button>
+                        </div>
+                    </form>
+                    <div class="button-group text-center margin-top10">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Login</button>
+                    </div>
+                </div> -->
+
+
+                <!-- FOR OTP -->
+                 <div class="login-form">
+                    <form>
+                        <div class="form-group text-center">
+                            <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6}"></ng-otp-input>
+                        </div>
+                        <div class="button-group text-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Submit</button>
+                        </div>
+                    </form>
+                    <div class="button-group text-center margin-top10">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i class="fa fa-lock"> </i> Resend OTP</button>
+                    </div>
                 </div>
 
             </div>
-            <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div> -->
         </div>
     </div>
 </div>

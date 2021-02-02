@@ -13,10 +13,15 @@ export class HeaderComponent implements OnInit {
 	TooltipLabel = TooltipLabel;
   CountryISO = CountryISO;
   setCountry: any;
+  otp: string;
   constructor() { }
 
   ngOnInit(): void {
     this.setCountry = CountryISO.India;
   }
 
+
+  onOtpChange(otp) {
+    this.otp = otp;
+  }
 }

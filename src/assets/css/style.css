@@ -11069,7 +11069,7 @@ ul.benifits-col li i {
 
 /* LOGIN MODAL */
 .login-modal .modal-content {
-    height: 500px !important;
+    height: 530px !important;
     width: 400px !important;
     border-radius: 16px !important;
     margin-left: 50px !important;
@@ -11111,7 +11111,6 @@ input#country-search-box {
 }
 
 .login-form{
-    margin-top: 32px;
     padding: 25px;
 }
 .login-form .form-group {
@@ -11130,6 +11129,15 @@ input#country-search-box {
     font-size: 18px;
     background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%);
 }
+.margin-top10{
+    margin-top: 10px;
+}
 
 /* LOGIN MODAL */
  
+/* OTP */
+.otp-input{
+    width: 35px !important;
+    height: 40px !important;
+    font-size: 20px !important;
+}
