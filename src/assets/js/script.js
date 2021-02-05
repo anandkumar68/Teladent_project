@@ -405,140 +405,106 @@ Version      : 1.0
         }
     })
 
-    $(document).ready(function(e) {
-        var revapi = $(".rev_slider").revolution({
-            sliderType: "standard",
-            sliderLayout: "auto",
-            dottedOverlay: "none",
-            delay: 5000,
-            navigation: {
-                keyboardNavigation: "off",
-                keyboard_direction: "horizontal",
-                mouseScrollNavigation: "off",
-                onHoverStop: "off",
-                touch: {
-                    touchenabled: "on",
-                    swipe_threshold: 75,
-                    swipe_min_touches: 1,
-                    swipe_direction: "horizontal",
-                    drag_block_vertical: false
-                },
-                arrows: {
-                    style: "zeus",
-                    enable: true,
-                    hide_onmobile: true,
-                    hide_under: 600,
-                    hide_onleave: true,
-                    hide_delay: 200,
-                    hide_delay_mobile: 1200,
-                    tmp: '<div class="tp-title-wrap">    <div class="tp-arr-imgholder"></div> </div>',
-                    left: {
-                        h_align: "left",
-                        v_align: "center",
-                        h_offset: 30,
-                        v_offset: 0
-                    },
-                    right: {
-                        h_align: "right",
-                        v_align: "center",
-                        h_offset: 30,
-                        v_offset: 0
-                    }
-                },
-                bullets: {
-                    enable: true,
-                    hide_onmobile: true,
-                    hide_under: 1800,
-                    style: "metis",
-                    hide_onleave: true,
-                    hide_delay: 200,
-                    hide_delay_mobile: 1200,
-                    direction: "horizontal",
-                    h_align: "center",
-                    v_align: "bottom",
-                    h_offset: 0,
-                    v_offset: 30,
-                    space: 5,
-                    tmp: '<span class="tp-bullet-image"></span><span class="tp-bullet-imageoverlay"></span><span class="tp-bullet-title"></span>'
-                }
-            },
-            responsiveLevels: [1240, 1024, 778],
-            visibilityLevels: [1240, 1024, 778],
-            gridwidth: [1170, 1024, 778, 480],
-            gridheight: [450, 450, 400, 400],
-            lazyType: "none",
-            parallax: {
-                origo: "slidercenter",
-                speed: 1000,
-                levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47, 48, 49, 50, 100, 55],
-                type: "scroll"
-            },
-            shadow: 0,
-            spinner: "off",
-            stopLoop: "on",
-            stopAfterLoops: 0,
-            stopAtSlide: -1,
-            shuffle: "off",
-            autoHeight: "off",
-            fullScreenAutoWidth: "off",
-            fullScreenAlignForce: "off",
-            fullScreenOffsetContainer: "",
-            fullScreenOffset: "0",
-            hideThumbsOnMobile: "off",
-            hideSliderAtLimit: 0,
-            hideCaptionAtLimit: 0,
-            hideAllCaptionAtLilmit: 0,
-            debugMode: false,
-            fallbacks: {
-                simplifyAll: "off",
-                nextSlideOnWindowFocus: "off",
-                disableFocusListener: false,
-            }
-        });
-    });
+    // $(document).ready(function(e) {
+    //     var revapi = $(".rev_slider").revolution({
+    //         sliderType: "standard",
+    //         sliderLayout: "auto",
+    //         dottedOverlay: "none",
+    //         delay: 5000,
+    //         navigation: {
+    //             keyboardNavigation: "off",
+    //             keyboard_direction: "horizontal",
+    //             mouseScrollNavigation: "off",
+    //             onHoverStop: "off",
+    //             touch: {
+    //                 touchenabled: "on",
+    //                 swipe_threshold: 75,
+    //                 swipe_min_touches: 1,
+    //                 swipe_direction: "horizontal",
+    //                 drag_block_vertical: false
+    //             },
+    //             arrows: {
+    //                 style: "zeus",
+    //                 enable: true,
+    //                 hide_onmobile: true,
+    //                 hide_under: 600,
+    //                 hide_onleave: true,
+    //                 hide_delay: 200,
+    //                 hide_delay_mobile: 1200,
+    //                 tmp: '<div class="tp-title-wrap">    <div class="tp-arr-imgholder"></div> </div>',
+    //                 left: {
+    //                     h_align: "left",
+    //                     v_align: "center",
+    //                     h_offset: 30,
+    //                     v_offset: 0
+    //                 },
+    //                 right: {
+    //                     h_align: "right",
+    //                     v_align: "center",
+    //                     h_offset: 30,
+    //                     v_offset: 0
+    //                 }
+    //             },
+    //             bullets: {
+    //                 enable: true,
+    //                 hide_onmobile: true,
+    //                 hide_under: 1800,
+    //                 style: "metis",
+    //                 hide_onleave: true,
+    //                 hide_delay: 200,
+    //                 hide_delay_mobile: 1200,
+    //                 direction: "horizontal",
+    //                 h_align: "center",
+    //                 v_align: "bottom",
+    //                 h_offset: 0,
+    //                 v_offset: 30,
+    //                 space: 5,
+    //                 tmp: '<span class="tp-bullet-image"></span><span class="tp-bullet-imageoverlay"></span><span class="tp-bullet-title"></span>'
+    //             }
+    //         },
+    //         responsiveLevels: [1240, 1024, 778],
+    //         visibilityLevels: [1240, 1024, 778],
+    //         gridwidth: [1170, 1024, 778, 480],
+    //         gridheight: [450, 450, 400, 400],
+    //         lazyType: "none",
+    //         parallax: {
+    //             origo: "slidercenter",
+    //             speed: 1000,
+    //             levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47, 48, 49, 50, 100, 55],
+    //             type: "scroll"
+    //         },
+    //         shadow: 0,
+    //         spinner: "off",
+    //         stopLoop: "on",
+    //         stopAfterLoops: 0,
+    //         stopAtSlide: -1,
+    //         shuffle: "off",
+    //         autoHeight: "off",
+    //         fullScreenAutoWidth: "off",
+    //         fullScreenAlignForce: "off",
+    //         fullScreenOffsetContainer: "",
+    //         fullScreenOffset: "0",
+    //         hideThumbsOnMobile: "off",
+    //         hideSliderAtLimit: 0,
+    //         hideCaptionAtLimit: 0,
+    //         hideAllCaptionAtLilmit: 0,
+    //         debugMode: false,
+    //         fallbacks: {
+    //             simplifyAll: "off",
+    //             nextSlideOnWindowFocus: "off",
+    //             disableFocusListener: false,
+    //         }
+    //     });
+    // });
 
 })(jQuery);
 
 
-document.getElementById("copyright").innerHTML =
-    "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='https://webexpo.co.in' target='_blank' alt='webexpo - An Online web design and development agency.'>www.Webexpo.co.in</a> ";
 
 
-window.onscroll = function() { myFunction() };
-
-var header = document.getElementById("mainHeader");
-var sticky = header.offsetTop;
-
-function myFunction() {
-    if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-    } else {
-        header.classList.remove("sticky");
-    }
-}
 
 
-var tabs = $('.tabs');
-var selector = $('.tabs').find('a').length;
-//var selector = $(".tabs").find(".selector");
-var activeItem = tabs.find('.active');
-var activeWidth = activeItem.innerWidth();
-$(".selector").css({
-    "left": activeItem.position.left + "px",
-    "width": activeWidth + "px"
-});
 
-$(".tabs").on("click", "a", function(e) {
-    e.preventDefault();
-    $('.tabs a').removeClass("active");
-    $(this).addClass('active');
-    var activeWidth = $(this).innerWidth();
-    var itemPos = $(this).position();
-    $(".selector").css({
-        "left": itemPos.left + "px",
-        "width": activeWidth + "px"
-    });
-});
 
 
 
@@ -850,20 +816,20 @@ $(document).ready(function() {
 
 
 
-$(function() {
-    $("#tabs").tabs({
-        show: { effect: "blind", direction: "right", duration: 300 }
-    });
-    $("#accordion").accordion();
+// $(function() {
+//     $("#tabs").tabs({
+//         show: { effect: "blind", direction: "right", duration: 300 }
+//     });
+//     $("#accordion").accordion();
 
-    var btn = $('#accordion li a');
-    var wrapper = $('#accordion li');
+//     var btn = $('#accordion li a');
+//     var wrapper = $('#accordion li');
 
-    $(btn).on('click', function() {
-        $(btn).removeClass('active');
-        $(btn).parent().find('.addon').removeClass('fadein');
+//     $(btn).on('click', function() {
+//         $(btn).removeClass('active');
+//         $(btn).parent().find('.addon').removeClass('fadein');
 
-        $(this).addClass('active');
-        $(this).parent().find('.addon').addClass('fadein');
-    });
-});
+//         $(this).addClass('active');
+//         $(this).parent().find('.addon').addClass('fadein');
+//     });
+// });
