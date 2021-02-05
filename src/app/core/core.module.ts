@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,9 @@ import { NgOtpInputModule } from 'ng-otp-input';
   imports: [
     CommonModule,
     NgxIntlTelInputModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[HeaderComponent, FooterComponent]
 })
