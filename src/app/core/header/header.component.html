@@ -109,7 +109,7 @@
                     <img src="../../../assets/img/teladent.png" alt="">
                 </div>
                 <!-- FOR LOGIN -->
-                <!-- <div class="login-form">
+                <div class="login-form" *ngIf="showHideForm.login">
                     <form>
                         <div class="form-group">
                             <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
@@ -120,29 +120,28 @@
                                 [separateDialCode]="separateDialCode" name="phone">
                             </ngx-intl-tel-input>
                         </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password">
+                        <div class="form-group form-focus">
+                            <input type="password" class="form-control  floating" >
+                            <label class="focus-label">Password</label>
                         </div>
                         <div class="button-group text-center">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Login</button>
                         </div>
                     </form>
                     <div class="button-group text-center margin-top10">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Sign Up</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="signup()"> Sign Up</button>
                     </div>
                     <div class="margin-top10 text-center">
-                        <a href="javascript:void(0);">Forgot password?</a>
+                        <a href="javascript:void(0);" (click)="forgotPassword()">Forgot password?</a>
                     </div>
-                </div> -->
-
-
-
+                </div>
 
                 <!-- FOR SIGNUP -->
-                <!-- <div class="login-form">
+                <div class="login-form" *ngIf="showHideForm.signup">
                     <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Fullname">
+                        <div class="form-group form-focus">
+                            <input type="text" class="form-control floating" placeholder="Fullname">
+                            <label class="focus-label">Fullname</label>
                         </div>
                         <div class="form-group">
                             <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
@@ -153,21 +152,43 @@
                                 [separateDialCode]="separateDialCode" name="phone">
                             </ngx-intl-tel-input>
                         </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password">
+                        <div class="form-group form-focus">
+                            <input type="password" class="form-control floating" placeholder="Password">
+                            <label class="focus-label">Password</label>
                         </div>
                         <div class="button-group text-center">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sign Up</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Submit</button>
                         </div>
                     </form>
                     <div class="button-group text-center margin-top10">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Login</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="login()"> Login</button>
                     </div>
-                </div> -->
+                </div>
+
+                <!-- FOR FORGOT PASSWORD -->
+                <div class="login-form" *ngIf="showHideForm.forgotPassword">
+                    <form>
+                        <div class="form-group">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
+                                [enablePlaceholder]="true" [searchCountryFlag]="true"
+                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
+                                [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                [separateDialCode]="separateDialCode" name="phone">
+                            </ngx-intl-tel-input>
+                        </div>
+                        <div class="button-group text-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Submit</button>
+                        </div>
+                    </form>
+                    <div class="button-group text-center margin-top10">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="login()">Login</button>
+                    </div>
+                </div>
 
 
                 <!-- FOR OTP -->
-                 <div class="login-form">
+                 <div class="login-form" *ngIf="showHideForm.otp">
                     <form>
                         <div class="form-group text-center">
                             <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6}"></ng-otp-input>
