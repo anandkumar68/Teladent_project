@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   CountryISO,
   SearchCountryField,
   TooltipLabel,
 } from 'ngx-intl-tel-input';
-declare const $:any;
+import { ToastrService } from 'ngx-toastr';
+declare const $: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -26,14 +32,11 @@ export class HeaderComponent implements OnInit {
     forgotPassword: false,
   };
 
-// LOGIN FORM
-  loginForm:FormGroup;
+  // LOGIN FORM
+  loginForm: FormGroup;
   loginSubmit = false;
 
-
-  constructor(
-    public fb: FormBuilder
-  ) {}
+  constructor(public fb: FormBuilder, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     window.onscroll = function () {
@@ -73,43 +76,41 @@ export class HeaderComponent implements OnInit {
 
     this.setCountry = CountryISO.India;
     this.login();
-    this.loginFormValidation()
+    this.loginFormValidation();
   }
 
-
-
   // FOR LOGIN FORM VALIDATION
-  loginFormValidation(){
+  loginFormValidation() {
     try {
       this.loginForm = this.fb.group({
-        phone: new FormControl('',Validators.required),
-        password: new FormControl('',Validators.required)
+        phone: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
       });
     } catch (error) {
       console.error(error);
     }
   }
 
-// FOR LOGIN FORM VALIDATION ERRORS
-  get loginValidation(){ return this.loginForm.controls }
+  // FOR LOGIN FORM VALIDATION ERRORS
+  get loginValidation() {
+    return this.loginForm.controls;
+  }
 
-// FOR SUBMIT LOGIN FORM
-  submitLogin(){
+  // FOR SUBMIT LOGIN FORM
+  submitLogin() {
     try {
       this.loginSubmit = true;
-      if(this.loginForm.invalid){
+      if (this.loginForm.invalid) {
+        this.toastr.error('All fields are required');
         return;
       }
-      if(this.loginForm.valid){
-        console.log(this.loginForm.value)
+      if (this.loginForm.valid) {
+        console.log(this.loginForm.value);
       }
     } catch (error) {
       console.error(error);
     }
   }
-
-
-
 
   onOtpChange(otp) {
     this.otp = otp;
@@ -151,8 +152,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-   // FOR FORGOT PASSWORD
-   forgotPassword() {
+  // FOR FORGOT PASSWORD
+  forgotPassword() {
     try {
       this.showHideForm.login = false;
       this.showHideForm.signup = false;
