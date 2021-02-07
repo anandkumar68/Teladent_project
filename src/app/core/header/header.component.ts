@@ -11,6 +11,7 @@ import {
   TooltipLabel,
 } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
+import { Constants } from 'src/app/shared/constant';
 declare const $: any;
 @Component({
   selector: 'app-header',
@@ -23,7 +24,7 @@ export class HeaderComponent implements OnInit {
   TooltipLabel = TooltipLabel;
   CountryISO = CountryISO;
   setCountry: any;
-  otp: string;
+  otp:string;
 
   showHideForm = {
     login: false,
@@ -35,6 +36,10 @@ export class HeaderComponent implements OnInit {
   // LOGIN FORM
   loginForm: FormGroup;
   loginSubmit = false;
+
+  // SIGNUP FORM
+  signupForm: FormGroup;
+  signupSubmit = false;
 
   constructor(public fb: FormBuilder, private toastr: ToastrService) {}
 
@@ -77,6 +82,7 @@ export class HeaderComponent implements OnInit {
     this.setCountry = CountryISO.India;
     this.login();
     this.loginFormValidation();
+    this.signupFormValidation();
   }
 
   // FOR LOGIN FORM VALIDATION
@@ -91,9 +97,36 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  // FOR SIGNUP FORM VALIDATION
+  signupFormValidation() {
+    try {
+      this.signupForm = this.fb.group(
+        {
+          phone: new FormControl('', Validators.required),
+          name: new FormControl('', Validators.required),
+          password: new FormControl('',Validators.compose([
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/)
+          ])  ),
+          confirmPassword: new FormControl('', Validators.required),
+        },
+        {
+          validator: Constants.mustMatch('password', 'confirmPassword'),
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // FOR LOGIN FORM VALIDATION ERRORS
   get loginValidation() {
     return this.loginForm.controls;
+  }
+
+  // FOR SIGNUP FORM VALIDATION ERRORS
+  get signupValidation() {
+    return this.signupForm.controls;
   }
 
   // FOR SUBMIT LOGIN FORM
@@ -106,6 +139,22 @@ export class HeaderComponent implements OnInit {
       }
       if (this.loginForm.valid) {
         console.log(this.loginForm.value);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // FOR SUBMIT SIGNUP FORM
+  submitSignup() {
+    try {
+      this.signupSubmit = true;
+      if (this.signupForm.invalid) {
+        this.toastr.error('All fields are required');
+        return;
+      }
+      if (this.signupForm.valid) {
+        console.log(this.signupForm.value);
       }
     } catch (error) {
       console.error(error);

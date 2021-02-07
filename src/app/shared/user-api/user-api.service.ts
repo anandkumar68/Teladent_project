@@ -30,4 +30,14 @@ export class UserApiService {
       console.log(error.message);
     }
   }
+
+    // VERIFY OTP WHEN USER SIGNUP 
+    verifyLoginCode(data): Observable<any> {
+      try {
+        const apiUrl = `${this.BASE_URL}/user/verify-phone`;
+        return this.http.post(apiUrl, data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
 }
