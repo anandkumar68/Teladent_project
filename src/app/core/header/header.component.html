@@ -86,7 +86,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link btn-grad" href="login.html" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-user " aria-hidden="true"></i> </a>
+                    <a class="nav-link btn-grad" href="login.html" data-toggle="modal" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true"></i> </a>
                 </li>
 
             </ul>
@@ -110,7 +110,51 @@
                 </div>
                 <!-- FOR LOGIN -->
                 <div class="login-form" *ngIf="showHideForm.login">
-                    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+                    <form  [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+                        <div class="form-group">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
+                                [enablePlaceholder]="true" [searchCountryFlag]="true"
+                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
+                                [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                            </ngx-intl-tel-input>
+                            <div *ngIf="loginSubmit && loginValidation.phone.errors" class="invalid-feedback">
+                                <div *ngIf="loginValidation.phone.errors.required">Phone No. is Mandatory</div>
+                              </div>
+                        </div>
+                        <div class="form-group form-focus">
+                            <input type="password" class="form-control floating" formControlName="password" >
+                            <label class="focus-label">Password</label>
+                            <div *ngIf="loginSubmit && loginValidation.password.errors" class="invalid-feedback">
+                                <div *ngIf="loginValidation.password.errors.required">Password is Mandatory</div>
+                              </div>
+                        </div>
+                        <div class="text-right">
+                            <a class="forgot-link" href="javascript:void(0);" (click)="forgotPassword()">Forgot Password ?</a>
+                        </div>
+                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit">Login</button>
+                        <div class="login-or">
+                            <span class="or-line"></span>
+                            <span class="span-or">or</span>
+                        </div>
+                        <div class="row form-row social-login">
+                            <div class="col-6">
+                                <a href="#" class="btn btn-facebook btn-block">
+                                    <i class="fab fa-facebook-f mr-1"></i> Login
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-google btn-block">
+                                    <i class="fab fa-google mr-1"></i> Login
+                                </a>
+                            </div>
+                        </div>
+                        <div class="text-center dont-have">Don’t have an account?
+                            <a href="javascript:void(0);" (click)="signup()">Register</a>
+                        </div>
+                    </form>
+                    <!-- <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
                         <div class="form-group">
                             <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
                                 [enablePlaceholder]="true" [searchCountryFlag]="true"
@@ -139,9 +183,9 @@
                     </div>
                     <div class="margin-top10 text-center">
                         <a href="javascript:void(0);" (click)="forgotPassword()">Forgot password?</a>
-                    </div>
+                    </div> -->
                 </div>
-
+                
                 <!-- FOR SIGNUP -->
                 <div class="login-form" *ngIf="showHideForm.signup">
                     <form>

@@ -3064,13 +3064,13 @@ section.iq-features {
     margin-top: 2px;
 }
 
-.login-right .dont-have {
+ .dont-have {
     color: #3d3d3d;
     margin-top: 20px;
     font-size: 13px;
 }
 
-.login-right .dont-have a {
+ .dont-have a {
     color: #09dca4;
 }
 
@@ -11069,7 +11069,7 @@ ul.benifits-col li i {
 
 /* LOGIN MODAL */
 .login-modal .modal-content {
-    height: 530px !important;
+    height: 580px !important;
     width: 400px !important;
     border-radius: 16px !important;
     margin-left: 50px !important;

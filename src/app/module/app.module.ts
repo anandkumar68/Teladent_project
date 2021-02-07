@@ -10,6 +10,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
-    NgOtpInputModule
+    NgOtpInputModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
