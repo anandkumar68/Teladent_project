@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   CountryISO,
   SearchCountryField,
   TooltipLabel,
 } from 'ngx-intl-tel-input';
-declare const $;
+declare const $:any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -25,7 +26,14 @@ export class HeaderComponent implements OnInit {
     forgotPassword: false,
   };
 
-  constructor() {}
+// LOGIN FORM
+  loginForm:FormGroup;
+  loginSubmit = false;
+
+
+  constructor(
+    public fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     window.onscroll = function () {
@@ -65,7 +73,43 @@ export class HeaderComponent implements OnInit {
 
     this.setCountry = CountryISO.India;
     this.login();
+    this.loginFormValidation()
   }
+
+
+
+  // FOR LOGIN FORM VALIDATION
+  loginFormValidation(){
+    try {
+      this.loginForm = this.fb.group({
+        phone: new FormControl('',Validators.required),
+        password: new FormControl('',Validators.required)
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+// FOR LOGIN FORM VALIDATION ERRORS
+  get loginValidation(){ return this.loginForm.controls }
+
+// FOR SUBMIT LOGIN FORM
+  submitLogin(){
+    try {
+      this.loginSubmit = true;
+      if(this.loginForm.invalid){
+        return;
+      }
+      if(this.loginForm.valid){
+        console.log(this.loginForm.value)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+
 
   onOtpChange(otp) {
     this.otp = otp;
