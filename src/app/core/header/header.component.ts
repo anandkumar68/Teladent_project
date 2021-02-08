@@ -13,6 +13,7 @@ import {
 } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from 'src/app/shared/constant';
+import { UserApiService } from 'src/app/shared/user-api/user-api.service';
 declare const $: any;
 @Component({
   selector: 'app-header',
@@ -30,6 +31,8 @@ export class HeaderComponent implements OnInit {
   setCountry: any;
   otp: string;
   timer = 300;
+
+  userId:any;
 
   showHideForm = {
     login: false,
@@ -50,7 +53,11 @@ export class HeaderComponent implements OnInit {
   forgotForm: FormGroup;
   forgotSubmit = false;
 
-  constructor(public fb: FormBuilder, private toastr: ToastrService) {}
+  constructor(
+    public fb: FormBuilder,
+    private toastr: ToastrService,
+    public api:UserApiService
+     ) {}
 
   ngOnInit(): void {
     window.onscroll = function () {
@@ -89,7 +96,6 @@ export class HeaderComponent implements OnInit {
     });
 
     this.setCountry = CountryISO.India;
-    this.login();
     this.loginFormValidation();
     this.signupFormValidation();
     this.forgotFormValidation();
@@ -181,11 +187,31 @@ export class HeaderComponent implements OnInit {
     try {
       this.signupSubmit = true;
       if (this.signupForm.invalid) {
-        this.toastr.error('All fields are required');
         return;
       }
       if (this.signupForm.valid) {
-        console.log(this.signupForm.value);
+        let data = {
+          name:this.signupForm.get('name').value.trim(),
+          phone :(this.signupForm.get('phone').value.e164Number).replace(this.signupForm.get('phone').value.dialCode, ''),
+          countryCode :this.signupForm.get('phone').value.dialCode,
+          password :this.signupForm.get('password').value.trim(),
+          passwordConfirmation   :this.signupForm.get('confirmPassword').value.trim(),
+        }
+        this.api.userRegisterApi(data).subscribe(response => {
+          console.log(response);
+          if(response.status === 'success'){
+            this.userId = response.data._id;
+            this.toastr.success(response.message);
+            localStorage.setItem('otpVerify',Constants.credentialsEncrypt(JSON.stringify(response.data)))
+            this.showOtp();
+          } 
+
+          if(response.status === 'error'){
+            this.toastr.error(response.message);
+          } 
+        },error => {
+          console.log(error);
+        });
       }
     } catch (error) {
       console.error(error);
@@ -284,6 +310,23 @@ export class HeaderComponent implements OnInit {
       }
       if (this.otp.length === 6) {
         console.log(this.otp);
+        let data = {
+          code: this.otp,
+          userId:this.userId
+        }
+        this.api.verifyLoginCode(data).subscribe(response => {
+          console.log(response);
+          if(response.status === 'success'){
+            this.toastr.success(response.message);
+            localStorage.setItem('user',Constants.credentialsEncrypt(JSON.stringify(response.data)))
+          } 
+
+          if(response.status === 'error'){
+            this.toastr.error(response.message);
+          } 
+        },error => {
+          console.log(error);
+        });
       }
     } catch (error) {
       console.error(error);
