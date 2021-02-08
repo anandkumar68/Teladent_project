@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CountdownModule } from 'ngx-countdown';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgxIntlTelInputModule,
     NgOtpInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CountdownModule
   ],
   exports:[HeaderComponent, FooterComponent]
 })

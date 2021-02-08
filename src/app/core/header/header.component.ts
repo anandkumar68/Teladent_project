@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { CountdownComponent } from 'ngx-countdown';
 import {
   CountryISO,
   SearchCountryField,
@@ -19,12 +20,16 @@ declare const $: any;
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('countdown', { static: false })
+  private counter: CountdownComponent;
+
   separateDialCode = true;
   SearchCountryField = SearchCountryField;
   TooltipLabel = TooltipLabel;
   CountryISO = CountryISO;
   setCountry: any;
-  otp:string;
+  otp: string;
+  timer = 300;
 
   showHideForm = {
     login: false,
@@ -40,6 +45,10 @@ export class HeaderComponent implements OnInit {
   // SIGNUP FORM
   signupForm: FormGroup;
   signupSubmit = false;
+
+  // FORGOT FORM
+  forgotForm: FormGroup;
+  forgotSubmit = false;
 
   constructor(public fb: FormBuilder, private toastr: ToastrService) {}
 
@@ -83,6 +92,7 @@ export class HeaderComponent implements OnInit {
     this.login();
     this.loginFormValidation();
     this.signupFormValidation();
+    this.forgotFormValidation();
   }
 
   // FOR LOGIN FORM VALIDATION
@@ -104,16 +114,32 @@ export class HeaderComponent implements OnInit {
         {
           phone: new FormControl('', Validators.required),
           name: new FormControl('', Validators.required),
-          password: new FormControl('',Validators.compose([
-            Validators.required,
-            Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/)
-          ])  ),
+          password: new FormControl(
+            '',
+            Validators.compose([
+              Validators.required,
+              Validators.pattern(
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/
+              ),
+            ])
+          ),
           confirmPassword: new FormControl('', Validators.required),
         },
         {
           validator: Constants.mustMatch('password', 'confirmPassword'),
         }
       );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // FOR FORGOT-PASSWORD FORM VALIDATION
+  forgotFormValidation() {
+    try {
+      this.forgotForm = this.fb.group({
+        phone: new FormControl('', Validators.required),
+      });
     } catch (error) {
       console.error(error);
     }
@@ -127,6 +153,11 @@ export class HeaderComponent implements OnInit {
   // FOR SIGNUP FORM VALIDATION ERRORS
   get signupValidation() {
     return this.signupForm.controls;
+  }
+
+  // FOR FORGOT FORM VALIDATION ERRORS
+  get forgotValidation() {
+    return this.forgotForm.controls;
   }
 
   // FOR SUBMIT LOGIN FORM
@@ -161,6 +192,22 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  // FOR SUBMIT FORGOT FORM
+  submitForgot() {
+    try {
+      this.forgotSubmit = true;
+      if (this.forgotForm.invalid) {
+        this.toastr.error('All fields are required');
+        return;
+      }
+      if (this.forgotForm.valid) {
+        console.log(this.forgotForm.value);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   onOtpChange(otp) {
     this.otp = otp;
   }
@@ -172,6 +219,8 @@ export class HeaderComponent implements OnInit {
       this.showHideForm.signup = false;
       this.showHideForm.otp = false;
       this.showHideForm.forgotPassword = false;
+      this.loginForm.reset();
+      this.loginSubmit = false;
     } catch (error) {
       console.error(error);
     }
@@ -184,6 +233,8 @@ export class HeaderComponent implements OnInit {
       this.showHideForm.signup = true;
       this.showHideForm.otp = false;
       this.showHideForm.forgotPassword = false;
+      this.signupForm.reset();
+      this.signupSubmit = false;
     } catch (error) {
       console.error(error);
     }
@@ -208,6 +259,32 @@ export class HeaderComponent implements OnInit {
       this.showHideForm.signup = false;
       this.showHideForm.otp = false;
       this.showHideForm.forgotPassword = true;
+      this.forgotForm.reset();
+      this.forgotSubmit = false;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // CHECK TIMER EVENT WHEN START OR CLOSE
+  handleEvent($event) {
+    try {
+      if ($event.action === 'done' && $event.text === '00:00') {
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // SUBMIT OTP DETAILS
+  submitOtp() {
+    try {
+      if (this.otp.length > 6) {
+        this.toastr.error('Invalid OTP');
+      }
+      if (this.otp.length === 6) {
+        console.log(this.otp);
+      }
     } catch (error) {
       console.error(error);
     }

@@ -211,42 +211,47 @@
 
                 <!-- FOR FORGOT PASSWORD -->
                 <div class="login-form" *ngIf="showHideForm.forgotPassword">
-                    <form>
+                    <form [formGroup]="forgotForm" (ngSubmit)="submitForgot()">
                         <div class="form-group">
                             <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
                                 [enablePlaceholder]="true" [searchCountryFlag]="true"
                                 [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
                                 [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
                                 [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
-                                [separateDialCode]="separateDialCode" name="phone">
+                                [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
                             </ngx-intl-tel-input>
+                            <div *ngIf="forgotSubmit && forgotValidation.phone.errors" class="invalid-feedback">
+                                <div *ngIf="forgotValidation.phone.errors.required">Phone No. is Mandatory</div>
+                            </div>
                         </div>
-                        <div class="button-group text-center">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Submit</button>
+                        <div class="text-right">
+                            <a class="forgot-link" href="javascript:void(0);" (click)="login()">Login</a>
                         </div>
+                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit">Submit</button>
                     </form>
-                    <div class="button-group text-center margin-top10">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            (click)="login()">Login</button>
-                    </div>
                 </div>
 
 
                 <!-- FOR OTP -->
-                <div class="login-form">
-                    <form>
-                        <div class="form-group text-center">
+                <div class="login-form" *ngIf="showHideForm.otp">
+                    <form [formGroup]="signupForm" (ngSubmit)="submitOtp()">
+                        <div class="form-group form-focus text-center">
                             <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:6}"></ng-otp-input>
                         </div>
-                        <div class="button-group text-center">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                [disabled]="otp?.length < 6">Submit</button>
+                        <div class="form-group row">
+                            <div class="col-md-6 col-sm-6 col-lg-6">
+                                <countdown #countdown [config]="{leftTime: timer, format: 'mm:ss'}"
+                                    (event)="handleEvent($event)"></countdown> Min
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-lg-6 text-right">
+                                <a class="forgot-link" href="javascript:void(0);">Resend OTP</a>
+                            </div>
                         </div>
+
+                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit"
+                            [disabled]="otp?.length < 6">Submit</button>
                     </form>
-                    <div class="button-group text-center margin-top10">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i class="fa fa-lock">
-                            </i> Resend OTP</button>
-                    </div>
                 </div>
             </div>
         </div>
