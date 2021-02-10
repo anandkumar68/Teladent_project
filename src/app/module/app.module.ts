@@ -12,11 +12,14 @@ import { NgOtpInputModule } from  'ng-otp-input';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { OnlineConsultationComponent } from './online-consultation/online-consultation.component';
+import { RouterModule } from '@angular/router';
+import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
-    OnlineConsultationComponent
+    OnlineConsultationComponent,
+    DoctorProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -28,7 +31,8 @@ import { OnlineConsultationComponent } from './online-consultation/online-consul
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
     NgOtpInputModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
