@@ -1,22 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { CountdownComponent } from 'ngx-countdown';
 import {
   CountryISO,
   SearchCountryField,
   TooltipLabel,
 } from 'ngx-intl-tel-input';
-declare const $;
+import { ToastrService } from 'ngx-toastr';
+import { Constants } from 'src/app/shared/constant';
+import { UserApiService } from 'src/app/shared/user-api/user-api.service';
+declare const $: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('countdown', { static: false })
+  private counter: CountdownComponent;
+
   separateDialCode = true;
   SearchCountryField = SearchCountryField;
   TooltipLabel = TooltipLabel;
   CountryISO = CountryISO;
   setCountry: any;
   otp: string;
+  timer = 300;
+
+  userId: any;
+  showUser = false;
+  userDetails: any;
 
   showHideForm = {
     login: false,
@@ -25,7 +43,23 @@ export class HeaderComponent implements OnInit {
     forgotPassword: false,
   };
 
-  constructor() {}
+  // LOGIN FORM
+  loginForm: FormGroup;
+  loginSubmit = false;
+
+  // SIGNUP FORM
+  signupForm: FormGroup;
+  signupSubmit = false;
+
+  // FORGOT FORM
+  forgotForm: FormGroup;
+  forgotSubmit = false;
+
+  constructor(
+    public fb: FormBuilder,
+    private toastr: ToastrService,
+    public api: UserApiService
+  ) { }
 
   ngOnInit(): void {
     window.onscroll = function () {
@@ -64,7 +98,175 @@ export class HeaderComponent implements OnInit {
     });
 
     this.setCountry = CountryISO.India;
-    this.login();
+    this.loginFormValidation();
+    this.signupFormValidation();
+    this.forgotFormValidation();
+    let userId = localStorage.getItem(Constants.credentialsDecrypt('userId'));
+    
+    this.showUser = userId === undefined || userId === undefined || userId === null  ? false : true;
+    this.loginUserDetails();
+  }
+
+  // FOR LOGIN USER DETAILS
+  loginUserDetails() {
+    try {
+      if (this.showUser) {
+        this.userDetails = JSON.parse(Constants.credentialsDecrypt(localStorage.getItem('user')));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // FOR LOGIN FORM VALIDATION
+  loginFormValidation() {
+    try {
+      this.loginForm = this.fb.group({
+        phone: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // FOR SIGNUP FORM VALIDATION
+  signupFormValidation() {
+    try {
+      this.signupForm = this.fb.group(
+        {
+          phone: new FormControl('', Validators.required),
+          name: new FormControl('', Validators.required),
+          password: new FormControl(
+            '',
+            Validators.compose([
+              Validators.required,
+              Validators.pattern(
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/
+              ),
+            ])
+          ),
+          confirmPassword: new FormControl('', Validators.required),
+        },
+        {
+          validator: Constants.mustMatch('password', 'confirmPassword'),
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // FOR FORGOT-PASSWORD FORM VALIDATION
+  forgotFormValidation() {
+    try {
+      this.forgotForm = this.fb.group({
+        phone: new FormControl('', Validators.required),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // FOR LOGIN FORM VALIDATION ERRORS
+  get loginValidation() {
+    return this.loginForm.controls;
+  }
+
+  // FOR SIGNUP FORM VALIDATION ERRORS
+  get signupValidation() {
+    return this.signupForm.controls;
+  }
+
+  // FOR FORGOT FORM VALIDATION ERRORS
+  get forgotValidation() {
+    return this.forgotForm.controls;
+  }
+
+  // FOR SUBMIT LOGIN FORM
+  submitLogin() {
+    try {
+      this.loginSubmit = true;
+      if (this.loginForm.invalid) {
+        return;
+      }
+      if (this.loginForm.valid) {
+        let data = {
+          username:(this.loginForm.get('phone').value.e164Number).replace(this.loginForm.get('phone').value.dialCode, ''),
+          countryCode :this.loginForm.get('phone')?.value.dialCode,
+          password:this.loginForm.get('password')?.value.trim()
+        }
+        this.api.userLoginApi(data).subscribe(response => {
+          if (response.status === 'success') {
+            this.toastr.success(response.message);
+            localStorage.setItem('userId', Constants.credentialsEncrypt(response.data.userId));
+            localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
+            this.showUser = true;
+            this.loginUserDetails();
+            (document.getElementById('exampleModal') as HTMLElement).click();
+          }
+
+          if (response.status === 'error') {
+            this.toastr.error(response.message);
+          }
+        }, error => {
+          console.log(error);
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // FOR SUBMIT SIGNUP FORM
+  submitSignup() {
+    try {
+      this.signupSubmit = true;
+      if (this.signupForm.invalid) {
+        return;
+      }
+      if (this.signupForm.valid) {
+        let data = {
+          name: this.signupForm.get('name').value.trim(),
+          phone: (this.signupForm.get('phone').value.e164Number).replace(this.signupForm.get('phone').value.dialCode, ''),
+          countryCode: this.signupForm.get('phone').value.dialCode,
+          password: this.signupForm.get('password').value.trim(),
+          passwordConfirmation: this.signupForm.get('confirmPassword').value.trim(),
+        }
+        this.api.userRegisterApi(data).subscribe(response => {
+          if (response.status === 'success') {
+            this.userId = response.data._id;
+            this.toastr.success(response.message);
+            localStorage.setItem('otpVerify', Constants.credentialsEncrypt(JSON.stringify(response.data)))
+            this.showOtp();
+          }
+
+          if (response.status === 'error') {
+            this.toastr.error(response.message);
+          }
+        }, error => {
+          console.log(error);
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // FOR SUBMIT FORGOT FORM
+  submitForgot() {
+    try {
+      this.forgotSubmit = true;
+      if (this.forgotForm.invalid) {
+        this.toastr.error('All fields are required');
+        return;
+      }
+      if (this.forgotForm.valid) {
+        console.log(this.forgotForm.value);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   onOtpChange(otp) {
@@ -78,6 +280,8 @@ export class HeaderComponent implements OnInit {
       this.showHideForm.signup = false;
       this.showHideForm.otp = false;
       this.showHideForm.forgotPassword = false;
+      this.loginForm.reset();
+      this.loginSubmit = false;
     } catch (error) {
       console.error(error);
     }
@@ -90,6 +294,8 @@ export class HeaderComponent implements OnInit {
       this.showHideForm.signup = true;
       this.showHideForm.otp = false;
       this.showHideForm.forgotPassword = false;
+      this.signupForm.reset();
+      this.signupSubmit = false;
     } catch (error) {
       console.error(error);
     }
@@ -107,13 +313,70 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-   // FOR FORGOT PASSWORD
-   forgotPassword() {
+  // FOR FORGOT PASSWORD
+  forgotPassword() {
     try {
       this.showHideForm.login = false;
       this.showHideForm.signup = false;
       this.showHideForm.otp = false;
       this.showHideForm.forgotPassword = true;
+      this.forgotForm.reset();
+      this.forgotSubmit = false;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // CHECK TIMER EVENT WHEN START OR CLOSE
+  handleEvent($event) {
+    try {
+      if ($event.action === 'done' && $event.text === '00:00') {
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // SUBMIT OTP DETAILS
+  submitOtp() {
+    try {
+      if (this.otp.length > 6) {
+        this.toastr.error('Invalid OTP');
+      }
+      if (this.otp.length === 6) {
+        let data = {
+          code: this.otp,
+          userId: this.userId
+        }
+        this.api.verifyLoginCode(data).subscribe(response => {
+          if (response.status === 'success') {
+            this.toastr.success(response.message);
+            localStorage.setItem('userId', Constants.credentialsEncrypt(response.data.userId));
+            localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
+            this.showUser = true;
+            this.loginUserDetails();
+            (document.getElementById('exampleModal') as HTMLElement).click();
+          }
+
+          if (response.status === 'error') {
+            this.toastr.error(response.message);
+          }
+        }, error => {
+          console.log(error);
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+  // FOR LOGOUT USER
+  logout() {
+    try {
+      localStorage.setItem('userId', undefined);
+      localStorage.setItem('user', undefined);
+      this.showUser = false;
     } catch (error) {
       console.error(error);
     }

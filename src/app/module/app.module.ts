@@ -9,10 +9,17 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgOtpInputModule } from  'ng-otp-input';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+import { OnlineConsultationComponent } from './online-consultation/online-consultation.component';
+import { RouterModule } from '@angular/router';
+import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent
+    IndexComponent,
+    OnlineConsultationComponent,
+    DoctorProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -22,7 +29,10 @@ import { NgOtpInputModule } from  'ng-otp-input';
     NgxIntlTelInputModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
-    NgOtpInputModule
+    ToastrModule.forRoot(),
+    NgOtpInputModule,
+    HttpClientModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
