@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -11,16 +11,6 @@ export class UserApiService {
 
   constructor(public http: HttpClient) {}
 
-  // SUBMIT USER LOGIN API
-  userLoginApi(data): Observable<any> {
-    try {
-      const apiUrl = `${this.BASE_URL}​/user​/login`;
-      return this.http.post(apiUrl, data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
   // SUBMIT USER REGISTER API
   userRegisterApi(data): Observable<any> {
     try {
@@ -31,13 +21,23 @@ export class UserApiService {
     }
   }
 
-    // VERIFY OTP WHEN USER SIGNUP 
-    verifyLoginCode(data): Observable<any> {
-      try {
-        const apiUrl = `${this.BASE_URL}/user/verify-phone`;
-        return this.http.post(apiUrl, data);
-      } catch (error) {
-        console.log(error.message);
-      }
+  // VERIFY OTP WHEN USER SIGNUP
+  verifyLoginCode(data): Observable<any> {
+    try {
+      const apiUrl = `${this.BASE_URL}/user/verify-phone`;
+      return this.http.post(apiUrl, data);
+    } catch (error) {
+      console.log(error.message);
     }
+  }
+
+  // SUBMIT USER LOGIN API
+  userLoginApi(data): Observable<any> {
+    try {
+      const apiUrl=`${this.BASE_URL}/user/login`;
+      return this.http.post(apiUrl, data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 }

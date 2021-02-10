@@ -32,7 +32,9 @@ export class HeaderComponent implements OnInit {
   otp: string;
   timer = 300;
 
-  userId:any;
+  userId: any;
+  showUser = false;
+  userDetails: any;
 
   showHideForm = {
     login: false,
@@ -56,8 +58,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private toastr: ToastrService,
-    public api:UserApiService
-     ) {}
+    public api: UserApiService
+  ) { }
 
   ngOnInit(): void {
     window.onscroll = function () {
@@ -99,6 +101,21 @@ export class HeaderComponent implements OnInit {
     this.loginFormValidation();
     this.signupFormValidation();
     this.forgotFormValidation();
+    let userId = localStorage.getItem(Constants.credentialsDecrypt('userId'));
+    
+    this.showUser = userId === undefined || userId === undefined || userId === null  ? false : true;
+    this.loginUserDetails();
+  }
+
+  // FOR LOGIN USER DETAILS
+  loginUserDetails() {
+    try {
+      if (this.showUser) {
+        this.userDetails = JSON.parse(Constants.credentialsDecrypt(localStorage.getItem('user')));
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   // FOR LOGIN FORM VALIDATION
@@ -171,11 +188,30 @@ export class HeaderComponent implements OnInit {
     try {
       this.loginSubmit = true;
       if (this.loginForm.invalid) {
-        this.toastr.error('All fields are required');
         return;
       }
       if (this.loginForm.valid) {
-        console.log(this.loginForm.value);
+        let data = {
+          username:(this.loginForm.get('phone').value.e164Number).replace(this.loginForm.get('phone').value.dialCode, ''),
+          countryCode :this.loginForm.get('phone')?.value.dialCode,
+          password:this.loginForm.get('password')?.value.trim()
+        }
+        this.api.userLoginApi(data).subscribe(response => {
+          if (response.status === 'success') {
+            this.toastr.success(response.message);
+            localStorage.setItem('userId', Constants.credentialsEncrypt(response.data.userId));
+            localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
+            this.showUser = true;
+            this.loginUserDetails();
+            (document.getElementById('exampleModal') as HTMLElement).click();
+          }
+
+          if (response.status === 'error') {
+            this.toastr.error(response.message);
+          }
+        }, error => {
+          console.log(error);
+        });
       }
     } catch (error) {
       console.error(error);
@@ -191,25 +227,24 @@ export class HeaderComponent implements OnInit {
       }
       if (this.signupForm.valid) {
         let data = {
-          name:this.signupForm.get('name').value.trim(),
-          phone :(this.signupForm.get('phone').value.e164Number).replace(this.signupForm.get('phone').value.dialCode, ''),
-          countryCode :this.signupForm.get('phone').value.dialCode,
-          password :this.signupForm.get('password').value.trim(),
-          passwordConfirmation   :this.signupForm.get('confirmPassword').value.trim(),
+          name: this.signupForm.get('name').value.trim(),
+          phone: (this.signupForm.get('phone').value.e164Number).replace(this.signupForm.get('phone').value.dialCode, ''),
+          countryCode: this.signupForm.get('phone').value.dialCode,
+          password: this.signupForm.get('password').value.trim(),
+          passwordConfirmation: this.signupForm.get('confirmPassword').value.trim(),
         }
         this.api.userRegisterApi(data).subscribe(response => {
-          console.log(response);
-          if(response.status === 'success'){
+          if (response.status === 'success') {
             this.userId = response.data._id;
             this.toastr.success(response.message);
-            localStorage.setItem('otpVerify',Constants.credentialsEncrypt(JSON.stringify(response.data)))
+            localStorage.setItem('otpVerify', Constants.credentialsEncrypt(JSON.stringify(response.data)))
             this.showOtp();
-          } 
+          }
 
-          if(response.status === 'error'){
+          if (response.status === 'error') {
             this.toastr.error(response.message);
-          } 
-        },error => {
+          }
+        }, error => {
           console.log(error);
         });
       }
@@ -309,25 +344,39 @@ export class HeaderComponent implements OnInit {
         this.toastr.error('Invalid OTP');
       }
       if (this.otp.length === 6) {
-        console.log(this.otp);
         let data = {
           code: this.otp,
-          userId:this.userId
+          userId: this.userId
         }
         this.api.verifyLoginCode(data).subscribe(response => {
-          console.log(response);
-          if(response.status === 'success'){
+          if (response.status === 'success') {
             this.toastr.success(response.message);
-            localStorage.setItem('user',Constants.credentialsEncrypt(JSON.stringify(response.data)))
-          } 
+            localStorage.setItem('userId', Constants.credentialsEncrypt(response.data.userId));
+            localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
+            this.showUser = true;
+            this.loginUserDetails();
+            (document.getElementById('exampleModal') as HTMLElement).click();
+          }
 
-          if(response.status === 'error'){
+          if (response.status === 'error') {
             this.toastr.error(response.message);
-          } 
-        },error => {
+          }
+        }, error => {
           console.log(error);
         });
       }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+  // FOR LOGOUT USER
+  logout() {
+    try {
+      localStorage.setItem('userId', undefined);
+      localStorage.setItem('user', undefined);
+      this.showUser = false;
     } catch (error) {
       console.error(error);
     }

@@ -11,10 +11,12 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { OnlineConsultationComponent } from './online-consultation/online-consultation.component';
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent
+    IndexComponent,
+    OnlineConsultationComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -11150,3 +11150,7 @@ input#country-search-box {
 .invalid-feedback {
     display: block !important;
 }
+
+.pointer{
+    cursor: pointer;
+}
