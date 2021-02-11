@@ -40,4 +40,25 @@ export class UserApiService {
       console.log(error.message);
     }
   }
+
+
+  // SUBMIT USER FORGOT PASSWORD FORM API
+  userForgotPasswordApi(data): Observable<any> {
+    try {
+      const apiUrl=`${this.BASE_URL}/user/forgot-password`;
+      return this.http.post(apiUrl, data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+    // SUBMIT USER SET NEW PASSWORD FORM API
+    setNewPasswordApi(data): Observable<any> {
+      try {
+        const apiUrl=`${this.BASE_URL}/user/password/set-new-password`;
+        return this.http.post(apiUrl, data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
 }
