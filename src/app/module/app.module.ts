@@ -14,12 +14,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { OnlineConsultationComponent } from './online-consultation/online-consultation.component';
 import { RouterModule } from '@angular/router';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
+import { BookingComponent } from './booking/booking.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     OnlineConsultationComponent,
-    DoctorProfileComponent
+    DoctorProfileComponent,
+    BookingComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserAnimationsModule,
