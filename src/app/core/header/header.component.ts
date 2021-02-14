@@ -240,14 +240,9 @@ export class HeaderComponent implements OnInit {
           (response) => {
             if (response.status === 'success') {
               this.toastr.success(response.message);
-              localStorage.setItem(
-                'userId',
-                Constants.credentialsEncrypt(response.data.userId)
-              );
-              localStorage.setItem(
-                'user',
-                Constants.credentialsEncrypt(JSON.stringify(response.data))
-              );
+              localStorage.setItem('userId',Constants.credentialsEncrypt(response.data.userId));
+              localStorage.setItem('token',Constants.credentialsEncrypt(response.data.token));
+              localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
               this.showUser = true;
               this.loginUserDetails();
               (document.getElementById('exampleModal') as HTMLElement).click();
@@ -469,6 +464,7 @@ export class HeaderComponent implements OnInit {
               } else {
                 localStorage.setItem('userId', Constants.credentialsEncrypt(response.data.userId));
                 localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
+                localStorage.setItem('token',Constants.credentialsEncrypt(response.data.token));
                 this.showUser = true;
                 this.loginUserDetails();
                 (document.getElementById('exampleModal') as HTMLElement).click();
