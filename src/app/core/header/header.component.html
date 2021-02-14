@@ -203,7 +203,7 @@
                             </ngx-intl-tel-input>
                             <div *ngIf="signupSubmit && signupValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="signupValidation.phone.errors.required">Phone No. is Mandatory</div>
-                                < <div *ngIf="signupValidation.phone.invalid && !signupValidation.phone.errors.required">Invalid Phone No.</div>
+                             <div *ngIf="signupValidation.phone.invalid && !signupValidation.phone.errors.required">Invalid Phone No.</div>
                             </div>
                         </div>
                         <div class="form-group form-focus">
@@ -247,6 +247,8 @@
                             </ngx-intl-tel-input>
                             <div *ngIf="forgotSubmit && forgotValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="forgotValidation.phone.errors.required">Phone No. is Mandatory</div>
+                             <div *ngIf="forgotValidation.phone.invalid && !forgotValidation.phone.errors.required">Invalid Phone No.</div>
+
                             </div>
                         </div>
                         <div class="text-right">
@@ -280,6 +282,36 @@
                             <div class="text-center dont-have">Don’t have an account?
                                 <a href="javascript:void(0);" (click)="signup()">Register</a>
                             </div>
+                    </form>
+                </div>
+
+                <!-- FOR SET NEW PASSWORD -->
+                <div class="login-form" *ngIf="showHideForm.setNewPassword">
+                    <form [formGroup]="setNewPasswordForm" (ngSubmit)="submitNewPassword()">
+                        <div class="form-group form-focus">
+                            <input type="password" class="form-control floating" formControlName="password">
+                            <label class="focus-label">Password</label>
+                            <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.password.errors" class="invalid-feedback">
+                                <div *ngIf="setNewPasswordValidation.password.errors.required">Password is Mandatory</div>
+                                <div *ngIf="setNewPasswordValidation.password.errors.pattern">Invalid Password</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-focus">
+                            <input type="password" class="form-control floating" formControlName="confirmPassword">
+                            <label class="focus-label">Confirm Password</label>
+                            <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.confirmPassword.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="setNewPasswordValidation.confirmPassword.errors.required">Confirm Password is
+                                    Mandatory</div>
+                                <div *ngIf="setNewPasswordValidation.confirmPassword.errors.mustMatch">Password Mismatch</div>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <a class="forgot-link" href="javascript:void(0);" (click)="login()">Login</a>
+                        </div>
+                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit">Submit</button>
                     </form>
                 </div>
             </div>
