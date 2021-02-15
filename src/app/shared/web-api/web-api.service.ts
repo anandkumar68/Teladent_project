@@ -13,17 +13,24 @@ export class WebApiService {
 
   constructor(public http: HttpClient) {}
 
-  // SUBMIT USER REGISTER API
-  // userRegisterApi(data): Observable<any> {
-  //   try {
-  //     const apiUrl = `${this.BASE_URL}/user/signup`;
-  //     return this.http.post(apiUrl, data,{
-  //       headers: new HttpHeaders()
-  //       .set('Authorization', `Bearer ${Constants.credentialsDecrypt(localStorage.getItem('token'))}`),
-  //     });
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // }
+  // USER DOCTOR API LIST
+  getUserDoctorlist(data): Observable<any> {
+    try {
+      const apiUrl = `${this.BASE_URL}/user/doctor-list?limit=${data.limit}&skip=${data.skip}&gender=${data.gender}&speciality=${data.speciality}`;
+      return this.http.get(apiUrl);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // USER DOCTOR API SPECIALIST LIST
+  getUserSpecialistDoctorlist(): Observable<any> {
+    try {
+      const apiUrl = `${this.BASE_URL}/user/doctor-specialiist-list`;
+      return this.http.get(apiUrl);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
 }
