@@ -37,11 +37,12 @@
 
                 <nav class="tabs d-none d-md-block">
                     <div class="selector"></div>
-                    <a href="about.html" class="active">Who we are</a>
-                    <a href="#">Oral Test</a>
-                    <a href="#">How We Can Help</a>
-                    <a href="#">Info Bytes</a>
-                    <a href="#"> find a clinic</a>
+                    <a href="#" (click)="navigateHeader('about-us')">Who we are</a>
+                    <!-- <a href="#">Oral Test</a> -->
+                    <!-- <a href="#">How We Can Help</a> -->
+                    <a href="#" (click)="navigateHeader('info-bytes')">Info Bytes</a>
+                    <a href="#" (click)="navigateHeader('contact-us')">Contact Us</a>
+                    <!-- <a href="#"> find a clinic</a> -->
 
                 </nav>
 
