@@ -38,7 +38,6 @@ export class OnlineConsultationComponent implements OnInit {
   ngOnInit(): void {
     this.doctorSpecialistList();
     this.activatedRoute.queryParams.subscribe(response => {
-      console.log(response);
 
       if(response['gender']) {
         (document.getElementById(response['gender']) as HTMLInputElement).checked = true;
@@ -175,6 +174,20 @@ export class OnlineConsultationComponent implements OnInit {
       queryParams['skip'] = (this.pageNum * this.limit) - this.limit;
       this.router.navigate(['/online-consultation'], { queryParams: queryParams });
 
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  appointmentForward(doctorId) {
+    try {
+      
+      if(localStorage.getItem('token') === null) {
+        (document.getElementById('loginCall') as HTMLInputElement).click();
+      } else {
+        this.router.navigateByUrl(`/booking/${doctorId}`);
+      }
+      
     } catch (error) {
       console.log(error);
     }

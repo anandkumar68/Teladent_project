@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="clinic-booking">
                                     <a class="view-pro-btn" routerLink="/doctor-profile">View Profile</a>
-                                    <a class="apt-btn" routerLink="/booking">Book Appointment</a>
+                                    <a class="apt-btn" (click)="appointmentForward(doctor?._id)" href="javascript:void(0);">Book Appointment</a>
                                 </div>
                             </div>
                         </div>

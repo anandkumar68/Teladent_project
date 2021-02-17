@@ -33,4 +33,62 @@ export class WebApiService {
     }
   }
 
+  // GET AVAILABLE SLOTS
+  getDoctorAvailableSlot(): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor/available-time-slot`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // Doctor Details
+  getDoctorDetails(doctorId): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor/individual-details/${doctorId}`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  createOrderId(data): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/create-razor-order-id`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  verfiyPaymentSignature(data): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/verify-razor-payment-signature`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
 }

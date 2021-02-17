@@ -4,12 +4,12 @@
 				<div class="container-fluid">
 					<div class="row align-items-center">
 						<div class="col-md-12 col-12">
-							<nav aria-label="breadcrumb" class="page-breadcrumb">
+							<!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Checkout</li>
 								</ol>
-							</nav>
+							</nav> -->
 							<h2 class="breadcrumb-title">Checkout</h2>
 						</div>
 					</div>
@@ -36,25 +36,30 @@
 												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
 														<label>First Name</label>
-														<input class="form-control" type="text">
+														<input class="form-control" value="{{sessionValue?.firstName}}" type="text" readonly>
 													</div>
 												</div>
 												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
 														<label>Last Name</label>
-														<input class="form-control" type="text">
+														<input class="form-control" value="{{sessionValue?.lastName}}" type="text" readonly>
 													</div>
 												</div>
 												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
 														<label>Email</label>
-														<input class="form-control" type="email">
+														<input class="form-control" 
+														id="emailCheck"
+														(keyup)="emailVerification('emailCheck')"
+														value="{{sessionValue?.email}}" type="email">
+														<p class="error-msg">{{emailErrorMsg}}</p>
 													</div>
+													
 												</div>
 												<div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
 														<label>Phone</label>
-														<input class="form-control" type="text">
+														<input class="form-control" value="{{sessionValue?.phone}}" type="text" readonly>
 													</div>
 												</div>
 											</div>
@@ -65,7 +70,10 @@
 											
 											<!-- Submit Section -->
 											<div class="submit-section mt-4">
-												<button (click)="payViaRazor()" class="btn btn-primary submit-btn">Confirm and Pay</button>
+												<button 
+												(click)="payViaRazor()" 
+												[ngClass]="allowForPay === undefined || isEmailExist === false ? 'disabled' : '' "
+												class="btn btn-primary submit-btn">{{buttonValue}}</button>
 											</div>
 											<!-- /Submit Section -->
 											
@@ -90,20 +98,29 @@
 									<!-- Booking Doctor Info -->
 									<div class="booking-doc-info">
 										<a href="doctor-profile.html" class="booking-doc-img">
-											<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+											<img src="{{sessionValue?.doctorDetails?.imageUrl}}" alt="User Image">
 										</a>
 										<div class="booking-info">
-											<h4><a href="doctor-profile.html">Dr. Darren Elder</a></h4>
+											<h4><a href="doctor-profile.html">{{sessionValue?.doctorDetails?.name}}</a></h4>
 											<div class="rating">
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star"></i>
-												<span class="d-inline-block average-rating">35</span>
+												<i *ngIf="sessionValue?.doctorDetails?.rating === 1 || sessionValue?.doctorDetails?.rating > 1" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 1" class="fas fa-star"></i>
+
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating === 2 || sessionValue?.doctorDetails?.rating > 2" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 2" class="fas fa-star"></i>
+
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating === 3 || sessionValue?.doctorDetails?.rating > 3" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 3" class="fas fa-star"></i>
+
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating === 4 || sessionValue?.doctorDetails?.rating > 4" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 4" class="fas fa-star"></i>
+
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating === 5" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 5" class="fas fa-star"></i>
+												<span class="d-inline-block average-rating">({{sessionValue?.doctorDetails?.totalReview}})</span>
 											</div>
 											<div class="clinic-details">
-												<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
+												<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{sessionValue?.doctorDetails?.city}}, {{sessionValue?.doctorDetails?.state}}</p>
 											</div>
 										</div>
 									</div>
@@ -112,19 +129,19 @@
 									<div class="booking-summary">
 										<div class="booking-item-wrap">
 											<ul class="booking-date">
-												<li>Date <span>16 Nov 2019</span></li>
-												<li>Time <span>10:00 AM</span></li>
+												<li>Date <span>{{sessionValue?.slotVlaue?.slotDate | date: 'dd MMM yyyy'}}</span></li>
+												<li>Time <span>{{sessionValue?.slotVlaue?.timeslot}}</span></li>
 											</ul>
 											<ul class="booking-fee">
-												<li>Consulting Fee <span>$100</span></li>
-												<li>Booking Fee <span>$10</span></li>
-												<li>Video Call <span>$50</span></li>
+												<li>Consulting Fee <span>₹{{paidAmt}}</span></li>
+												<!-- <li>Booking Fee <span>$10</span></li>
+												<li>Video Call <span>$50</span></li> -->
 											</ul>
 											<div class="booking-total">
 												<ul class="booking-total-list">
 													<li>
 														<span>Total</span>
-														<span class="total-cost">$160</span>
+														<span class="total-cost">₹{{paidAmt}}</span>
 													</li>
 												</ul>
 											</div>

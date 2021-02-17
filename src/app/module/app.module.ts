@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { BookingComponent } from './booking/booking.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     OnlineConsultationComponent,
     DoctorProfileComponent,
     BookingComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    BookingConfirmComponent
   ],
   imports: [
     BrowserAnimationsModule,

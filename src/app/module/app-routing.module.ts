@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 import { BookingComponent } from './booking/booking.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
@@ -20,12 +21,16 @@ const routes: Routes = [
         component: DoctorProfileComponent,
       },
       {
-        path:'booking',
+        path:'booking/:providerId',
         component: BookingComponent,
       },
       {
         path:'checkout',
         component: CheckoutComponent,
+      },
+      {
+        path:'booking-confirm',
+        component: BookingConfirmComponent,
       },
       {
         path: '',
