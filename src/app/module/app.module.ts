@@ -17,6 +17,10 @@ import { DoctorProfileComponent } from './doctor-profile/doctor-profile.componen
 import { BookingComponent } from './booking/booking.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ComingsoonComponent } from './comingsoon/comingsoon.component';
+import { InfobytesComponent } from './infobytes/infobytes.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +29,11 @@ import { BookingConfirmComponent } from './booking-confirm/booking-confirm.compo
     DoctorProfileComponent,
     BookingComponent,
     CheckoutComponent,
-    BookingConfirmComponent
+    BookingConfirmComponent,
+    AboutUsComponent,
+    ComingsoonComponent,
+    InfobytesComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserAnimationsModule,

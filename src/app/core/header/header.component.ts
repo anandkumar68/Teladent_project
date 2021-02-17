@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CountdownComponent } from 'ngx-countdown';
 import {
   CountryISO,
@@ -23,6 +24,7 @@ declare const $: any;
 export class HeaderComponent implements OnInit {
   @ViewChild('countdown', { static: false })
   private counter: CountdownComponent;
+  
 
   separateDialCode = true;
   SearchCountryField = SearchCountryField;
@@ -64,7 +66,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private toastr: ToastrService,
-    public api: UserApiService
+    public api: UserApiService,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -526,6 +529,17 @@ export class HeaderComponent implements OnInit {
       this.showUser = false;
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  // NAVIGATION HEADER
+  navigateHeader(navigate) {
+    try {
+      
+      this.router.navigateByUrl(navigate);
+
+    } catch (error) {
+      console.log(error);
     }
   }
 }
