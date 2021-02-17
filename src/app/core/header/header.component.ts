@@ -233,7 +233,7 @@ export class HeaderComponent implements OnInit {
               this.loginForm.get('phone').value.dialCode,
               ''
             ),
-          countryCode: this.loginForm.get('phone')?.value.dialCode,
+          countryCode: this.loginForm.get('phone')?.value.dialCode.substr(1),
           password: this.loginForm.get('password')?.value.trim(),
         };
         this.api.userLoginApi(data).subscribe(
@@ -278,7 +278,7 @@ export class HeaderComponent implements OnInit {
               this.signupForm.get('phone').value.dialCode,
               ''
             ),
-          countryCode: this.signupForm.get('phone').value.dialCode,
+          countryCode: this.signupForm.get('phone').value.dialCode.substr(1),
           password: this.signupForm.get('password').value.trim(),
           passwordConfirmation: this.signupForm
             .get('confirmPassword')
@@ -326,7 +326,7 @@ export class HeaderComponent implements OnInit {
               this.forgotForm.get('phone').value.dialCode,
               ''
             ),
-          countryCode: this.forgotForm.get('phone').value.dialCode,
+          countryCode: this.forgotForm.get('phone').value.dialCode.substr(1),
         };
         this.api.userForgotPasswordApi(data).subscribe(
           (response) => {
