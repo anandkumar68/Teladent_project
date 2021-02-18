@@ -24,7 +24,7 @@ declare const $: any;
 export class HeaderComponent implements OnInit {
   @ViewChild('countdown', { static: false })
   private counter: CountdownComponent;
-  
+
 
   separateDialCode = true;
   SearchCountryField = SearchCountryField;
@@ -112,11 +112,7 @@ export class HeaderComponent implements OnInit {
     this.forgotFormValidation();
     this.setNewPasswordFormValidation();
     let userId = localStorage.getItem(Constants.credentialsDecrypt('userId'));
-
-    this.showUser =
-      userId === undefined || userId === undefined || userId === null
-        ? false
-        : true;
+    this.showUser = userId === undefined || userId === null ? false : true;
     this.loginUserDetails();
   }
 
@@ -125,8 +121,7 @@ export class HeaderComponent implements OnInit {
     try {
       if (this.showUser) {
         this.userDetails = JSON.parse(
-          Constants.credentialsDecrypt(localStorage.getItem('user'))
-        );
+          Constants.credentialsDecrypt(localStorage.getItem('user')));
       }
     } catch (error) {
       console.error(error);
@@ -236,15 +231,15 @@ export class HeaderComponent implements OnInit {
               this.loginForm.get('phone').value.dialCode,
               ''
             ),
-          countryCode: this.loginForm.get('phone')?.value.dialCode,
+          countryCode: this.loginForm.get('phone')?.value.dialCode.substr(1),
           password: this.loginForm.get('password')?.value.trim(),
         };
         this.api.userLoginApi(data).subscribe(
           (response) => {
             if (response.status === 'success') {
               this.toastr.success(response.message);
-              localStorage.setItem('userId',Constants.credentialsEncrypt(response.data.userId));
-              localStorage.setItem('token',Constants.credentialsEncrypt(response.data.token));
+              localStorage.setItem('userId', Constants.credentialsEncrypt(response.data.userId));
+              localStorage.setItem('token', Constants.credentialsEncrypt(response.data.token));
               localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
               this.showUser = true;
               this.loginUserDetails();
@@ -281,7 +276,7 @@ export class HeaderComponent implements OnInit {
               this.signupForm.get('phone').value.dialCode,
               ''
             ),
-          countryCode: this.signupForm.get('phone').value.dialCode,
+          countryCode: this.signupForm.get('phone').value.dialCode.substr(1),
           password: this.signupForm.get('password').value.trim(),
           passwordConfirmation: this.signupForm
             .get('confirmPassword')
@@ -329,7 +324,7 @@ export class HeaderComponent implements OnInit {
               this.forgotForm.get('phone').value.dialCode,
               ''
             ),
-          countryCode: this.forgotForm.get('phone').value.dialCode,
+          countryCode: this.forgotForm.get('phone').value.dialCode.substr(1),
         };
         this.api.userForgotPasswordApi(data).subscribe(
           (response) => {
@@ -467,7 +462,7 @@ export class HeaderComponent implements OnInit {
               } else {
                 localStorage.setItem('userId', Constants.credentialsEncrypt(response.data.userId));
                 localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
-                localStorage.setItem('token',Constants.credentialsEncrypt(response.data.token));
+                localStorage.setItem('token', Constants.credentialsEncrypt(response.data.token));
                 this.showUser = true;
                 this.loginUserDetails();
                 (document.getElementById('exampleModal') as HTMLElement).click();
@@ -488,7 +483,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-// FOR SUBMIT SET NEW PASSWORD VALUES
+  // FOR SUBMIT SET NEW PASSWORD VALUES
   submitNewPassword() {
     try {
       this.setNewPasswordSubmit = true;
@@ -535,7 +530,7 @@ export class HeaderComponent implements OnInit {
   // NAVIGATION HEADER
   navigateHeader(navigate) {
     try {
-      
+
       this.router.navigateByUrl(navigate);
 
     } catch (error) {
