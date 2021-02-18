@@ -192,4 +192,20 @@ export class OnlineConsultationComponent implements OnInit {
       console.log(error);
     }
   }
+
+  viewProfile(doctorId) {
+    try {
+      
+      if(localStorage.getItem('token') === null) {
+        (document.getElementById('loginCall') as HTMLInputElement).click();
+      } else {
+        this.router.navigateByUrl(`/booking/${doctorId}`);
+      }
+
+      // routerLink="/doctor-profile"
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
