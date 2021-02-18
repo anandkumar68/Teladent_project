@@ -11,7 +11,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     document.getElementById("copyright").innerHTML =
-    "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='https://webexpo.co.in' target='_blank' alt='webexpo - An Online web design and development agency.'>www.Webexpo.co.in</a> ";
+    "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='javascript:void(0);'>Teladent & Team</a> ";
 
   }
 
