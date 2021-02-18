@@ -21,6 +21,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ComingsoonComponent } from './comingsoon/comingsoon.component';
 import { InfobytesComponent } from './infobytes/infobytes.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { DoctorsPanelModule } from './doctors-panel/doctors-panel.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     AboutUsComponent,
     ComingsoonComponent,
     InfobytesComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    
   ],
   imports: [
     BrowserAnimationsModule,
@@ -46,7 +48,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     ToastrModule.forRoot(),
     NgOtpInputModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    DoctorsPanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]
