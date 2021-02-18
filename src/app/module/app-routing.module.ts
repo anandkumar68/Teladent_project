@@ -11,47 +11,56 @@ import { InfobytesComponent } from './infobytes/infobytes.component';
 import { OnlineConsultationComponent } from './online-consultation/online-consultation.component';
 
 const routes: Routes = [
-      {
-        path:'index',
-        component: IndexComponent,
-      },
-      {
-        path:'online-consultation',
-        component: OnlineConsultationComponent,
-      },
-      {
-        path:'doctor-profile',
-        component: DoctorProfileComponent,
-      },
-      {
-        path:'booking/:providerId',
-        component: BookingComponent,
-      },
-      {
-        path:'checkout',
-        component: CheckoutComponent,
-      },
-      {
-        path:'booking-confirm',
-        component: BookingConfirmComponent,
-      },
-      {
-        path:'about-us',
-        component: AboutUsComponent,
-      },
-      {
-        path:'info-bytes',
-        component: InfobytesComponent,
-      },
-      {
-        path:'contact-us',
-        component: ContactUsComponent,
-      },
-      {
-        path: '',
-        redirectTo: 'index',
-        pathMatch:'full',
-      },
+  {
+    path: 'index',
+    component: IndexComponent,
+  },
+  {
+    path: 'online-consultation',
+    component: OnlineConsultationComponent,
+  },
+  {
+    path: 'doctor-profile',
+    component: DoctorProfileComponent,
+  },
+  {
+    path: 'booking/:providerId',
+    component: BookingComponent,
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+  },
+  {
+    path: 'booking-confirm',
+    component: BookingConfirmComponent,
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
+  },
+  {
+    path: 'info-bytes',
+    component: InfobytesComponent,
+  },
+  {
+    path: 'contact-us',
+    component: ContactUsComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'index',
+    pathMatch: 'full',
+  },
+  {
+    path: 'doctors-panel',
+    loadChildren: () => import('./doctors-panel/doctors-panel.module').then(m => m.DoctorsPanelModule),
+  },
+  {
+    path: '',
+    redirectTo: 'doctors-panel',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
