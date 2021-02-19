@@ -8,6 +8,7 @@ import { IndexComponent } from './index/index.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +23,8 @@ import { ComingsoonComponent } from './comingsoon/comingsoon.component';
 import { InfobytesComponent } from './infobytes/infobytes.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { DoctorsPanelModule } from './doctors-panel/doctors-panel.module';
+import { DatePipe } from '@angular/common';
+import { TagInputModule } from 'ngx-chips';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,12 +49,14 @@ import { DoctorsPanelModule } from './doctors-panel/doctors-panel.module';
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     NgOtpInputModule,
     HttpClientModule,
     RouterModule,
-    DoctorsPanelModule
+    DoctorsPanelModule,
+    TagInputModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

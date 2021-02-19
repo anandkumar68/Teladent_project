@@ -111,7 +111,7 @@ export class HeaderComponent implements OnInit {
     this.signupFormValidation();
     this.forgotFormValidation();
     this.setNewPasswordFormValidation();
-    let userId = localStorage.getItem(Constants.credentialsDecrypt('userId'));
+    let userId = Constants.credentialsDecrypt(localStorage.getItem('userId'));    
     this.showUser = userId === undefined || userId === null ? false : true;
     this.loginUserDetails();
   }
