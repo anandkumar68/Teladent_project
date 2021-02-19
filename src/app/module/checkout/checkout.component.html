@@ -1,4 +1,6 @@
 			
+<ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
+			
 			<!-- Breadcrumb -->
 			<div class="breadcrumb-bar">
 				<div class="container-fluid">
@@ -62,6 +64,19 @@
 														<input class="form-control" value="{{sessionValue?.phone}}" type="text" readonly>
 													</div>
 												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="form-group card-label">
+														<label>Service Type</label>
+														<select class="form-control" (change)="selectService($event.target.value)">
+															<option disabled selected value="">Select Service</option>
+															<option value="Dental Emergencies">Dental Emergencies</option>
+															<option value="Dental Online Check Up">Dental Online Check Up</option>
+															<option value="Child Care">Child Care</option>
+															<option value="Second Opinion">Second Opinion</option>
+														</select>
+														<p class="error-msg">{{serviceErrMsg}}</p>
+													</div>
+												</div>
 											</div>
 										</div>
 										<!-- /Personal Information -->
@@ -72,7 +87,7 @@
 											<div class="submit-section mt-4">
 												<button 
 												(click)="payViaRazor()" 
-												[ngClass]="allowForPay === undefined || isEmailExist === false ? 'disabled' : '' "
+												[ngClass]="allowForPay === undefined || isEmailExist === false || isServiceSelected === false ? 'disabled' : '' "
 												class="btn btn-primary submit-btn">{{buttonValue}}</button>
 											</div>
 											<!-- /Submit Section -->

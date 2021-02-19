@@ -5,6 +5,7 @@ import { BookingConfirmComponent } from './booking-confirm/booking-confirm.compo
 import { BookingComponent } from './booking/booking.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { CovidComponent } from './covid/covid.component';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { IndexComponent } from './index/index.component';
 import { InfobytesComponent } from './infobytes/infobytes.component';
@@ -20,7 +21,7 @@ const routes: Routes = [
     component: OnlineConsultationComponent,
   },
   {
-    path: 'doctor-profile',
+    path: 'doctor-profile/:doctorId',
     component: DoctorProfileComponent,
   },
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'contact-us',
     component: ContactUsComponent,
+  },
+  {
+    path: 'covid-guidelines',
+    component: CovidComponent,
   },
   {
     path: '',

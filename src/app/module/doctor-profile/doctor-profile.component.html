@@ -1,14 +1,9 @@
-		<!-- Breadcrumb -->
+<ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
+        <!-- Breadcrumb -->
         <div class="breadcrumb-bar">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Doctor Profile</li>
-                            </ol>
-                        </nav>
                         <h2 class="breadcrumb-title">Doctor Profile</h2>
                     </div>
                 </div>
@@ -26,43 +21,51 @@
                         <div class="doctor-widget">
                             <div class="doc-info-left">
                                 <div class="doctor-img">
-                                    <img src="assets/img/doctors/doctor-thumb-02.jpg" class="img-fluid" alt="User Image">
+                                    <img src="{{doctorDetail?.imageUrl}}" class="img-fluid" alt="User Image">
                                 </div>
                                 <div class="doc-info-cont">
-                                    <h4 class="doc-name">Dr. Darren Elder</h4>
-                                    <p class="doc-speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>
-                                    <p class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</p>
+                                    <h4 class="doc-name">Dr. {{doctorDetail?.name}}</h4>
+                                    <p class="doc-speciality">{{doctorDetail?.education}}</p>
+                                    <p class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">{{doctorDetail?.dentistType}}</p>
                                     <div class="rating">
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span class="d-inline-block average-rating">(35)</span>
+                                        <i *ngIf="doctorDetail?.rating === 1 || doctorDetail?.rating > 1" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 1" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctorDetail?.rating === 2 || doctorDetail?.rating > 2" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 2" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctorDetail?.rating === 3 || doctorDetail?.rating > 3" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 3" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctorDetail?.rating === 4 || doctorDetail?.rating > 4" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 4" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctorDetail?.rating === 5" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 5" class="fas fa-star"></i>
+                                        <span class="d-inline-block average-rating">({{doctorDetail?.totalReview}})</span>
                                     </div>
                                     <div class="clinic-details">
-                                        <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Newyork, USA - <a href="javascript:void(0);">Get Directions</a></p>
+                                        <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctorDetail?.city}}, {{doctorDetail?.state}}</p>
                                        
                                     </div>
                                     <div class="clinic-services">
-                                        <span>Dental Fillings</span>
-                                        <span>Teeth Whitneing</span>
+                                        <span *ngFor="let service of doctorDetail?.services">{{service}}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="doc-info-right">
                                 <div class="clini-infos">
                                     <ul>
-                                        <li><i class="far fa-thumbs-up"></i> 99%</li>
-                                        <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                                        <li><i class="far fa-money-bill-alt"></i> ₹500 </li>
+                                        <li><i class="far fa-thumbs-up"></i> {{doctorDetail?.ratingPercentage}}%</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> {{doctorDetail?.city}}, {{doctorDetail?.state}}</li>
+                                        <li><i class="far fa-money-bill-alt"></i> ₹{{doctorDetail?.price}} </li>
                                     </ul>
                                 </div>
                                 <div class="doctor-action">
-                                    <a href="javascript:void(0)" class="btn btn-white fav-btn">
+                                    <!-- <a href="javascript:void(0)" class="btn btn-white fav-btn">
                                         <i class="far fa-bookmark"></i>
-                                    </a>
-                                    <a href="chat.html" class="btn btn-white msg-btn">
+                                    </a> -->
+                                    <a href="javascript:void(0)" class="btn btn-white msg-btn disbaled">
                                         <i class="far fa-comment-alt"></i>
                                     </a>
                                     <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
@@ -73,7 +76,7 @@
                                     </a>
                                 </div>
                                 <div class="clinic-booking">
-                                    <a class="apt-btn" href="booking.html">Book Appointment</a>
+                                    <a class="apt-btn" (click)="bookAppointments(doctorDetail?._id)" href="javascript:void(0);">Book Appointment</a>
                                 </div>
                             </div>
                         </div>
@@ -91,15 +94,15 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="#doc_locations" data-toggle="tab">Locations</a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a class="nav-link" href="#doc_reviews" data-toggle="tab">Reviews</a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="#doc_business_hours" data-toggle="tab">Business Hours</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </nav>
                         <!-- /Tab Menu -->
@@ -115,7 +118,7 @@
                                         <!-- About Details -->
                                         <div class="widget about-widget">
                                             <h4 class="widget-title">About Me</h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <p>{{doctorDetail?.about}}</p>
                                         </div>
                                         <!-- /About Details -->
                                     
@@ -124,27 +127,15 @@
                                             <h4 class="widget-title">Education</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
-                                                    <li>
+                                                    <li *ngFor="let education of doctorDetail?.educationDetail">
                                                         <div class="experience-user">
                                                             <div class="before-circle"></div>
                                                         </div>
                                                         <div class="experience-content">
                                                             <div class="timeline-content">
-                                                                <a href="#/" class="name">American Dental Medical University</a>
-                                                                <div>BDS</div>
-                                                                <span class="time">1998 - 2003</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <a href="#/" class="name">American Dental Medical University</a>
-                                                                <div>MDS</div>
-                                                                <span class="time">2003 - 2005</span>
+                                                                <a href="#/" class="name">{{education?.degree}}</a>
+                                                                <div>{{education?.collegName}}</div>
+                                                                <span class="time">{{education?.fromYear}} - {{education?.completionYear}}</span>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -158,36 +149,14 @@
                                             <h4 class="widget-title">Work & Experience</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
-                                                    <li>
+                                                    <li *ngFor="let experience of doctorDetail?.experience">
                                                         <div class="experience-user">
                                                             <div class="before-circle"></div>
                                                         </div>
                                                         <div class="experience-content">
                                                             <div class="timeline-content">
-                                                                <a href="#/" class="name">Glowing Smiles Family Dental Clinic</a>
-                                                                <span class="time">2010 - Present (5 years)</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <a href="#/" class="name">Comfort Care Dental Clinic</a>
-                                                                <span class="time">2007 - 2010 (3 years)</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <a href="#/" class="name">Dream Smile Dental Practice</a>
-                                                                <span class="time">2005 - 2007 (2 years)</span>
+                                                                <a href="#/" class="name">{{experience?.hospitalName}}</a>
+                                                                <span class="time">{{experience?.from}} - {{experience?.to}} ({{experience?.to - experience?.from}} years)</span>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -201,39 +170,15 @@
                                             <h4 class="widget-title">Awards</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
-                                                    <li>
+                                                    <li *ngFor="let award of doctorDetail?.awards">
                                                         <div class="experience-user">
                                                             <div class="before-circle"></div>
                                                         </div>
                                                         <div class="experience-content">
                                                             <div class="timeline-content">
-                                                                <p class="exp-year">July 2019</p>
-                                                                <h4 class="exp-title">Humanitarian Award</h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <p class="exp-year">March 2011</p>
-                                                                <h4 class="exp-title">Certificate for International Volunteer Service</h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <p class="exp-year">May 2008</p>
-                                                                <h4 class="exp-title">The Dental Professional of The Year Award</h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                                                <p class="exp-year">{{award?.year}}</p>
+                                                                <h4 class="exp-title">{{award?.name}}</h4>
+                                                                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p> -->
                                                             </div>
                                                         </div>
                                                     </li>
@@ -246,12 +191,7 @@
                                         <div class="service-list">
                                             <h4>Services</h4>
                                             <ul class="clearfix">
-                                                <li>Tooth cleaning </li>
-                                                <li>Root Canal Therapy</li>
-                                                <li>Implants</li>
-                                                <li>Composite Bonding</li>
-                                                <li>Fissure Sealants</li>
-                                                <li>Surgical Extractions</li>
+                                                <li *ngFor="let service of doctorDetail?.services">{{service}}</li>
                                             </ul>
                                         </div>
                                         <!-- /Services List -->
@@ -260,12 +200,7 @@
                                         <div class="service-list">
                                             <h4>Specializations</h4>
                                             <ul class="clearfix">
-                                                <li>Children Care</li>
-                                                <li>Dental Care</li>	
-                                                <li>Oral and Maxillofacial Surgery </li>	
-                                                <li>Orthodontist</li>	
-                                                <li>Periodontist</li>	
-                                                <li>Prosthodontics</li>	
+                                                <li *ngFor="let special of doctorDetail?.specialization">{{special}}</li>
                                             </ul>
                                         </div>
                                         <!-- /Specializations List -->

@@ -30,7 +30,7 @@
 <!-- Page Content -->
 <div class="content">
     <div class="container-fluid">
-
+        <ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
         <div class="row">
             <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
@@ -99,7 +99,7 @@
                                     </h4>
                                     <p class="doc-speciality">{{doctor?.education}}</p>
                                     <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png"
-                                            class="img-fluid" alt="Speciality">Dentist</h5>
+                                            class="img-fluid" alt="Speciality">{{doctor?.dentistType}}</h5>
                                     <div class="rating">
                                         <i *ngIf="doctor?.rating === 1 || doctor?.rating > 1" class="fas fa-star filled"></i>
                                         <i *ngIf="doctor?.rating < 1" class="fas fa-star"></i>
@@ -135,7 +135,7 @@
                                     </ul>
                                 </div>
                                 <div class="clinic-booking">
-                                    <a class="view-pro-btn" (click)="appointmentForward(doctor?._id)" href="javascript:void(0);">View Profile</a>
+                                    <a class="view-pro-btn" (click)="viewProfile(doctor?._id)" href="javascript:void(0);">View Profile</a>
                                     <a class="apt-btn" (click)="appointmentForward(doctor?._id)" href="javascript:void(0);">Book Appointment</a>
                                 </div>
                             </div>

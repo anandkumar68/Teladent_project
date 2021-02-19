@@ -25,6 +25,34 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { DoctorsPanelModule } from './doctors-panel/doctors-panel.module';
 import { DatePipe } from '@angular/common';
 import { TagInputModule } from 'ngx-chips';
+import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER } from 'ngx-ui-loader';
+import { CovidComponent } from './covid/covid.component';
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  // For Simple Loader
+  fgsColor: '#00d0f1',
+  fgsPosition: POSITION.centerCenter,
+  fgsSize: 90,
+  fgsType: SPINNER.pulse,
+
+  // For Background Loader
+  bgsColor: '#00d0f1',
+  bgsPosition: POSITION.centerCenter,
+  bgsSize: 40,
+  bgsOpacity: 1,
+
+  // For Progress bar
+  hasProgressBar: true,
+  pbColor: '#00d0f1',
+  pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
+  pbThickness: 2, // progress bar thickness
+  masterLoaderId: 'master',
+
+  logoPosition: "center-center",
+  logoSize: 200,
+  logoUrl: "assets/img/alias-web-loader.gif",
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +66,7 @@ import { TagInputModule } from 'ngx-chips';
     ComingsoonComponent,
     InfobytesComponent,
     ContactUsComponent,
+    CovidComponent,
     
   ],
   imports: [
@@ -54,7 +83,9 @@ import { TagInputModule } from 'ngx-chips';
     HttpClientModule,
     RouterModule,
     DoctorsPanelModule,
-    TagInputModule
+    TagInputModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    ToastrModule.forRoot()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

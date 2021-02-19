@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { WebApiService } from 'src/app/shared/web-api/web-api.service';
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { Constants } from '../../shared/constant';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+
+
+
 
 @Component({
   selector: 'app-online-consultation',
@@ -24,7 +30,8 @@ export class OnlineConsultationComponent implements OnInit {
   constructor(
     public serviceApi: WebApiService,
     public activatedRoute: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public ngxLoader: NgxUiLoaderService
   ) { 
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
@@ -36,6 +43,15 @@ export class OnlineConsultationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    (document.getElementById('home') as HTMLAnchorElement).classList.remove('active');
+    (document.getElementById('about') as HTMLAnchorElement).classList.remove('active');
+    (document.getElementById('bytes') as HTMLAnchorElement).classList.remove('active');
+    (document.getElementById('contact') as HTMLAnchorElement).classList.remove('active');
+    (document.getElementById('covid') as HTMLAnchorElement).classList.remove('active');
+
+    (document.getElementById('webmenu') as HTMLAnchorElement).removeAttribute('style');
+
     this.doctorSpecialistList();
     this.activatedRoute.queryParams.subscribe(response => {
 
@@ -63,17 +79,21 @@ export class OnlineConsultationComponent implements OnInit {
   // Doctor List
   doctorList(data){
     try {
-      
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      this.ngxLoader.startLoader('loader-01');
       this.serviceApi.getUserDoctorlist(data).subscribe((resolve) => {
 
         if(resolve.status === 'success') {
 
           this.userDoctorList = resolve.data.doctorList;
           this.totalDocuments = resolve.data.totalDocuments;
+          this.ngxLoader.stopLoader('loader-01');
 
+        } else {
+          this.ngxLoader.stopLoader('loader-01');
         }
       },
-      err => console.log(err));
+      err => this.ngxLoader.stopLoader('loader-01'));
 
     } catch (error) {
       console.log(error);
@@ -185,7 +205,13 @@ export class OnlineConsultationComponent implements OnInit {
       if(localStorage.getItem('token') === null) {
         (document.getElementById('loginCall') as HTMLInputElement).click();
       } else {
-        this.router.navigateByUrl(`/booking/${doctorId}`);
+        const helper = new JwtHelperService();
+        const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
+        if(isExpired) {
+          (document.getElementById('loginCall') as HTMLInputElement).click();
+        } else {
+          this.router.navigateByUrl(`/booking/${doctorId}`);
+        }
       }
       
     } catch (error) {
@@ -199,7 +225,13 @@ export class OnlineConsultationComponent implements OnInit {
       if(localStorage.getItem('token') === null) {
         (document.getElementById('loginCall') as HTMLInputElement).click();
       } else {
-        this.router.navigateByUrl(`/booking/${doctorId}`);
+        const helper = new JwtHelperService();
+        const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
+        if(isExpired) {
+          (document.getElementById('loginCall') as HTMLInputElement).click();
+        } else {
+          this.router.navigateByUrl(`/doctor-profile/${doctorId}`);
+        }
       }
 
       // routerLink="/doctor-profile"

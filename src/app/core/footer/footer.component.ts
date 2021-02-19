@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -7,12 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public router: Router
+  ) { }
 
   ngOnInit(): void {
     document.getElementById("copyright").innerHTML =
-    "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='javascript:void(0);'>Teladent & Team</a> ";
+    "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='javascript:void(0);'>Tela Dentist Team</a> ";
 
+  }
+
+  // Router Link
+  footerRouter(routerLink) {
+    this.router.navigateByUrl(routerLink);
   }
 
 }

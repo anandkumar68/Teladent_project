@@ -1,5 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { WebApiService } from 'src/app/shared/web-api/web-api.service';
 
 declare var Razorpay: any;
@@ -16,16 +18,28 @@ export class CheckoutComponent implements OnInit {
   emailErrorMsg= '';
   paidAmt = 0;
   buttonValue = 'Confirm and Pay';
+  isServiceSelected = false;
+  serviceErrMsg = "Please Select Service Type"
 
   options = {};
 
 
   constructor(
     public apiService: WebApiService,
-    public router: Router
+    public router: Router,
+    public ngxLoader: NgxUiLoaderService,
+    public toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
+
+    (document.getElementById('home') as HTMLAnchorElement).classList.remove('active');
+    (document.getElementById('about') as HTMLAnchorElement).classList.remove('active');
+    (document.getElementById('bytes') as HTMLAnchorElement).classList.remove('active');
+    (document.getElementById('contact') as HTMLAnchorElement).classList.remove('active');
+    (document.getElementById('covid') as HTMLAnchorElement).classList.remove('active');
+
+    (document.getElementById('webmenu') as HTMLAnchorElement).removeAttribute('style');
 
     if(sessionStorage.getItem('checkout') !== null) {
 
@@ -52,7 +66,7 @@ export class CheckoutComponent implements OnInit {
         "currency": "INR",
         "name": "Tela Dent",
         "description": "Dentistry Anytime Anywhere",
-        "image": "../../../assets/img/tela-square-logo.jpg",
+        "image": "assets/img/tela-square-logo.jpg",
         "order_id": `${this.sessionValue.id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
         "theme": {
           "color": "#3399cc"
@@ -64,13 +78,14 @@ export class CheckoutComponent implements OnInit {
       var rzp1 = new Razorpay(this.options);
 
       rzp1.on('payment.failed', function (response){
-        alert(response.error.code);
-        alert(response.error.description);
-        alert(response.error.source);
-        alert(response.error.step);
-        alert(response.error.reason);
-        alert(response.error.metadata.order_id);
-        alert(response.error.metadata.payment_id);
+
+        this.toastr.error(response.error.code);
+        this.toastr.error(response.error.description);
+        this.toastr.error(response.error.source);
+        this.toastr.error(response.error.step);
+        this.toastr.error(response.error.reason);
+        this.toastr.error(response.error.metadata.order_id);
+        this.toastr.error(response.error.metadata.payment_id);
     });
 
     rzp1.open();
@@ -120,7 +135,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   handle_response(res: any){
-   
+   this.ngxLoader.startLoader('loader-01')
     this.apiService.verfiyPaymentSignature({
       razorOrderId: res.razorpay_order_id,
       razorPayId: res.razorpay_payment_id,
@@ -128,11 +143,26 @@ export class CheckoutComponent implements OnInit {
       sessionValue: this.sessionValue
     }).subscribe((resolve) => {
 
+      console.log(resolve);
+
       if(resolve.status ==='success') {
         this.router.navigateByUrl('/booking-confirm')
+        this.ngxLoader.stopLoader('loader-01');
       }
 
-    })
+      if(resolve.status === 'error') {
+        this.toastr.error(resolve.message);
+        this.ngxLoader.stopLoader('loader-01');
+      }
+
+    },
+    err => this.ngxLoader.stopLoader('loader-01'))
+  }
+
+  selectService(serviceType) {
+    this.sessionValue.serviceType = serviceType;
+    this.isServiceSelected = true;
+    this.serviceErrMsg = "";
   }
 
 }
