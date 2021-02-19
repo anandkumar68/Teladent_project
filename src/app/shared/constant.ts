@@ -20,7 +20,8 @@ export class Constants {
   public static EMAIL_PATTERN = /^.+@.+\..+$/;
   // public static PHONE_PATTERN = /^(\+91)?(\d{10}|\w)$/;
   public static PHONE_PATTERN = /^\+(?:[0-9] ?){6,14}[0-9]$/;
-
+  public static YEAR_PATTERN = /^(19|20)\d{2}$/;
+  public static ZIPCODE_PATTERN = '^[0-9]{5,6}$';
   // public static PHONE_PATTERN =  /(\+91(-)?|91(-)?|0(-)?)?(9)[0-9]{6}$/;
 
 

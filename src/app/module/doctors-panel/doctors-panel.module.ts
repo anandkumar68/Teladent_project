@@ -5,17 +5,37 @@ import { DoctorsPanelRoutingModule } from './doctors-panel-routing.module';
 import { DoctorsPanelComponent } from './doctors-panel.component';
 import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
+import { DoctorSidebarComponent } from './doctor-sidebar/doctor-sidebar.component';
+import { DoctorsReviewsComponent } from './doctors-reviews/doctors-reviews.component';
+import { ProfileSettingComponent } from './profile-setting/profile-setting.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { TagInputModule } from 'ngx-chips';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
   declarations: [
     DoctorsPanelComponent,
     DoctorDashboardComponent,
-    AppointmentsComponent
+    AppointmentsComponent,
+    DoctorSidebarComponent,
+    DoctorsReviewsComponent,
+    ProfileSettingComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
-    DoctorsPanelRoutingModule
-  ]
+    DoctorsPanelRoutingModule,
+    NgxIntlTelInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    TagInputModule,
+    BsDatepickerModule.forRoot(),
+
+  ],
 })
 export class DoctorsPanelModule { }

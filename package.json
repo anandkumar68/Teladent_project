@@ -27,6 +27,7 @@
     "moment": "^2.29.1",
     "ng-otp-input": "^1.7.1",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-chips": "^2.2.2",
     "ngx-countdown": "^11.0.1",
     "ngx-intl-tel-input": "^3.0.5",
     "ngx-toastr": "^13.2.0",
