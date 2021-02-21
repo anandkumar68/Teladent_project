@@ -66,6 +66,16 @@ const routes: Routes = [
     redirectTo: 'doctors-panel',
     pathMatch: 'full',
   },
+
+  {
+    path: 'patient-panel',
+    loadChildren: () => import('./patient-panel/patient-panel.module').then(m => m.PatientPanelModule),
+  },
+  {
+    path: '',
+    redirectTo: 'patient-panel',
+    pathMatch: 'full',
+  }
 ];
 
 @NgModule({
