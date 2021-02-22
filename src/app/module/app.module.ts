@@ -27,12 +27,13 @@ import { DatePipe } from '@angular/common';
 import { TagInputModule } from 'ngx-chips';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER } from 'ngx-ui-loader';
 import { CovidComponent } from './covid/covid.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
-  fgsColor: '#00d0f1',
+  fgsColor: 'rgba(40,40,40,0.8)',
   fgsPosition: POSITION.centerCenter,
-  fgsSize: 90,
+  fgsSize: 0,
   fgsType: SPINNER.pulse,
 
   // For Background Loader
@@ -85,7 +86,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     DoctorsPanelModule,
     TagInputModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxPaginationModule,
+    NgCircleProgressModule.forRoot()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
