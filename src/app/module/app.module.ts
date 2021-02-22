@@ -27,6 +27,7 @@ import { DatePipe } from '@angular/common';
 import { TagInputModule } from 'ngx-chips';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER } from 'ngx-ui-loader';
 import { CovidComponent } from './covid/covid.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
@@ -85,7 +86,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     DoctorsPanelModule,
     TagInputModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

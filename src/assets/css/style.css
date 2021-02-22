@@ -11157,3 +11157,14 @@ input#country-search-box {
 .ngx-overlay.ngx-position-absolute.loading-foreground {
     position: fixed !important;
 }
+
+
+.btn-group-sm>.btn, .btn-sm {
+    margin-right: 4px;
+}
+
+.result-str {
+    padding-top: 0.85em;
+    white-space: nowrap;
+    padding-left: 10px;
+}
