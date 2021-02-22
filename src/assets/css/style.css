@@ -11154,3 +11154,6 @@ input#country-search-box {
 .pointer{
     cursor: pointer;
 }
+.ngx-overlay.ngx-position-absolute.loading-foreground {
+    position: fixed !important;
+}

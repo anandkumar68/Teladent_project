@@ -30,9 +30,9 @@ import { CovidComponent } from './covid/covid.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
-  fgsColor: '#00d0f1',
+  fgsColor: 'rgba(40,40,40,0.8)',
   fgsPosition: POSITION.centerCenter,
-  fgsSize: 90,
+  fgsSize: 0,
   fgsType: SPINNER.pulse,
 
   // For Background Loader
