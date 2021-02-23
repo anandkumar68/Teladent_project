@@ -111,4 +111,22 @@ export class WebApiService {
     }
   }
 
+
+    /********************************* FOR DOCTOR PROFILE SETTING DETAILS **********************/
+
+  // USER DOCTOR API LIST
+  getDoctorProfileDetails(): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor/update-individual-details`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
 }

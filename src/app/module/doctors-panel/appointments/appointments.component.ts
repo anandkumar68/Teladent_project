@@ -41,7 +41,6 @@ export class AppointmentsComponent implements OnInit {
         }
         if (res.status === 'error') {
           this.appointmentList = [];
-          this.appointmentList = res.data;
         }
       }, error => {
         this.ngxLoader.stopLoader('loader-02');

@@ -4,7 +4,11 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Router } from '@angular/router';
 import { CountryISO, SearchCountryField, TooltipLabel } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Constants } from 'src/app/shared/constant';
+import { WebApiService } from 'src/app/shared/web-api/web-api.service';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+
 
 @Component({
   selector: 'app-profile-setting',
@@ -31,20 +35,180 @@ export class ProfileSettingComponent implements OnInit {
   setCountry: any;
 
 
+  profileDetails: any;
+
+
 
   constructor(
     private fb: FormBuilder,
     public datePipe: DatePipe,
-    // public ngxLoader: NgxUiLoaderService,
+    public ngxLoader: NgxUiLoaderService,
     public toastr: ToastrService,
-    // public api: AdminApiService,
+    public api: WebApiService,
     public router: Router,
 
   ) { }
 
   ngOnInit(): void {
     this.formValidation();
+    this.getProfileDetails();
+
   }
+
+
+
+
+  // FOR GET DOCTOR PROFILE DETAILS
+  getProfileDetails() {
+    try {
+      this.ngxLoader.startLoader('loader-02');
+      this.api.getDoctorProfileDetails().subscribe((res: any) => {
+        console.log(res);
+
+        this.ngxLoader.stopLoader('loader-02');
+        if (res.status === 'success') {
+          this.profileDetails = {};
+          if (res.data.length > 0) {
+            this.profileDetails = res.data[0];
+            this.services = this.profileDetails.services;
+            this.specialization = this.profileDetails.specialization;
+            this.dentistType = this.profileDetails.dentistType;
+            this.addDoctorForm.get('firstName')?.setValue(this.profileDetails.firstName);
+            this.addDoctorForm.get('lastName')?.setValue(this.profileDetails.lastName);
+            this.addDoctorForm.get('gender')?.setValue(this.profileDetails.gender);
+            this.addDoctorForm.get('dob')?.setValue(new Date(this.profileDetails.dob));
+            this.addDoctorForm.get('biography')?.setValue(this.profileDetails.bio);
+            this.addDoctorForm.get('addressLine1')?.setValue(this.profileDetails.addressLine1);
+            this.addDoctorForm.get('addressLine2')?.setValue(this.profileDetails.addressLine2);
+            this.addDoctorForm.get('city')?.setValue(this.profileDetails.city);
+            this.addDoctorForm.get('country')?.setValue(this.profileDetails.country);
+            this.addDoctorForm.get('state')?.setValue(this.profileDetails.state);
+            this.addDoctorForm.get('zipcode')?.setValue(this.profileDetails.zipcode);
+            this.addDoctorForm.get('pricingType')?.setValue(this.profileDetails.pricingType);
+            this.addDoctorForm.get('pricingType')?.setValue(this.profileDetails.pricingType);
+            this.showPrice = this.profileDetails.pricingType === 'Custom Price' ? true : false;
+            this.addDoctorForm.get('priceCharges')?.setValue(this.profileDetails.priceCharges);
+
+
+
+              
+            if (this.profileDetails?.education.length > 0) {
+              for (let i = 0; i < this.profileDetails?.education.length; i++) {
+                (this.addDoctorForm.get('education') as FormArray).push(this.fb.group({
+                  degree: new FormControl(this.profileDetails.education[i].degree),
+                  collegName: new FormControl(this.profileDetails.education[i].collegName),
+                  fromYear: new FormControl(this.profileDetails.education[i].fromYear, Validators.pattern(Constants.YEAR_PATTERN)),
+                  completionYear: new FormControl(this.profileDetails.education[i].completionYear, Validators.pattern(Constants.YEAR_PATTERN))
+                }));
+              }
+            } else {
+              this.addNewGroup('education');
+            }
+
+
+            if (this.profileDetails?.experience.length > 0) {
+              for (let i = 0; i < this.profileDetails?.experience.length; i++) {
+                (this.addDoctorForm.get('experience') as FormArray).push(this.fb.group({
+                  hospitalName: new FormControl(this.profileDetails.experience[i].hospitalName),
+                  from: new FormControl(this.profileDetails.experience[i].from, Validators.pattern(Constants.YEAR_PATTERN)),
+                  to: new FormControl(this.profileDetails.experience[i].to, Validators.pattern(Constants.YEAR_PATTERN))
+                }));
+              }
+            } else {
+              this.addNewGroup('experience');
+            }
+
+
+
+            if (this.profileDetails?.awards.length > 0) {
+              for (let i = 0; i < this.profileDetails?.awards.length; i++) {
+                (this.addDoctorForm.get('awards') as FormArray).push(this.fb.group({
+                  name: new FormControl(this.profileDetails.awards[i].name),
+                  year: new FormControl(this.profileDetails.awards[i].year, Validators.pattern(Constants.YEAR_PATTERN)),
+                }));
+              }
+            } else {
+              this.addNewGroup('awards');
+            }
+            if (this.profileDetails?.registrations.length > 0) {
+              for (let i = 0; i < this.profileDetails?.registrations.length; i++) {
+                (this.addDoctorForm.get('registrations') as FormArray).push(this.fb.group({
+                  name: new FormControl(this.profileDetails.registrations[i].name),
+                  year: new FormControl(this.profileDetails.registrations[i].year, Validators.pattern(Constants.YEAR_PATTERN)),
+                }));
+              }
+            } else {
+              this.addNewGroup('registrations');
+            }
+
+            if (this.profileDetails?.membership.length > 0) {
+              for (let i = 0; i < this.profileDetails?.membership.length; i++) {
+                (this.addDoctorForm.get('membership') as FormArray).push(this.fb.control(''));
+              }
+            } else {
+              this.addNewGroup('membership');
+            }
+
+
+
+
+            // FOR SET COUNTRY DIAL CODE
+            let phoneNumber = parsePhoneNumberFromString(`+${this.profileDetails.countryCode + '' + this.profileDetails.phone}`);
+            if (phoneNumber) {
+              if (phoneNumber.isValid()) {
+                this.setCountry = phoneNumber.country;
+                this.addDoctorForm.controls.phone.setValue(phoneNumber.nationalNumber);
+                return null;
+              } else {
+                this.setCountry = CountryISO.India;
+                this.addDoctorForm.controls.phone.setValue('');
+                return {
+                  phoneNumber: {
+                    valid: false
+                  }
+                }
+              }
+            } else {
+              this.setCountry = CountryISO.India;
+              this.addDoctorForm.controls.phone.setValue('');
+              return {
+                phoneNumber: {
+                  valid: false
+                }
+              }
+            }
+
+          }
+        }
+        if (res.status === 'error') {
+          this.profileDetails = {};
+        }
+      }, error => {
+        this.ngxLoader.stopLoader('loader-02');
+        console.log(error);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // FOR FORM VALIDATION
   formValidation() {
@@ -72,36 +236,11 @@ export class ProfileSettingComponent implements OnInit {
         pricingType: new FormControl('Free', Validators.required),
         priceCharges: new FormControl('0', Validators.required),
 
-        education: this.fb.array([
-          this.fb.group({
-            degree: new FormControl(''),
-            collegName: new FormControl(''),
-            fromYear: new FormControl('', Validators.pattern(Constants.YEAR_PATTERN)),
-            completionYear: new FormControl('', Validators.pattern(Constants.YEAR_PATTERN))
-          })
-        ]),
-        experience: this.fb.array([
-          this.fb.group({
-            hospitalName: new FormControl(''),
-            from: new FormControl('', Validators.pattern(Constants.YEAR_PATTERN)),
-            to: new FormControl('', Validators.pattern(Constants.YEAR_PATTERN)),
-          })
-        ]),
-        awards: this.fb.array([
-          this.fb.group({
-            name: new FormControl(''),
-            year: new FormControl('', Validators.pattern(Constants.YEAR_PATTERN)),
-          })
-        ]),
-        registrations: this.fb.array([
-          this.fb.group({
-            name: new FormControl(''),
-            year: new FormControl('', Validators.pattern(Constants.YEAR_PATTERN)),
-          })
-        ]),
-        membership: this.fb.array([
-          this.fb.control('')
-        ])
+        education: this.fb.array([]),
+        experience: this.fb.array([]),
+        awards: this.fb.array([]),
+        registrations: this.fb.array([]),
+        membership: this.fb.array([])
       });
     } catch (error) {
       console.error(error);
@@ -188,13 +327,13 @@ export class ProfileSettingComponent implements OnInit {
           }
 
 
-          let specializationData= [];
+          let specializationData = [];
           for (let data of this.specialization) {
             specializationData.push(data['value'])
           }
 
 
-          let dentistTypeData= [];
+          let dentistTypeData = [];
           for (let data of this.dentistType) {
             dentistTypeData.push(data['value'])
           }
@@ -307,26 +446,26 @@ export class ProfileSettingComponent implements OnInit {
   // AFTER CHIPS REMOVED
   onRemoveChips(tag: any, attrTyp: any) {
 
-    attrTyp === 'service' ? 
-    this.services.length === 0 ?
-    this.showServiceError = true : this.showServiceError = false :
-    attrTyp === 'special' ? 
-    this.specialization.length === 0 ? 
-    this.showSpecializationError = true : this.showSpecializationError = false :
-    attrTyp === 'dentist' ?
-    this.dentistType.length === 0 ?
-    this.showDentistTypeError = true : this.showDentistTypeError = false : '' ;
+    attrTyp === 'service' ?
+      this.services.length === 0 ?
+        this.showServiceError = true : this.showServiceError = false :
+      attrTyp === 'special' ?
+        this.specialization.length === 0 ?
+          this.showSpecializationError = true : this.showSpecializationError = false :
+        attrTyp === 'dentist' ?
+          this.dentistType.length === 0 ?
+            this.showDentistTypeError = true : this.showDentistTypeError = false : '';
   }
 
   // AFTER CHIPS ADDED
   onAddChips(tag: any, attrTyp: any) {
 
-    attrTyp === 'service' ? 
-    this.showServiceError = false : 
-    attrTyp === 'special' ? 
-    this.showSpecializationError = false : 
-    attrTyp === 'dentist' ? 
-    this.showDentistTypeError = false : '';
+    attrTyp === 'service' ?
+      this.showServiceError = false :
+      attrTyp === 'special' ?
+        this.showSpecializationError = false :
+        attrTyp === 'dentist' ?
+          this.showDentistTypeError = false : '';
 
   }
 
