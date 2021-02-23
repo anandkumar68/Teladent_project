@@ -16,6 +16,7 @@ import { TagInputModule } from 'ngx-chips';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     TagInputModule,
     BsDatepickerModule.forRoot(),
     NgxPaginationModule,
-    NgCircleProgressModule
+    NgCircleProgressModule,
+    NgxUiLoaderModule
 
   ],
 })

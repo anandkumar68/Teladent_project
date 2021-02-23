@@ -522,6 +522,7 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('userId', undefined);
       localStorage.setItem('user', undefined);
       this.showUser = false;
+      this.router.navigateByUrl('/index')
     } catch (error) {
       console.error(error);
     }
