@@ -205,10 +205,17 @@ export class OnlineConsultationComponent implements OnInit {
       if(localStorage.getItem('token') === null) {
         (document.getElementById('loginCall') as HTMLInputElement).click();
       } else {
+
         const helper = new JwtHelperService();
         const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
+        
         if(isExpired) {
-          (document.getElementById('loginCall') as HTMLInputElement).click();
+
+          (document.getElementById('logoutCall') as HTMLInputElement).click();
+          setTimeout(() => {
+            (document.getElementById('loginCall') as HTMLInputElement).click();
+          }, 200);
+          
         } else {
           this.router.navigateByUrl(`/booking/${doctorId}`);
         }
@@ -228,13 +235,16 @@ export class OnlineConsultationComponent implements OnInit {
         const helper = new JwtHelperService();
         const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
         if(isExpired) {
-          (document.getElementById('loginCall') as HTMLInputElement).click();
+          
+          (document.getElementById('logoutCall') as HTMLInputElement).click();
+          setTimeout(() => {
+            (document.getElementById('loginCall') as HTMLInputElement).click();
+          }, 200);
+
         } else {
           this.router.navigateByUrl(`/doctor-profile/${doctorId}`);
         }
       }
-
-      // routerLink="/doctor-profile"
       
     } catch (error) {
       console.log(error);
