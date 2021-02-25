@@ -45,14 +45,33 @@
                             </div>
                         </div>
                         <div class="appointment-action">
-                            <a href="#" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
+                            <a href="javascript:void(0);"
+                            id="{{list._id}}"
+                            (click)="individualAppointmentDetails(list._id)"
+                            class="btn btn-sm bg-info-light"
+                            data-toggle="modal" 
+                            data-target="#appt_details">
                                 <i class="far fa-eye"></i> View
                             </a>
-                            <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                <i class="fas fa-check"></i> Accept
+                            <a 
+                            *ngIf="list.currentStatus === 'Pending' " 
+                            href="javascript:void(0);"
+                            (click)="updateStatus('accept', list._id)"
+                            class="btn btn-sm bg-success-light">
+                                <i class="fas fa-check"></i> Confirm
                             </a>
-                            <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                <i class="fas fa-times"></i> Cancel
+                            <a 
+                            *ngIf="list.currentStatus === 'Accept' " 
+                            (click)="updateStatus('completed', list._id)"
+                            href="javascript:void(0);" 
+                            class="btn btn-sm bg-success-light">
+                                <i class="fas fa-check"></i> Completed
+                            </a>
+                            <a
+                            *ngIf="list.currentStatus === 'Accept' " 
+                            href="javascript:void(0);" 
+                            class="btn btn-sm bg-danger-light">
+                                <i class="fas fa-times"></i> ReSchedule
                             </a>
                         </div>
                     </div>
@@ -98,12 +117,15 @@
                         <div class="details-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <span class="title">#APT0001</span>
-                                    <span class="text">21 Oct 2019 10:00 AM</span>
+                                    <span class="title">#{{individualDetails?.appointmentId}}</span>
+                                    <span class="text">{{individualDetails?.appointmentDate | date: 'dd MMM yyyy'}} {{individualDetails?.appointmentTime}}</span>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-right">
-                                        <button type="button" class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Accept' " type="button" disabled class="btn bg-success-light btn-sm" id="topup_status">Confirm</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Completed' " type="button" disabled class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Reallocate' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">ReSchedule</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Pending' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">Pending</button>
                                     </div>
                                 </div>
                             </div>
@@ -111,15 +133,18 @@
                     </li>
                     <li>
                         <span class="title">Status:</span>
-                        <span class="text">Completed</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Accept' ">Confirm</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Completed' ">Completed</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Pending' ">Pending</span>
                     </li>
                     <li>
-                        <span class="title">Confirm Date:</span>
-                        <span class="text">29 Jun 2019</span>
+                        <span class="title">Status Date:</span>
+                        <span class="text">{{individualDetails?.statusDate | date: 'dd MMM yyyy'}}</span>
                     </li>
                     <li>
                         <span class="title">Paid Amount</span>
-                        <span class="text">$450</span>
+                        <span class="text">₹{{individualDetails?.paid}}</span>
                     </li>
                 </ul>
             </div>

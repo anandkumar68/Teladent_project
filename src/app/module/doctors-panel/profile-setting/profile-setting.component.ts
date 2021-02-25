@@ -56,14 +56,11 @@ export class ProfileSettingComponent implements OnInit {
   }
 
 
-
-
   // FOR GET DOCTOR PROFILE DETAILS
   getProfileDetails() {
     try {
       this.ngxLoader.startLoader('loader-02');
       this.api.getDoctorProfileDetails().subscribe((res: any) => {
-        console.log(res);
 
         this.ngxLoader.stopLoader('loader-02');
         if (res.status === 'success') {
@@ -88,8 +85,6 @@ export class ProfileSettingComponent implements OnInit {
             this.addDoctorForm.get('pricingType')?.setValue(this.profileDetails.pricingType);
             this.showPrice = this.profileDetails.pricingType === 'Custom Price' ? true : false;
             this.addDoctorForm.get('priceCharges')?.setValue(this.profileDetails.priceCharges);
-
-
 
               
             if (this.profileDetails?.education.length > 0) {
@@ -192,24 +187,6 @@ export class ProfileSettingComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // FOR FORM VALIDATION
   formValidation() {
     try {
@@ -246,7 +223,6 @@ export class ProfileSettingComponent implements OnInit {
       console.error(error);
     }
   }
-
 
   // FOR GET VALIDATION ERRORS
   get validation() {
@@ -323,20 +299,24 @@ export class ProfileSettingComponent implements OnInit {
 
           let servicesData = [];
           for (let data of this.services) {
-            servicesData.push(data['value'])
+            data.value ? servicesData.push(data['value']) :
+            servicesData.push(data);
           }
 
 
           let specializationData = [];
           for (let data of this.specialization) {
-            specializationData.push(data['value'])
+            data.value ? specializationData.push(data['value']) :
+            specializationData.push(data);
           }
 
 
           let dentistTypeData = [];
           for (let data of this.dentistType) {
-            dentistTypeData.push(data['value'])
+            data.value ? dentistTypeData.push(data['value']) :
+            dentistTypeData.push(data);
           }
+          
           let data = {
             "firstName": this.addDoctorForm.get('firstName')?.value.trim(),
             "lastName": this.addDoctorForm.get('lastName')?.value.trim(),
@@ -362,20 +342,20 @@ export class ProfileSettingComponent implements OnInit {
             "awards": this.addDoctorForm.get('awards')?.value,
             "registrations": this.addDoctorForm.get('registrations')?.value,
           }
-          // this.ngxLoader.start();
-          // this.api.addDoctorApi(data).subscribe((res: any) => {
-          //   this.ngxLoader.stop();
-          //   if (res.status === 'success') {
-          //     this.toastr.success(res.message);
-          //     this.router.navigateByUrl('/admin/doctors-list');
-          //   }
-          //   if (res.status === 'error') {
-          //     this.toastr.error(res.message);
-          //   }
-          // }, (error: any) => {
-          //   console.log(error);
-          //   this.ngxLoader.stop();
-          // });
+
+          this.ngxLoader.startLoader('loader-02');
+          this.api.updateDoctorProfile(data).subscribe((res: any) => {
+            this.ngxLoader.stopLoader('loader-02');
+            if (res.status === 'success') {
+              this.toastr.success(res.message);
+            }
+            if (res.status === 'error') {
+              this.toastr.error(res.message);
+            }
+          }, (error: any) => {
+            console.log(error);
+            this.ngxLoader.stopLoader('loader-02');
+          });
 
         }
       }

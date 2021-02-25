@@ -29,18 +29,6 @@ export class DoctorDashboardComponent implements OnInit {
       this.currentPage = page;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
   data = [
     {
       "name": "Abhishek Kumar",
@@ -72,5 +60,5 @@ export class DoctorDashboardComponent implements OnInit {
     },
   ]
 
-
+   
 }

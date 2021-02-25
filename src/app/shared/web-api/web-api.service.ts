@@ -93,7 +93,7 @@ export class WebApiService {
 
 
 
-  /********************************* FOR DOCTOR APPOINTMENT **********************/
+  /********************************* FOR DOCTOR DASHBOARD **********************/
 
   // USER DOCTOR API LIST
   getDoctorAppiontmentlist(limit:any, skip:any): Observable<any> {
@@ -111,8 +111,67 @@ export class WebApiService {
     }
   }
 
+  // UPDATE DOCTOR PROFILE
+  updateDoctorProfile(data: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor/update-profile`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
-    /********************************* FOR DOCTOR PROFILE SETTING DETAILS **********************/
+  // UPDATE APPOINTMENT STATUS
+  updateAppointmentStatus(data: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor-appointment-action`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // INDIVIDUAL APPOINTMENT DETAILS
+  individualAppointmentDetails(data: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor-appointment-individual-details`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // DOCTOR SET PASSWORD
+  setDoctorDashboardPassword(data: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor-update-password-from-dashboard`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+    /********************************* FOR ADMIN DOCTOR PROFILE SETTING DETAILS **********************/
 
   // USER DOCTOR API LIST
   getDoctorProfileDetails(): Observable<any> {
