@@ -10,6 +10,7 @@ import { DoctorProfileComponent } from './doctor-profile/doctor-profile.componen
 import { IndexComponent } from './index/index.component';
 import { InfobytesComponent } from './infobytes/infobytes.component';
 import { OnlineConsultationComponent } from './online-consultation/online-consultation.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -75,7 +76,12 @@ const routes: Routes = [
     path: '',
     redirectTo: 'patient-panel',
     pathMatch: 'full',
-  }
+  },
+
+  {
+    path: 'page-not-found',
+    component: PageNotFoundComponent,
+  },
 ];
 
 @NgModule({
