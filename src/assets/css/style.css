@@ -11168,3 +11168,9 @@ input#country-search-box {
     white-space: nowrap;
     padding-left: 10px;
 }
+
+
+.reschedule{
+    display: inline;
+    color: brown ;
+}
