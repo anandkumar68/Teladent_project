@@ -207,4 +207,29 @@ export class WebApiService {
     }
   }
 
+  /**********************************************************************************/
+  /********************************* PATIENT PANEL API START ****************************/
+  /**********************************************************************************/
+
+
+  /********************************* FOR PATIENT DASHBOARD DETAILS *******************/
+
+  //GET PATIENT DASHBOARD DETAILS
+  getPatientDashboardDetails(limit: any, skip: any, dashboardType: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/get-dasboard-details`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+        params: new HttpParams().set('limit', limit).set('skip', skip).set('dashboardType', dashboardType)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+
+
 }

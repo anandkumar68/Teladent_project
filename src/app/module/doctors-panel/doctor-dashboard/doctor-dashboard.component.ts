@@ -183,7 +183,7 @@ export class DoctorDashboardComponent implements OnInit {
   checkTabValue(value){
     try {
       if(value === 'uptoNow'){
-        this.dashboardTab = 'value';
+        this.dashboardTab = 'uptoNow';
         this.getDashboardDetails(value);
       }
 
