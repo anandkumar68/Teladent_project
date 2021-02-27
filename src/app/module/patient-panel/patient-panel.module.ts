@@ -8,13 +8,18 @@ import { PatientSidebarComponent } from './patient-sidebar/patient-sidebar.compo
 import { FavouritesComponent } from './favourites/favourites.component';
 import { PatientProfileSettingsComponent } from './patient-profile-settings/patient-profile-settings.component';
 import { PatientChangePasswordComponent } from './patient-change-password/patient-change-password.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { RescheduleAppointmentComponent } from './reschedule-appointment/reschedule-appointment.component';
 
 
 @NgModule({
-  declarations: [PatientPanelComponent, PatientDashboardComponent, PatientSidebarComponent, FavouritesComponent, PatientProfileSettingsComponent, PatientChangePasswordComponent],
+  declarations: [PatientPanelComponent, PatientDashboardComponent, PatientSidebarComponent, FavouritesComponent, PatientProfileSettingsComponent, PatientChangePasswordComponent, RescheduleAppointmentComponent],
   imports: [
     CommonModule,
-    PatientPanelRoutingModule
+    PatientPanelRoutingModule,
+    NgxPaginationModule,
+    NgxUiLoaderModule
   ]
 })
 export class PatientPanelModule { }

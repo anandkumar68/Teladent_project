@@ -96,7 +96,7 @@ export class WebApiService {
   /********************************* FOR DOCTOR DASHBOARD **********************/
 
   // USER DOCTOR API LIST
-  getDoctorAppiontmentlist(limit:any, skip:any): Observable<any> {
+  getDoctorAppiontmentlist(limit: any, skip: any): Observable<any> {
     try {
       let token: any;
       token = localStorage.getItem('token');
@@ -171,7 +171,7 @@ export class WebApiService {
     }
   }
 
-    /********************************* FOR ADMIN DOCTOR PROFILE SETTING DETAILS **********************/
+  /********************************* FOR ADMIN DOCTOR PROFILE SETTING DETAILS **********************/
 
   // USER DOCTOR API LIST
   getDoctorProfileDetails(): Observable<any> {
@@ -187,5 +187,49 @@ export class WebApiService {
       console.log(error.message);
     }
   }
+
+
+  /********************************* FOR DOCTOR DASHBOARD DETAILS **********************/
+
+  //GET DOCTOR DASHBOARD DETAILS
+  getDoctorDashboardDetails(limit: any, skip: any, listFor: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor-dashboard-details`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+        params: new HttpParams().set('limit', limit).set('skip', skip).set('listFor', listFor)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  /**********************************************************************************/
+  /********************************* PATIENT PANEL API START ****************************/
+  /**********************************************************************************/
+
+
+  /********************************* FOR PATIENT DASHBOARD DETAILS *******************/
+
+  //GET PATIENT DASHBOARD DETAILS
+  getPatientDashboardDetails(limit: any, skip: any, dashboardType: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/get-dasboard-details`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+        params: new HttpParams().set('limit', limit).set('skip', skip).set('dashboardType', dashboardType)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+
 
 }

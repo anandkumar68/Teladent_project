@@ -5,6 +5,7 @@ import { PatientChangePasswordComponent } from './patient-change-password/patien
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { PatientPanelComponent } from './patient-panel.component';
 import { PatientProfileSettingsComponent } from './patient-profile-settings/patient-profile-settings.component';
+import { RescheduleAppointmentComponent } from './reschedule-appointment/reschedule-appointment.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path:'patient-change-password',
         component: PatientChangePasswordComponent,
+      },
+      {
+        path:'reschedule-appointment/:providerId/:appointId',
+        component: RescheduleAppointmentComponent,
       },
       {
         path: '',
