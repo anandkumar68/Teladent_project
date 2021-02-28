@@ -111,8 +111,9 @@ export class HeaderComponent implements OnInit {
     this.signupFormValidation();
     this.forgotFormValidation();
     this.setNewPasswordFormValidation();
-    let userId = Constants.credentialsDecrypt(localStorage.getItem('userId'));    
-    this.showUser = userId === undefined || userId === null ? false : true;
+    let userId = Constants.credentialsDecrypt(localStorage.getItem('userId'));
+    console.log(userId);
+    this.showUser = !userId ? false : true;
     this.loginUserDetails();
   }
 
@@ -239,8 +240,9 @@ export class HeaderComponent implements OnInit {
             if (response.status === 'success') {
               this.toastr.success(response.message);
               localStorage.setItem('userId', Constants.credentialsEncrypt(response.data.userId));
-              localStorage.setItem('token', Constants.credentialsEncrypt(response.data.token));
               localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
+              localStorage.setItem('token', Constants.credentialsEncrypt(response.data.token));
+              localStorage.setItem('loginAs', Constants.credentialsEncrypt(response.data.userType));
               this.showUser = true;
               this.loginUserDetails();
               (document.getElementById('exampleModal') as HTMLElement).click();
@@ -463,6 +465,7 @@ export class HeaderComponent implements OnInit {
                 localStorage.setItem('userId', Constants.credentialsEncrypt(response.data.userId));
                 localStorage.setItem('user', Constants.credentialsEncrypt(JSON.stringify(response.data)));
                 localStorage.setItem('token', Constants.credentialsEncrypt(response.data.token));
+                localStorage.setItem('loginAs', Constants.credentialsEncrypt(response.data.userType));
                 this.showUser = true;
                 this.loginUserDetails();
                 (document.getElementById('exampleModal') as HTMLElement).click();
@@ -519,8 +522,10 @@ export class HeaderComponent implements OnInit {
   // FOR LOGOUT USER
   logout() {
     try {
-      localStorage.setItem('userId', undefined);
-      localStorage.setItem('user', undefined);
+      localStorage.setItem('userId', null);
+      localStorage.setItem('user', null);
+      localStorage.setItem('loginAs', null);
+      localStorage.setItem('token', null);
       this.showUser = false;
       this.router.navigateByUrl('/index')
     } catch (error) {

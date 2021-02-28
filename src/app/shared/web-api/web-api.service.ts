@@ -230,6 +230,51 @@ export class WebApiService {
     }
   }
 
+  // RESCHEDULE APPOINTMENT
+  rescheduleAppointment(data): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/reschedule-appointment`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // INDIVIDUAL APPOINTMENT PATIENT DETAILS
+  individualAppointmentPatDetails(data: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/individual-appointment-details`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // INDIVIDUAL APPOINTMENT PATIENT DETAILS
+  updatePrescription(data: any, appointId: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor/update-appt-drug/${appointId}`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
 
 
 }

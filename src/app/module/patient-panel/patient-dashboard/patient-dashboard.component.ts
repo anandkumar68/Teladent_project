@@ -86,32 +86,32 @@ export class PatientDashboardComponent implements OnInit {
   }
 
     // INDIVIDUAL APPOINTMENT DETAILS
-    individualAppointmentDetails(appointId) {
+  individualAppointmentDetails(appointId) {
       try {
         
         let body = {
           appointId: appointId
         }
   
-        // this.ngxLoader.startLoader('loader-02');
-        // this.api.individualAppointmentDetails(body).subscribe((res: any) => {
-        //   this.ngxLoader.stopLoader('loader-02');
-        //   if (res.status === 'success') {
+        this.ngxLoader.startLoader('loader-02');
+        this.api.individualAppointmentPatDetails(body).subscribe((res: any) => {
+          this.ngxLoader.stopLoader('loader-02');
+          if (res.status === 'success') {
   
-        //     this.individualDetails = res.data;
+            this.individualDetails = res.data;
   
-        //   }
-        //   if (res.status === 'error') {
-        //     this.toastr.error(res.message);
-        //   }
-        // }, (error: any) => {
-        //   console.log(error);
-        //   this.ngxLoader.stopLoader('loader-02');
-        // });
+          }
+          if (res.status === 'error') {
+            this.toastr.error(res.message);
+          }
+        }, (error: any) => {
+          console.log(error);
+          this.ngxLoader.stopLoader('loader-02');
+        });
   
       } catch (error) {
         console.log(error);
       }
-    }
+  }
 
 }

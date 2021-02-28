@@ -20,6 +20,8 @@ export class RescheduleAppointmentComponent implements OnInit {
   previousTimeSlotSelected: any;
   selectedSlotValues: any;
   doctorDetail: any;
+  appointId: any;
+
 
   constructor(
     public activatedRouter: ActivatedRoute,
@@ -42,6 +44,7 @@ export class RescheduleAppointmentComponent implements OnInit {
 
 
     this.doctorId = this.activatedRouter.snapshot.params.providerId;
+    this.appointId = this.activatedRouter.snapshot.params.appointId;
     this.availableSlotList();
     this.doctorDetails();
   }
@@ -113,25 +116,29 @@ export class RescheduleAppointmentComponent implements OnInit {
   bookingConfirm() {
     try {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-      this.ngxLoader.startLoader('loader-01');
-      this.apiService.createOrderId({amount: this.doctorDetail.price, currency: "INR", doctorId: this.doctorId}).subscribe((resolve) => {
-        if(resolve.status === 'success') {
-          resolve.data.doctorId = this.doctorId;
-          resolve.data.slotVlaue = this.selectedSlotValues;
-          resolve.data.doctorDetails = this.doctorDetail;
+      this.ngxLoader.startLoader('loader-02');
+      this.apiService.rescheduleAppointment({
 
-          sessionStorage.setItem('checkout', JSON.stringify(resolve.data));
-          this.ngxLoader.stopLoader('loader-01')
-          this.router.navigateByUrl('/checkout');
+        doctorId: this.doctorId,
+        appointId: this.appointId,
+        slotDate: this.selectedSlotValues.slotDate,
+        timeslot: this.selectedSlotValues.timeslot
+
+      }).subscribe((resolve) => {
+        if(resolve.status === 'success') {
+          this.toastr.success(resolve.message)
+          this.ngxLoader.stopLoader('loader-02')
+          this.router.navigateByUrl('/patient-panel/patient-dashboard')
         }
 
         if(resolve.status === 'error') {
           this.toastr.error(resolve.message);
-          this.ngxLoader.stopLoader('loader-01');
+          this.ngxLoader.stopLoader('loader-02');
+          this.router.navigateByUrl('/patient-panel/patient-dashboard')
         }
 
       },
-      err => this.ngxLoader.stopLoader('loader-01'))
+      err => this.ngxLoader.stopLoader('loader-02'))
 
     } catch (error) {
       console.log(error);

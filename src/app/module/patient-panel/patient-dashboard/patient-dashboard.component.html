@@ -73,7 +73,7 @@
                                                                     <span>{{ list.dentistType }} <p class="reschedule" *ngIf="list.isReallocate"><i class="fa fa-registered"></i></p></span></a>
                                                             </h2>
                                                         </td>
-                                                        <td>{{ list.appointmentDate }}<span class="d-block text-info">{{ list.appointmentTime }}</span>
+                                                        <td>{{ list.appointmentDate | date:'dd MMM yyyy' }}<span class="d-block text-info">{{ list.appointmentTime }}</span>
                                                         </td>
                                                         <td>{{ list.bookingDate | date:'dd MMM yyyy' }}</td>
                                                         <td>₹{{ list.paidAmount }}</td>
