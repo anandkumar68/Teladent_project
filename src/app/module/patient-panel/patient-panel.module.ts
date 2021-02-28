@@ -12,6 +12,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { RescheduleAppointmentComponent } from './reschedule-appointment/reschedule-appointment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgxPaginationModule,
     NgxUiLoaderModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxIntlTelInputModule,
+    BsDatepickerModule.forRoot(),
   ]
 })
 export class PatientPanelModule { }
