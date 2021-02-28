@@ -42,8 +42,6 @@ export class PatientDashboardComponent implements OnInit {
     try {
       this.ngxLoader.startLoader('loader-02');
       this.api.getPatientDashboardDetails(this.perPage, (this.currentPage * this.perPage) - this.perPage, value).subscribe((res: any) => {
-        console.log(res);
-        
         this.ngxLoader.stopLoader('loader-02');
         if (res.status === 'success') {
           this.dashboardData = [];
@@ -52,7 +50,7 @@ export class PatientDashboardComponent implements OnInit {
         }
         if (res.status === 'error') {
           this.dashboardData = [];
-
+          this.toastr.error(res.error, res.message);
         }
       }, error => {
         this.ngxLoader.stopLoader('loader-02');
@@ -64,61 +62,61 @@ export class PatientDashboardComponent implements OnInit {
   }
 
 
-  checkTabValue(value){
+  checkTabValue(value) {
     try {
-      if(value === 'appointment'){
+      if (value === 'appointment') {
         this.dashboardTab = 'appointment';
         this.getDashboardDetails(value);
       }
 
-      if(value === 'prescription'){
-        this.dashboardTab = 'prescription';
-        this.getDashboardDetails(value);
-      }
+      // if (value === 'prescription') {
+      //   this.dashboardTab = 'prescription';
+      //   this.getDashboardDetails(value);
+      // }
 
-      if(value === 'billing'){
-        this.dashboardTab = 'billing';
-        this.getDashboardDetails(value);
-      }
+      // if (value === 'billing') {
+      //   this.dashboardTab = 'billing';
+      //   this.getDashboardDetails(value);
+      // }
     } catch (error) {
       console.error(error);
     }
   }
 
-    // INDIVIDUAL APPOINTMENT DETAILS
-    individualAppointmentDetails(appointId) {
-      try {
-        
-        let body = {
-          appointId: appointId
-        }
-  
-        // this.ngxLoader.startLoader('loader-02');
-        // this.api.individualAppointmentDetails(body).subscribe((res: any) => {
-        //   this.ngxLoader.stopLoader('loader-02');
-        //   if (res.status === 'success') {
-  
-        //     this.individualDetails = res.data;
-  
-        //   }
-        //   if (res.status === 'error') {
-        //     this.toastr.error(res.message);
-        //   }
-        // }, (error: any) => {
-        //   console.log(error);
-        //   this.ngxLoader.stopLoader('loader-02');
-        // });
-  
-      } catch (error) {
-        console.log(error);
+  // INDIVIDUAL APPOINTMENT DETAILS
+  individualAppointmentDetails(appointId) {
+    try {
+
+      let body = {
+        appointId: appointId
       }
+
+      // this.ngxLoader.startLoader('loader-02');
+      // this.api.individualAppointmentDetails(body).subscribe((res: any) => {
+      //   this.ngxLoader.stopLoader('loader-02');
+      //   if (res.status === 'success') {
+
+      //     this.individualDetails = res.data;
+
+      //   }
+      //   if (res.status === 'error') {
+      //     this.toastr.error(res.message);
+      //   }
+      // }, (error: any) => {
+      //   console.log(error);
+      //   this.ngxLoader.stopLoader('loader-02');
+      // });
+
+    } catch (error) {
+      console.log(error);
     }
+  }
 
 
-      // ON PAGE CHANGE EVENTS
+  // ON PAGE CHANGE EVENTS
   onPageChange(page: number) {
     this.currentPage = page;
     this.getDashboardDetails(this.dashboardTab);
-  
+
   }
 }
