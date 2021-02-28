@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserApiService {
   BASE_URL = environment.apiBaseUrl;
-
+ 
   constructor(public http: HttpClient) {}
 
   // SUBMIT USER REGISTER API
