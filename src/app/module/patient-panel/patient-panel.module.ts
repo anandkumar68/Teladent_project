@@ -11,6 +11,7 @@ import { PatientChangePasswordComponent } from './patient-change-password/patien
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { RescheduleAppointmentComponent } from './reschedule-appointment/reschedule-appointment.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { RescheduleAppointmentComponent } from './reschedule-appointment/resched
     CommonModule,
     PatientPanelRoutingModule,
     NgxPaginationModule,
-    NgxUiLoaderModule
+    NgxUiLoaderModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PatientPanelModule { }

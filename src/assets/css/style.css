@@ -11189,3 +11189,17 @@ input#country-search-box {
 .cur-pointer {
     cursor: pointer;
 }
+
+
+/* PASSWORD ICON  */
+
+.password-icon {
+    position: absolute;
+    right: 25px;
+    top: 43px;
+    cursor: pointer;
+}
+
+.pos-rel {
+    position: relative;
+}
