@@ -61,8 +61,6 @@ export class PatientDashboardComponent implements OnInit {
     try {
       this.ngxLoader.startLoader('loader-02');
       this.api.getPatientDashboardDetails(this.perPage, (this.currentPage * this.perPage) - this.perPage, value).subscribe((res: any) => {
-        console.log(res);
-        
         this.ngxLoader.stopLoader('loader-02');
         if (res.status === 'success') {
           this.dashboardData = [];
@@ -71,7 +69,7 @@ export class PatientDashboardComponent implements OnInit {
         }
         if (res.status === 'error') {
           this.dashboardData = [];
-
+          this.toastr.error(res.error, res.message);
         }
       }, error => {
         this.ngxLoader.stopLoader('loader-02');
@@ -83,7 +81,7 @@ export class PatientDashboardComponent implements OnInit {
   }
 
 
-  checkTabValue(value){
+  checkTabValue(value) {
     try {
       this.currentPage = 1;
       if(value === 'appointment'){
@@ -91,7 +89,7 @@ export class PatientDashboardComponent implements OnInit {
         this.getDashboardDetails(value);
       }
 
-      if(value === 'prescription'){
+      if (value === 'prescription') {
         this.dashboardTab = 'prescription';
         this.getDashboardDetails(value);
       }
@@ -141,11 +139,11 @@ export class PatientDashboardComponent implements OnInit {
   }
 
 
-      // ON PAGE CHANGE EVENTS
+  // ON PAGE CHANGE EVENTS
   onPageChange(page: number) {
     this.currentPage = page;
     this.getDashboardDetails(this.dashboardTab);
-  
+
   }
 
 

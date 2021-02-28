@@ -109,4 +109,10 @@ export class Constants {
   }
 
 
+  public static cleanForm(formGroup: FormGroup) {  
+    Object.keys(formGroup.controls).forEach((key) => formGroup.get(key).setValue(formGroup.get(key).value.trim()));
+    return formGroup;
+  }
+
+
 }
