@@ -29,6 +29,7 @@ import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER }
 import { CovidComponent } from './covid/covid.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
   fgsColor: 'rgba(40,40,40,0.8)',
@@ -68,6 +69,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     InfobytesComponent,
     ContactUsComponent,
     CovidComponent,
+    PageNotFoundComponent,
     
   ],
   imports: [

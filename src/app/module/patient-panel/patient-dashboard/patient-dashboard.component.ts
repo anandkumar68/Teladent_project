@@ -114,4 +114,11 @@ export class PatientDashboardComponent implements OnInit {
       }
   }
 
+
+      // ON PAGE CHANGE EVENTS
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getDashboardDetails(this.dashboardTab);
+  
+  }
 }
