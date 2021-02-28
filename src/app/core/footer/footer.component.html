@@ -49,11 +49,11 @@
                     <div class="footer-widget footer-menu ">
                         <h2 class="footer-title ">For Patients</h2>
                         <ul>
-                            <li><a href="search.html ">Search for Clinics</a></li>
-                            <li><a href="login.html ">Login</a></li>
-                            <li><a href="register.html ">Register</a></li>
-                            <li><a href="booking.html ">Booking Appointment</a></li>
-                            <li><a href="patient-dashboard.html ">Patient Dashboard</a></li>
+                            <!-- <li><a href="search.html ">Search for Clinics</a></li> -->
+                            <li><a (click)="patientRouter('login')" href="javascript:void(0); ">Login</a></li>
+                            <li><a (click)="patientRouter('signup')" href="javascript:void(0);">Register</a></li>
+                            <li><a (click)="patientRouter('booking')" href="javascript:void(0);">Booking Appointment</a></li>
+                            <li><a (click)="patientRouter('patientDash')" href="javascript:void(0);">Patient Dashboard</a></li>
                         </ul>
                     </div>
                     <!-- /Footer Widget -->
@@ -66,11 +66,11 @@
                     <div class="footer-widget footer-menu ">
                         <h2 class="footer-title ">For Dentist</h2>
                         <ul>
-                            <li><a href="appointments.html ">Appointments</a></li>
+                            <li><a (click)="densitRouter('appointment')" href="javascript:void(0);">Appointments</a></li>
                             <!-- <li><a href="chat.html ">Chat</a></li> -->
-                            <li><a href="login.html ">Login</a></li>
-                            <li><a href="register.html ">Register</a></li>
-                            <li><a href="doctor-dashboard.html ">Dentist Dashboard</a></li>
+                            <li><a (click)="densitRouter('login')" href="javascript:void(0);">Login</a></li>
+                            <li><a (click)="densitRouter('signup')" href="javascript:void(0);">Register</a></li>
+                            <li><a (click)="densitRouter('doctorDash')" href="javascript:void(0);">Dentist Dashboard</a></li>
                         </ul>
                     </div>
                     <!-- /Footer Widget -->

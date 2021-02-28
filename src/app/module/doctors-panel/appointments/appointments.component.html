@@ -62,9 +62,12 @@
                             </a>
                             <a 
                             *ngIf="list.currentStatus === 'Accept' " 
-                            (click)="updateStatus('completed', list._id)"
                             href="javascript:void(0);" 
-                            class="btn btn-sm bg-success-light">
+                            class="btn btn-sm bg-success-light"
+                            (click)="completeRequest(list._id)"
+                            data-toggle="modal" 
+                            data-target="#appt_comp_details"
+                            data-backdrop="static">
                                 <i class="fas fa-check"></i> Completed
                             </a>
                             <a
@@ -153,3 +156,67 @@
     </div>
 </div>
 <!-- /Appointment Details Modal -->
+
+<!-- Complete Appointment Details Modal -->
+<div class="modal fade custom-modal" id="appt_comp_details">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Appointment Details</h5>
+                <button type="button" id="closeApp" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form">
+      
+                    <ul class="tab-group">
+                      <li id="desc" class="tab"><a id="descLink" href="#description">Summary</a></li>
+                      <li id="pesc" class="tab"><a id="pescLink" href="#prescription">Drug</a></li>
+                    </ul>
+                    
+                    <div class="tab-content">
+                      <div id="description">   
+                        <h4 class="heading-popup">Summary is Required to Complete Appointment</h4>
+                        
+                        <form>
+                          <div class="field-wrap">
+                            <label id="descLabel">
+                              Atleast 10 Character<span class="req">*</span>
+                            </label>
+                            <textarea (keyup)="descriptionValidation()" name="" id="descArea" cols="10" rows="5"></textarea>
+                          </div>
+                        <button 
+                        [ngClass] = " isDescription === false ? 'disabled' : '' "
+                        type="submit" 
+                        (click)="submitCompleteRequest()" 
+                        class="button button-block">Submit</button>
+                        </form>
+              
+                      </div>
+                      
+                      <div id="prescription">                        
+                        <form>
+                          <div class="field-wrap">
+                          <label id="suggestionArea">
+                            Suggestions
+                          </label>
+                            <textarea id="drug_suggestion" cols="10" rows="3"></textarea>
+                        </div>
+                        <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
+                        <div class="field-wrap">
+                            <input id="fileChosen" type='file' accept=".png, .jpg, .jpeg, .gif" (change)="onSelectFile($event)" multiple>
+                        </div>
+                        <button (click)="submitDrug()" class="button button-block">Submit</button>
+                        </form>
+                      </div>
+                      
+                    </div>
+                    <!-- tab-content -->
+                    
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Complete Appointment Details Modal -->
