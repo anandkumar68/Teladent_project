@@ -15,7 +15,26 @@ export class PatientDashboardComponent implements OnInit {
   currentPage = 1;
   perPage = 10;
   dashboardData = [];
-  individualDetails: any;
+  individualDetails = {
+    appointmentId: '',
+    appointmentDate: '',
+    appointmentTime: '',
+    currentStatus: '',
+    statusDate: '',
+    paid: ''
+  };
+  prescriptionDetails = {
+    appointmentId: "",
+    prescriptionTxt: "",
+    prescriptionAttach: [],
+    currentStatus: "Completed",
+    statusDate: "",
+    appointmentDate: "",
+    appointmentTime: "",
+    paid: "",
+    serviceType: "",
+    description: ""
+  }
 
 
   public directionLinks: boolean = true;
@@ -66,6 +85,7 @@ export class PatientDashboardComponent implements OnInit {
 
   checkTabValue(value){
     try {
+      this.currentPage = 1;
       if(value === 'appointment'){
         this.dashboardTab = 'appointment';
         this.getDashboardDetails(value);
@@ -76,10 +96,16 @@ export class PatientDashboardComponent implements OnInit {
         this.getDashboardDetails(value);
       }
 
-      if(value === 'billing'){
-        this.dashboardTab = 'billing';
+      if(value === 'invoice'){
+        this.dashboardTab = 'invoice';
         this.getDashboardDetails(value);
       }
+
+      if(value === 'booking'){
+        this.dashboardTab = 'booking';
+        this.getDashboardDetails(value);
+      }
+
     } catch (error) {
       console.error(error);
     }
@@ -121,4 +147,64 @@ export class PatientDashboardComponent implements OnInit {
     this.getDashboardDetails(this.dashboardTab);
   
   }
+
+
+  //PRESCRIPTION DETAILS
+  prescriptionDetailsView(appointId) {
+    try {
+      
+      let body = {
+        appointId: appointId
+      }
+
+      this.ngxLoader.startLoader('loader-02');
+      this.api.individualPresPatDetails(body).subscribe((res: any) => {
+        this.ngxLoader.stopLoader('loader-02');
+        if (res.status === 'success') {
+
+          this.prescriptionDetails = res.data;
+
+        }
+        if (res.status === 'error') {
+          this.toastr.error(res.message);
+        }
+      }, (error: any) => {
+        console.log(error);
+        this.ngxLoader.stopLoader('loader-02');
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+  //BILLING DETAILS
+  billingDetailsView(appointId) {
+    try {
+      
+      let body = {
+        appointId: appointId
+      }
+
+      this.ngxLoader.startLoader('loader-02');
+      this.api.individualPresPatDetails(body).subscribe((res: any) => {
+        this.ngxLoader.stopLoader('loader-02');
+        if (res.status === 'success') {
+
+          this.prescriptionDetails = res.data;
+
+        }
+        if (res.status === 'error') {
+          this.toastr.error(res.message);
+        }
+      }, (error: any) => {
+        console.log(error);
+        this.ngxLoader.stopLoader('loader-02');
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+}
+
 }

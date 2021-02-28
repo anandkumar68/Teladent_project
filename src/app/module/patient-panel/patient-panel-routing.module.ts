@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PatientAuthGuardGuard } from '../auth-guard/patient/patient-auth-guard.guard';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { PatientChangePasswordComponent } from './patient-change-password/patient-change-password.component';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
@@ -11,7 +12,7 @@ const routes: Routes = [
   {
     path:'',
     component: PatientPanelComponent,
-    // canActivate:[AuthGuard],
+    canActivate:[PatientAuthGuardGuard],
     children: [
       {
         path:'patient-dashboard',

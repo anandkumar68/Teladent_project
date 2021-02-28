@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { OnlineDoctorAuthGuardGuard } from '../auth-guard/online-doctors/online-doctor-auth-guard.guard';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
@@ -11,7 +12,7 @@ const routes: Routes = [
   {
     path:'',
     component: DoctorsPanelComponent,
-    // canActivate:[AuthGuard],
+    canActivate:[OnlineDoctorAuthGuardGuard],
     children: [
       {
         path:'doctor-dashboard',

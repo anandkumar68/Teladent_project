@@ -152,9 +152,7 @@ export class FooterComponent implements OnInit {
       if(linkType === 'appointment' || linkType === 'doctorDash') {
 
         if(!localStorage.getItem('token')) {
-
-          console.log("Prataap")
-
+          
           if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
             (document.getElementById('logoutCall') as HTMLInputElement).click();
