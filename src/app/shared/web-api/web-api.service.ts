@@ -291,5 +291,35 @@ export class WebApiService {
   }
 
 
+  // INDIVIDUAL PATIENT DETAILS
+  individualPatientDetails(): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/individual-details`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+   // UPDATE USER PATIENT PROFILE DETAILS
+   updateUserProfileDetails(data: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/update-details`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
 
 }
