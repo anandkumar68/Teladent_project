@@ -207,6 +207,21 @@ export class WebApiService {
     }
   }
 
+  //GET DOCTOR DASHBOARD SIDDEBAR DETAILS
+  getDoctorSideBarDetails(): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/doctor-individual-details`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   /**********************************************************************************/
   /********************************* PATIENT PANEL API START ****************************/
   /**********************************************************************************/
@@ -327,6 +342,21 @@ export class WebApiService {
       let token: any;
       token = localStorage.getItem('token');
       const apiUrl = `${this.BASE_URL}/user/update-details`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // UPDATE USER AVATAR
+  updateAvatar(data: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/update-profile`;
       return this.http.post(apiUrl, data, {
         headers: new HttpHeaders()
           .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
