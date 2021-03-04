@@ -112,7 +112,6 @@ export class HeaderComponent implements OnInit {
     this.forgotFormValidation();
     this.setNewPasswordFormValidation();
     let userId = Constants.credentialsDecrypt(localStorage.getItem('userId'));
-    console.log(userId);
     this.showUser = !userId ? false : true;
     this.loginUserDetails();
   }
@@ -245,7 +244,7 @@ export class HeaderComponent implements OnInit {
               localStorage.setItem('loginAs', Constants.credentialsEncrypt(response.data.userType));
               this.showUser = true;
               this.loginUserDetails();
-              (document.getElementById('exampleModal') as HTMLElement).click();
+              (document.getElementById('closeModal') as HTMLElement).click();
             }
 
             if (response.status === 'error') {
@@ -468,7 +467,7 @@ export class HeaderComponent implements OnInit {
                 localStorage.setItem('loginAs', Constants.credentialsEncrypt(response.data.userType));
                 this.showUser = true;
                 this.loginUserDetails();
-                (document.getElementById('exampleModal') as HTMLElement).click();
+                (document.getElementById('closeModal') as HTMLElement).click();
               }
             }
 

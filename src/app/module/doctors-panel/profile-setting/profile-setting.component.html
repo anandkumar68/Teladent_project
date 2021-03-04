@@ -36,12 +36,12 @@
                                 <div class="form-group">
                                     <div class="change-avatar">
                                         <div class="profile-img">
-                                            <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                            <img src="{{imageUrl}}" alt="User Image">
                                         </div>
                                         <div class="upload-img">
                                             <div class="change-photo-btn">
                                                 <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                <input type="file" class="upload">
+                                                <input type='file' class="upload" id="imageUpload" accept=".png, .jpg, .jpeg" (change)="onSelectFile($event)" />
                                             </div>
                                             <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
                                         </div>

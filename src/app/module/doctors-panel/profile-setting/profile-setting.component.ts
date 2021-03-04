@@ -36,6 +36,7 @@ export class ProfileSettingComponent implements OnInit {
 
 
   profileDetails: any;
+  imageUrl: any;
 
 
 
@@ -67,6 +68,7 @@ export class ProfileSettingComponent implements OnInit {
           this.profileDetails = {};
           if (res.data.length > 0) {
             this.profileDetails = res.data[0];
+            this.imageUrl = this.profileDetails.imageUrl;
             this.services = this.profileDetails.services;
             this.specialization = this.profileDetails.specialization;
             this.dentistType = this.profileDetails.dentistType;
@@ -447,6 +449,39 @@ export class ProfileSettingComponent implements OnInit {
         attrTyp === 'dentist' ?
           this.showDentistTypeError = false : '';
 
+  }
+
+  // on image select
+  onSelectFile(event) {
+    try {
+      if (event.target.files && event.target.files[0]) {
+        var reader = new FileReader();
+        if (event.target.files[0].size > 2000000) {
+          this.toastr.error('File Size Exceeded');
+        } else {
+          if (event.target.files.length > 0) {
+            reader.readAsDataURL(event.target.files[0]); // read file as data url
+            reader.onload = (event: any) => { // called once readAsDataURL is completed
+              this.imageUrl = event.target.result;
+            }
+            let imgBlob = event.target.files[0];
+            let formData = new FormData();
+            formData.append('profilePic', imgBlob);
+            this.ngxLoader.startLoader('loader-02');
+            this.api.updateAvatar(formData).subscribe(response => {
+              this.ngxLoader.stopLoader('loader-02');
+              this.toastr.success(response.message);
+              window.location.reload();
+            }, error => {
+              this.toastr.error(error.message);
+              this.ngxLoader.stopLoader('loader-02');
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 

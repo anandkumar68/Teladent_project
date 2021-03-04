@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Constants } from 'src/app/shared/constant';
+import { WebApiService } from 'src/app/shared/web-api/web-api.service';
 
 @Component({
   selector: 'app-doctor-sidebar',
@@ -8,16 +9,16 @@ import { Constants } from 'src/app/shared/constant';
 })
 export class DoctorSidebarComponent implements OnInit {
   userDetails: any;
-  education: any;
 
-  constructor() { }
+  constructor(
+    public api: WebApiService
+  ) { }
 
   ngOnInit(): void {
 
-    this.userDetails = JSON.parse(Constants.credentialsDecrypt(localStorage.getItem('user')));
-
-    // if(this.userDetails. )
-    
+    this.api.getDoctorSideBarDetails().subscribe((resolve) => {
+      this.userDetails = resolve.data;
+    })
 
   }
 

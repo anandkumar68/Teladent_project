@@ -26,6 +26,7 @@ export class PatientProfileSettingsComponent implements OnInit {
   setCountry: any;
 
   submitted = false;
+  imageUrl: any
 
 
 
@@ -81,6 +82,7 @@ export class PatientProfileSettingsComponent implements OnInit {
 
       this.ngxLoader.startLoader('loader-02');
       this.api.individualPatientDetails().subscribe((res: any) => {
+        this.imageUrl = res.data.imageUrl
         this.ngxLoader.stopLoader('loader-02');
         if (res.status === 'success') {
           this.profileForm.get('firstName')?.setValue(res.data?.firstName);
@@ -157,6 +159,7 @@ export class PatientProfileSettingsComponent implements OnInit {
             this.ngxLoader.stopLoader('loader-02');
             if (res.status === 'success') {
               this.toastr.success(res.message);
+              window.location.reload()
             }
             if (res.status === 'error') {
               this.toastr.error(res.message);
@@ -184,4 +187,38 @@ export class PatientProfileSettingsComponent implements OnInit {
       console.error(error);
     }
   }
+
+  // on image select
+  onSelectFile(event) {
+    try {
+      if (event.target.files && event.target.files[0]) {
+        var reader = new FileReader();
+        if (event.target.files[0].size > 2000000) {
+          this.toastr.error('File Size Exceeded');
+        } else {
+          if (event.target.files.length > 0) {
+            reader.readAsDataURL(event.target.files[0]); // read file as data url
+            reader.onload = (event: any) => { // called once readAsDataURL is completed
+              this.imageUrl = event.target.result;
+            }
+            let imgBlob = event.target.files[0];
+            let formData = new FormData();
+            formData.append('profilePic', imgBlob);
+            this.ngxLoader.startLoader('loader-02');
+            this.api.updateAvatar(formData).subscribe(response => {
+              this.ngxLoader.stopLoader('loader-02');
+              this.toastr.success(response.message);
+              window.location.reload();
+            }, error => {
+              this.toastr.error(error.message);
+              this.ngxLoader.stopLoader('loader-02');
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 }

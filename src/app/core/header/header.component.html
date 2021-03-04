@@ -84,7 +84,7 @@
                 </li>
 
                 <li class="nav-item" *ngIf="!showUser">
-                    <a class="nav-link btn-grad" href="login.html" data-toggle="modal" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
+                    <a class="nav-link btn-grad" href="login.html" data-toggle="modal" data-backdrop="static" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
                 </li>
 
                 <!-- User Menu -->
@@ -101,7 +101,8 @@
                             </div>
                             <div class="user-text">
                                 <h6>{{ userDetails.firstName + ' ' + userDetails.lastName}}</h6>
-                                <p class="text-muted mb-0">Dentist</p>
+                                <p *ngIf="userDetails?.userType === 'user' " class="text-muted mb-0">User</p>
+                                <p *ngIf="userDetails?.userType === 'onlineDoctors' " class="text-muted mb-0">Dentist</p>
                             </div>
                         </div>
                         <a class="dropdown-item pointer">Dashboard</a>
@@ -121,7 +122,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
