@@ -2,9 +2,7 @@
 <div class="main-wrapper">
     <div class="top-container">
 
-        <p class="animate__animated animate__heartBeat animate__slower animate__repeat-3 3 ">Book a Appointment on
-            WhatsApp
-            or Call on +91 1234567890</p>
+        <p class="animate__animated animate__heartBeat animate__slower animate__repeat-3 3 ">Book a Appointment on WhatsApp or Call on +91 1234567890</p>
     </div>
 
 
@@ -15,8 +13,8 @@
                 <a id="mobile_btn" href="javascript:void(0);">
                     <span class="bar-icon">
                         <span></span>
-                        <span></span>
-                        <span></span>
+                    <span></span>
+                    <span></span>
                     </span>
                 </a>
                 <a href="/index" class="navbar-brand logo">
@@ -38,7 +36,7 @@
                 <nav class="tabs d-none d-md-block">
 
                     <div class="selector" id="webmenu"></div>
-                    <a href="#" class="active" id="home"  (click)="navigateHeader('index')">Home</a>
+                    <a href="#" class="active" id="home" (click)="navigateHeader('index')">Home</a>
                     <a href="#" id="about" (click)="navigateHeader('about-us')">Who we are</a>
                     <a href="#" id="bytes" (click)="navigateHeader('info-bytes')">Info Bytes</a>
                     <a href="#" id="contact" (click)="navigateHeader('contact-us')">Contact Us</a>
@@ -69,7 +67,7 @@
                     </li>
 
                     <li class="login-link">
-                        <a href="javascript:void(0);" (click) = "navigateHeader('/online-consultation?limit=10&skip=0')">BOOK AN APPOINTMENT </a>
+                        <a href="javascript:void(0);" (click)="navigateHeader('/online-consultation?limit=10&skip=0')">BOOK AN APPOINTMENT </a>
                     </li>
 
                     <li class="login-link">
@@ -79,15 +77,14 @@
                 </ul>
             </div>
 
-             <ul class="nav header-navbar-rht">
+            <ul class="nav header-navbar-rht">
                 <li class="nav-item">
-                    <a class="nav-link btn-grad" href="javascript:void(0);" (click) = "navigateHeader('/online-consultation?limit=10&skip=0')">BOOK
+                    <a class="nav-link btn-grad" href="javascript:void(0);" (click)="navigateHeader('/online-consultation?limit=10&skip=0')">BOOK
                         AN APPOINTMENT </a>
                 </li>
 
                 <li class="nav-item" *ngIf="!showUser">
-                    <a class="nav-link btn-grad" href="login.html" data-toggle="modal" data-backdrop="static" data-target="#exampleModal"
-                        (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
+                    <a class="nav-link btn-grad" href="login.html" data-toggle="modal" data-backdrop="static" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
                 </li>
 
                 <!-- User Menu -->
@@ -110,11 +107,11 @@
                         </div>
                         <a class="dropdown-item pointer">Dashboard</a>
                         <a class="dropdown-item pointer">Profile Settings</a>
-                        <a class="dropdown-item pointer" id="logoutCall"  (click)="logout()">Logout</a>
+                        <a class="dropdown-item pointer" id="logoutCall" (click)="logout()">Logout</a>
                     </div>
                 </li>
                 <!-- /User Menu -->
-            </ul> 
+            </ul>
         </nav>
     </header>
 </div>
@@ -137,12 +134,8 @@
                 <div class="login-form" *ngIf="showHideForm.login">
                     <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
                         <div class="form-group">
-                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
-                                [enablePlaceholder]="true" [searchCountryFlag]="true"
-                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
-                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
-                                [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
-                                [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true" [customPlaceholder]="'XXXXXXXXXX'" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry" [tooltipField]="TooltipLabel.Name" [phoneValidation]="true" [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
                             </ngx-intl-tel-input>
                             <div *ngIf="loginSubmit && loginValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="loginValidation.phone.errors.required">Phone No. is Mandatory</div>
@@ -187,24 +180,19 @@
                 <div class="login-form" *ngIf="showHideForm.signup">
                     <form [formGroup]="signupForm" (ngSubmit)="submitSignup()">
                         <div class="form-group form-focus">
-                            <input type="text" class="form-control floating" placeholder="Fullname"
-                                formControlName="name">
+                            <input type="text" class="form-control floating" placeholder="Fullname" formControlName="name">
                             <label class="focus-label">Fullname</label>
                             <div *ngIf="signupSubmit && signupValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="signupValidation.phone.errors.required">Name is Mandatory</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
-                                [enablePlaceholder]="true" [searchCountryFlag]="true"
-                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
-                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
-                                [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
-                                [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]" [selectFirstCountry]="false"
+                                [selectedCountryISO]="setCountry" [tooltipField]="TooltipLabel.Name" [phoneValidation]="true" [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
                             </ngx-intl-tel-input>
                             <div *ngIf="signupSubmit && signupValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="signupValidation.phone.errors.required">Phone No. is Mandatory</div>
-                             <div *ngIf="signupValidation.phone.invalid && !signupValidation.phone.errors.required">Invalid Phone No.</div>
+                                <div *ngIf="signupValidation.phone.invalid && !signupValidation.phone.errors.required">Invalid Phone No.</div>
                             </div>
                         </div>
                         <div class="form-group form-focus">
@@ -219,10 +207,9 @@
                         <div class="form-group form-focus">
                             <input type="password" class="form-control floating" formControlName="confirmPassword">
                             <label class="focus-label">Confirm Password</label>
-                            <div *ngIf="signupSubmit && signupValidation.confirmPassword.errors"
-                                class="invalid-feedback">
-                                <div *ngIf="signupValidation.confirmPassword.errors.required">Confirm Password is
-                                    Mandatory</div>
+                            <div *ngIf="signupSubmit && signupValidation.confirmPassword.errors" class="invalid-feedback">
+                                <div *ngIf="signupValidation.confirmPassword.errors.required">Confirm Password is Mandatory
+                                </div>
                                 <div *ngIf="signupValidation.confirmPassword.errors.mustMatch">Password Mismatch</div>
                             </div>
                         </div>
@@ -239,16 +226,12 @@
                 <div class="login-form" *ngIf="showHideForm.forgotPassword">
                     <form [formGroup]="forgotForm" (ngSubmit)="submitForgot()">
                         <div class="form-group">
-                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
-                                [enablePlaceholder]="true" [searchCountryFlag]="true"
-                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
-                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
-                                [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
-                                [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]" [selectFirstCountry]="false"
+                                [selectedCountryISO]="setCountry" [tooltipField]="TooltipLabel.Name" [phoneValidation]="true" [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
                             </ngx-intl-tel-input>
                             <div *ngIf="forgotSubmit && forgotValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="forgotValidation.phone.errors.required">Phone No. is Mandatory</div>
-                             <div *ngIf="forgotValidation.phone.invalid && !forgotValidation.phone.errors.required">Invalid Phone No.</div>
+                                <div *ngIf="forgotValidation.phone.invalid && !forgotValidation.phone.errors.required">Invalid Phone No.</div>
 
                             </div>
                         </div>
@@ -268,8 +251,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 col-sm-6 col-lg-6">
-                                <countdown #countdown [config]="{leftTime: timer, format: 'mm:ss'}"
-                                    (event)="handleEvent($event)"></countdown> Min
+                                <countdown #countdown [config]="{leftTime: timer, format: 'mm:ss'}" (event)="handleEvent($event)"></countdown> Min
                             </div>
 
                             <div class="col-md-6 col-sm-6 col-lg-6 text-right">
@@ -277,12 +259,11 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit"
-                            [disabled]="otp?.length < 6">Submit</button>
+                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit" [disabled]="otp?.length < 6">Submit</button>
 
-                            <div class="text-center dont-have">Don’t have an account?
-                                <a href="javascript:void(0);" (click)="signup()">Register</a>
-                            </div>
+                        <div class="text-center dont-have">Don’t have an account?
+                            <a href="javascript:void(0);" (click)="signup()">Register</a>
+                        </div>
                     </form>
                 </div>
 
@@ -301,10 +282,9 @@
                         <div class="form-group form-focus">
                             <input type="password" class="form-control floating" formControlName="confirmPassword">
                             <label class="focus-label">Confirm Password</label>
-                            <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.confirmPassword.errors"
-                                class="invalid-feedback">
-                                <div *ngIf="setNewPasswordValidation.confirmPassword.errors.required">Confirm Password is
-                                    Mandatory</div>
+                            <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.confirmPassword.errors" class="invalid-feedback">
+                                <div *ngIf="setNewPasswordValidation.confirmPassword.errors.required">Confirm Password is Mandatory
+                                </div>
                                 <div *ngIf="setNewPasswordValidation.confirmPassword.errors.mustMatch">Password Mismatch</div>
                             </div>
                         </div>

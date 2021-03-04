@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +8,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent implements OnInit {
-
+  snapshot: any;
+  show404: boolean;
+  show500: boolean;
+  showOther: boolean;
   constructor(
-    private location: Location
+    private location: Location,
+    private router: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -31,10 +36,42 @@ export class PageNotFoundComponent implements OnInit {
       //console.log('X: ' + xAxis);
 
     });
+
+    this.snapshot = this.router.snapshot.paramMap.get('status');
+    this.pageLayout();
   }
 
-  goBack(){
-    this.location.back();
+  // go on the previous location
+  goBack() {
+    try {
+      this.location.back();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // for set page component according to error
+  pageLayout() {
+    try {
+      if (this.snapshot === '404') {
+        this.show404 = true;
+        this.show500 = false;
+        this.showOther = false;
+
+      } else if (this.snapshot === '500') {
+        this.show404 = false;
+        this.show500 = true;
+        this.showOther = false;
+
+      } else {
+        this.show404 = false;
+        this.show500 = false;
+        this.showOther = true;
+
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
 }

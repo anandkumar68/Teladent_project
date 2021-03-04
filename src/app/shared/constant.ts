@@ -5,13 +5,16 @@ import { environment } from 'src/environments/environment';
 import * as CryptoJS from 'crypto-js';
 import { FormControl, FormGroup } from '@angular/forms';
 import { of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class Constants {
 
   public static password = 'watchingyou';
-  public router: Router;
-  constructor() { }
+  static router: Router;
+  constructor(
+  ) { }
 
   // public static API_URL = environment.apiBaseUrl;
 
@@ -109,9 +112,86 @@ export class Constants {
   }
 
 
-  public static cleanForm(formGroup: FormGroup) {  
+  public static cleanForm(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((key) => formGroup.get(key).setValue(formGroup.get(key).value.trim()));
     return formGroup;
+  }
+
+
+  public static handleError(error: HttpErrorResponse) {
+    try {
+      if (error.status === 500) {
+        this.handle500Error(error);
+      }
+      else if (error.status === 404) {
+        this.handle404Error(error)
+      }
+      else if ((error.status).toString() === "401") {
+        this.tokenValidation(error)
+      }
+      else {
+        this.handleOtherError(error);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+
+  }
+
+  private static handle500Error(error: HttpErrorResponse) {
+    try {
+      this.router.navigate(['/page-not-found/500']);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  private static handle404Error(error: HttpErrorResponse) {
+    try {
+      this.router.navigate(['/page-not-found/404']);
+    } catch (err) {
+      console.log(err.message);
+    }
+
+  }
+
+  private static handleOtherError(error: HttpErrorResponse) {
+    try {
+      this.router.navigate(['/page-not-found']);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+
+  public static tokenValidation(error) {
+    try {
+      if ((error.status).toString() === "401") {
+        Swal.fire({
+          title: 'Session Timeout',
+          icon: 'info',
+          html: 'It will redirect to login page in  10 seconds.',
+          timer: 10000,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Login'
+        }).then((result) => {
+          if (
+            result.value === true ||
+            result.dismiss === Swal.DismissReason.timer ||
+            result.dismiss === Swal.DismissReason.cancel ||
+            result.dismiss === Swal.DismissReason.backdrop ||
+            result.dismiss === Swal.DismissReason.esc ||
+            result.dismiss === Swal.DismissReason.close
+          ) {
+            // localStorage.setItem('token', undefined);
+            // this.router.navigateByUrl('/user/login');
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+
+    }
   }
 
 
