@@ -27,23 +27,33 @@ export class OnlineConsultationComponent implements OnInit {
   pageNum = 1;
   limit = 10;
 
+
+  math = Math;
+  public directionLinks: boolean = true;
+  public autoHide: boolean = false;
+  public responsive: boolean = true;
+  public labels: any = {
+    previousLabel: '',
+    nextLabel: '',
+  };
+
   constructor(
     public serviceApi: WebApiService,
     public activatedRoute: ActivatedRoute,
     public router: Router,
     public ngxLoader: NgxUiLoaderService
-  ) { 
+  ) {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         this.activatedRoute.queryParams.subscribe(response => {
           this.doctorList(response);
-     });
+        });
       }
     });
   }
 
   ngOnInit(): void {
-    
+
     (document.getElementById('home') as HTMLAnchorElement).classList.remove('active');
     (document.getElementById('about') as HTMLAnchorElement).classList.remove('active');
     (document.getElementById('bytes') as HTMLAnchorElement).classList.remove('active');
@@ -55,35 +65,35 @@ export class OnlineConsultationComponent implements OnInit {
     this.doctorSpecialistList();
     this.activatedRoute.queryParams.subscribe(response => {
 
-      if(response['gender']) {
+      if (response['gender']) {
         (document.getElementById(response['gender']) as HTMLInputElement).checked = true;
         this.genderList[response['gender']] = true;
       }
-      
-      setTimeout(() => {
-        if(response['speciality']) {
 
-          for(let special of response['speciality']) {
-  
+      setTimeout(() => {
+        if (response['speciality']) {
+
+          for (let special of response['speciality']) {
+
             (document.getElementById(special) as HTMLInputElement).checked = true;
             this.specialistObject[special] = true;
-  
+
           }
         }
       }, 500);
 
       this.doctorList(response);
- });
+    });
   }
 
   // Doctor List
-  doctorList(data){
+  doctorList(data) {
     try {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       this.ngxLoader.startLoader('loader-01');
       this.serviceApi.getUserDoctorlist(data).subscribe((resolve) => {
 
-        if(resolve.status === 'success') {
+        if (resolve.status === 'success') {
 
           this.userDoctorList = resolve.data.doctorList;
           this.totalDocuments = resolve.data.totalDocuments;
@@ -93,29 +103,36 @@ export class OnlineConsultationComponent implements OnInit {
           this.ngxLoader.stopLoader('loader-01');
         }
       },
-      err => this.ngxLoader.stopLoader('loader-01'));
-
+        err => {
+          this.ngxLoader.stopLoader('loader-01');
+          Constants.handleError(err);
+        })
     } catch (error) {
       console.log(error);
     }
   }
 
+  // ON PAGE CHANGE EVENTS
+  onPageChange(page: number) {
+    this.pageNum = page;
+  }
+
   // Doctor Specialist list
-  doctorSpecialistList(){
+  doctorSpecialistList() {
     try {
-      
+
       this.serviceApi.getUserSpecialistDoctorlist().subscribe((resolve) => {
 
-        if(resolve.status === 'success') {
+        if (resolve.status === 'success') {
 
           this.userDoctorSpecialistList = resolve.data;
-          for(let specialist of this.userDoctorSpecialistList) {
+          for (let specialist of this.userDoctorSpecialistList) {
             this.specialistObject[specialist] = false;
           }
 
         }
       },
-      err => console.log(err));
+        err => console.log(err));
 
     } catch (error) {
       console.log(error);
@@ -123,23 +140,23 @@ export class OnlineConsultationComponent implements OnInit {
   }
 
   filterSpecialist(checkedValue) {
-    
+
     this.specialistObject[checkedValue] = (document.getElementById(checkedValue) as HTMLInputElement).checked;
     this.searchValidation();
   }
 
   filterGender(checkedValue) {
-    
+
     this.genderList[checkedValue] = (document.getElementById(checkedValue) as HTMLInputElement).checked;
-    if(checkedValue === 'Male'){
+    if (checkedValue === 'Male') {
       (document.getElementById('Female') as HTMLInputElement).checked = false;
       this.genderList['Female'] = false;
-    }     
+    }
     else {
       (document.getElementById('Male') as HTMLInputElement).checked = false;
       this.genderList['Male'] = false;
     }
-    
+
 
     this.searchValidation();
   }
@@ -150,7 +167,7 @@ export class OnlineConsultationComponent implements OnInit {
     try {
       let searchValidationValue = false;
 
-      if(
+      if (
         JSON.stringify(this.genderList).search('true') > -1 ||
         JSON.stringify(this.specialistObject).search('true') > -1
       ) {
@@ -158,8 +175,8 @@ export class OnlineConsultationComponent implements OnInit {
       }
 
       searchValidationValue ? this.isDisabledClassActive = false : this.isDisabledClassActive = true;
-      if(!searchValidationValue) {
-        this.router.navigate(['/online-consultation'], { queryParams: {limit: this.limit, skip: 0 } });
+      if (!searchValidationValue) {
+        this.router.navigate(['/online-consultation'], { queryParams: { limit: this.limit, skip: 0 } });
       }
 
     } catch (error) {
@@ -171,22 +188,22 @@ export class OnlineConsultationComponent implements OnInit {
   // Doctor Filter
   filterDoctor() {
     try {
-      let queryParams={};
-      for(let gender in this.genderList) {
-        if(this.genderList[gender] === true) {
+      let queryParams = {};
+      for (let gender in this.genderList) {
+        if (this.genderList[gender] === true) {
           queryParams['gender'] = gender
         }
       }
 
-      for(let specialist in this.specialistObject) {
-        if(this.specialistObject[specialist] === true) {
+      for (let specialist in this.specialistObject) {
+        if (this.specialistObject[specialist] === true) {
 
-          if(!queryParams['speciality']) {
+          if (!queryParams['speciality']) {
             queryParams['speciality'] = [];
           }
 
           queryParams['speciality'].push(specialist);
-          
+
         }
       }
 
@@ -201,26 +218,26 @@ export class OnlineConsultationComponent implements OnInit {
 
   appointmentForward(doctorId) {
     try {
-      
-      if(localStorage.getItem('token') === null) {
+
+      if (localStorage.getItem('token') === null) {
         (document.getElementById('loginCall') as HTMLInputElement).click();
       } else {
 
         const helper = new JwtHelperService();
         const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
-        
-        if(isExpired) {
+
+        if (isExpired) {
 
           (document.getElementById('logoutCall') as HTMLInputElement).click();
           setTimeout(() => {
             (document.getElementById('loginCall') as HTMLInputElement).click();
           }, 200);
-          
+
         } else {
           this.router.navigateByUrl(`/booking/${doctorId}`);
         }
       }
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -228,14 +245,14 @@ export class OnlineConsultationComponent implements OnInit {
 
   viewProfile(doctorId) {
     try {
-      
-      if(localStorage.getItem('token') === null) {
+
+      if (localStorage.getItem('token') === null) {
         (document.getElementById('loginCall') as HTMLInputElement).click();
       } else {
         const helper = new JwtHelperService();
         const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
-        if(isExpired) {
-          
+        if (isExpired) {
+
           (document.getElementById('logoutCall') as HTMLInputElement).click();
           setTimeout(() => {
             (document.getElementById('loginCall') as HTMLInputElement).click();
@@ -245,7 +262,7 @@ export class OnlineConsultationComponent implements OnInit {
           this.router.navigateByUrl(`/doctor-profile/${doctorId}`);
         }
       }
-      
+
     } catch (error) {
       console.log(error);
     }

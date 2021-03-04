@@ -82,6 +82,10 @@ const routes: Routes = [
     path: 'page-not-found',
     component: PageNotFoundComponent,
   },
+  {
+    path:'page-not-found/:status',
+    component:PageNotFoundComponent
+  },
 ];
 
 @NgModule({
