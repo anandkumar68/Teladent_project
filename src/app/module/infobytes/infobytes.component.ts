@@ -16,6 +16,7 @@ export class InfobytesComponent implements OnInit {
       var fields = $(".itemDot");
       var container = $(".dotCircle");
       var width = container.width();
+
       radius = width / 2.5;
     
       var height = container.height();
@@ -38,6 +39,7 @@ export class InfobytesComponent implements OnInit {
     
       $(".itemDot").click(function () {
         var dataTab = $(this).data("tab");
+        console.log(dataTab)
         $(".itemDot").removeClass("active");
         $(this).addClass("active");
         $(".CirItem").removeClass("active");
@@ -56,8 +58,8 @@ export class InfobytesComponent implements OnInit {
       });
     
       setInterval(function () {
-        var dataTab = $(".itemDot.active").data("tab");
-        if (dataTab > 5 || i > 5) {
+        var dataTab = $(".itemDot.active").data("tab");        
+        if (dataTab > 2 || i > 2) {
           dataTab = 1;
           i = 1;
         }
