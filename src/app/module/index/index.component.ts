@@ -50,4 +50,8 @@ export class IndexComponent implements OnInit {
     this.router.navigateByUrl(`/blog/${blogId}`)
   }
 
+  viewBlogRoute() {
+    this.router.navigateByUrl(`/blog`)
+  }
+
 }
