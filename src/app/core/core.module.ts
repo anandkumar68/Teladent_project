@@ -7,6 +7,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CountdownModule } from 'ngx-countdown';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CountdownModule } from 'ngx-countdown';
     NgOtpInputModule,
     FormsModule,
     ReactiveFormsModule,
-    CountdownModule
+    CountdownModule,
+    SharedModule
   ],
   exports:[HeaderComponent, FooterComponent]
 })
