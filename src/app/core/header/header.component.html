@@ -86,6 +86,7 @@
                 <li class="nav-item" *ngIf="!showUser">
                     <a class="nav-link btn-grad" href="login.html" data-toggle="modal" data-backdrop="static" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
                 </li>
+                <!-- <app-login-modal *ngIf="!showUser" [link]="'Abhi'"></app-login-modal> -->
 
                 <!-- User Menu -->
                 <li class="nav-item dropdown has-arrow logged-item" *ngIf="showUser">

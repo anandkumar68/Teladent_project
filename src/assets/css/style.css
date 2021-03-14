@@ -7712,6 +7712,7 @@ section.iq-features {
     padding: 10px 25px;
     min-width: 270px;
     color: #259cd7;
+    outline: none;
 }
 
 .form-col ul {
@@ -11203,3 +11204,5 @@ input#country-search-box {
 .pos-rel {
     position: relative;
 }
+
+
