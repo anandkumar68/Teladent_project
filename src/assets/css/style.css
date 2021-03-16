@@ -529,8 +529,8 @@ button.bg-danger:hover {
 }
 
 .btn-primary {
-    background-color: #09e5ab;
-    border: 1px solid #09e5ab;
+    background-color: #478dd3;
+    border: 1px solid #478dd3;
 }
 
 .btn-primary:hover,
@@ -538,8 +538,8 @@ button.bg-danger:hover {
 .btn-primary.active,
 .btn-primary:active,
 .open>.dropdown-toggle.btn-primary {
-    background-color: #09dca4;
-    border: 1px solid #09dca4;
+    background-color: #478dd3;
+    border: 1px solid #478dd3;
 }
 
 .btn-primary.active.focus,
@@ -551,15 +551,15 @@ button.bg-danger:hover {
 .open>.dropdown-toggle.btn-primary.focus,
 .open>.dropdown-toggle.btn-primary:focus,
 .open>.dropdown-toggle.btn-primary:hover {
-    background-color: #09dca4;
-    border: 1px solid #09dca4;
+    background-color: #478dd3;
+    border: 1px solid #478dd3;
 }
 
 .btn-primary.active:not(:disabled):not(.disabled),
 .btn-primary:active:not(:disabled):not(.disabled),
 .show>.btn-primary.dropdown-toggle {
-    background-color: #09dca4;
-    border-color: #09dca4;
+    background-color: #478dd3;
+    border-color: #478dd3;
     color: #fff;
 }
 
@@ -571,8 +571,8 @@ button.bg-danger:hover {
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-    background-color: #09e5ab;
-    border-color: #09e5ab;
+    background-color: #007bff;
+    border-color: #007bff;
     color: #fff;
 }
 
@@ -2483,7 +2483,7 @@ button.bg-danger:hover {
 }
 
 .header-navbar-rht .dropdown-menu .dropdown-item:hover {
-    color: #09dca4;
+    color: #478dd3 ;
 }
 
 .user-header {
@@ -4574,8 +4574,8 @@ section.iq-features {
 }
 
 .btn-search .btn {
-    background-color: #0de0fe;
-    border: 1px solid #0de0fe;
+    background-color:#478dd3;
+    border: 1px solid #478dd3;
     color: #fff;
     height: 46px;
     font-weight: 500;
@@ -7066,7 +7066,7 @@ section.iq-features {
 }
 
 .change-photo-btn {
-    background-color: #20c0f3;
+    background-color: #478dd3 ;
     border-radius: 50px;
     color: #fff;
     cursor: pointer;
@@ -7620,7 +7620,7 @@ section.iq-features {
 
 .dashboard-menu>ul>li:hover>a,
 .dashboard-menu>ul>li.active>a {
-    color: #0de0fe;
+    color: #478dd3;
 }
 
 .dashboard-menu ul li a i {
@@ -11205,4 +11205,22 @@ input#country-search-box {
     position: relative;
 }
 
+button.btn.btn-primary.btn-lg.btn-grad.login-btn {
+    padding: 5px;
+    height: 48px;
+    width: 155px;
+    margin-left: 82px;
+}
 
+
+.nav-tabs.nav-tabs-solid>li>a.pending.active, .nav-tabs.nav-tabs-solid>li>a.pending.active:hover, .nav-tabs.nav-tabs-solid>li>a.pending.active:focus {
+    background-color: brown;
+    border-color: brown;
+    color: #fff;
+}
+
+.nav-tabs.nav-tabs-solid>li>a.complete.active, .nav-tabs.nav-tabs-solid>li>a.complete.active:hover, .nav-tabs.nav-tabs-solid>li>a.complete.active:focus {
+    background-color: #00e65b;
+    border-color: #00e65b;
+    color: #fff;
+}

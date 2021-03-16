@@ -121,7 +121,7 @@
 <!-- Modal -->
 <div class="modal fade login-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" >
             <div class="modal-header">
                 <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -132,7 +132,7 @@
                     <img src="../../../assets/img/teladent.png" alt="">
                 </div>
                 <!-- FOR LOGIN -->
-                <div class="login-form" *ngIf="showHideForm.login">
+                <div class="login-form" *ngIf="showHideForm.login" >
                     <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
                         <div class="form-group">
                             <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true" [customPlaceholder]="'XXXXXXXXXX'" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
@@ -154,7 +154,8 @@
                             <a class="forgot-link" href="javascript:void(0);" (click)="forgotPassword()">Forgot Password
                                 ?</a>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit">Login</button>
+                        <button class="btn btn-primary btn-lg btn-grad login-btn" type="submit">Login</button>
+
                         <!-- <div class="login-or">
                             <span class="or-line"></span>
                             <span class="span-or">or</span>
@@ -219,7 +220,7 @@
                             <a class="forgot-link" href="javascript:void(0);" (click)="login()">Already have an
                                 account?</a>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit">Signup</button>
+                        <button class="btn btn-primary login-btn btn-lg btn-grad" type="submit">Signup</button>
                     </form>
                 </div>
 
@@ -239,7 +240,7 @@
                         <div class="text-right">
                             <a class="forgot-link" href="javascript:void(0);" (click)="login()">Login</a>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit">Submit</button>
+                        <button class="btn btn-primary login-btn btn-lg btn-grad" type="submit">Submit</button>
                     </form>
                 </div>
 
@@ -260,7 +261,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit" [disabled]="otp?.length < 6">Submit</button>
+                        <button class="btn btn-primary login-btn btn-lg btn-grad" type="submit" [disabled]="otp?.length < 6">Submit</button>
 
                         <div class="text-center dont-have">Don’t have an account?
                             <a href="javascript:void(0);" (click)="signup()">Register</a>
@@ -293,7 +294,7 @@
                         <div class="text-right">
                             <a class="forgot-link" href="javascript:void(0);" (click)="login()">Login</a>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg btn-grad" type="submit">Submit</button>
+                        <button class="btn btn-primary login-btn btn-lg btn-grad" type="submit">Submit</button>
                     </form>
                 </div>
             </div>
