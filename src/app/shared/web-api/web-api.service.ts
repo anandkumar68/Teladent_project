@@ -367,4 +367,36 @@ export class WebApiService {
   }
 
 
+  /**********************************************************************************/
+  /********************************* BLOG API ****************************/
+  /**********************************************************************************/
+
+
+  // BLOG DETAILS ON WEB
+  blogDetailsWeb(skip: any, limit: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/list-web-blog?skip=${skip}&limit=${limit}`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // BLOG INDIVIDUAL LIST API
+  blogIndividualList(blogId: any): any {
+    try {
+      let token: any;
+      token = localStorage.getItem('adminToken');
+      const apiUrl = `${this.BASE_URL}/user/list-web-individual-blog/${blogId}`;
+      return this.http.get(apiUrl);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
 }

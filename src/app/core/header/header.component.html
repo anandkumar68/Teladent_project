@@ -90,7 +90,7 @@
 
                 <!-- User Menu -->
                 <li class="nav-item dropdown has-arrow logged-item" *ngIf="showUser">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <span class="user-img">
                                     <img class="rounded-circle" src="{{userDetails.imageUrl}}" width="31" alt="{{ userDetails.firstName + ' ' + userDetails.lastName}}">
                                 </span>
@@ -106,8 +106,8 @@
                                 <p *ngIf="userDetails?.userType === 'onlineDoctors' " class="text-muted mb-0">Dentist</p>
                             </div>
                         </div>
-                        <a class="dropdown-item pointer">Dashboard</a>
-                        <a class="dropdown-item pointer">Profile Settings</a>
+                        <a class="dropdown-item pointer" (click)="headerRouter('dashboard')">Dashboard</a>
+                        <a class="dropdown-item pointer" (click)="headerRouter('profile')">Profile Settings</a>
                         <a class="dropdown-item pointer" id="logoutCall" (click)="logout()">Logout</a>
                     </div>
                 </li>

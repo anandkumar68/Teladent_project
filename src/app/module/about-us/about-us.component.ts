@@ -10,7 +10,7 @@ export class AboutUsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     (document.getElementById('home') as HTMLAnchorElement).classList.remove('active');
     (document.getElementById('about') as HTMLAnchorElement).classList.add('active');
     (document.getElementById('bytes') as HTMLAnchorElement).classList.remove('active');

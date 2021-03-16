@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     document.getElementById("copyright").innerHTML =
-    "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='javascript:void(0);'>Tela Dentist Team</a> ";
+    "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='javascript:void(0);'>Teladentist Solutions</a> ";
 
   }
 

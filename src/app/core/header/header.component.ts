@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { CountdownComponent } from 'ngx-countdown';
 import {
   CountryISO,
@@ -540,6 +541,48 @@ export class HeaderComponent implements OnInit {
 
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  headerRouter(linkType) {
+    try {
+
+          const helper = new JwtHelperService();
+          const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
+          
+          if(isExpired) {
+  
+            if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+
+              (document.getElementById('logoutCall') as HTMLInputElement).click();
+              setTimeout(() => {
+                (document.getElementById('loginCall') as HTMLInputElement).click();
+              }, 200);
+  
+            } else {
+  
+              (document.getElementById('loginCall') as HTMLInputElement).click();
+  
+            }
+            
+          } else {
+
+            if(Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'user') {
+              linkType === 'dashboard' ?
+              this.router.navigateByUrl('/patient-panel/patient-dashboard') : 
+              this.router.navigateByUrl('/patient-panel/patient-profile-setting');
+            }
+
+            if(Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'onlineDoctors') {
+              linkType === 'dashboard' ?
+              this.router.navigateByUrl('/doctor-dashboard') : 
+              this.router.navigateByUrl('/doctors-panel/doctor-profile-setting');
+            }
+
+          }
+      
+    } catch (error) {
+      console.log(error.message);
     }
   }
 }

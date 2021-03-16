@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { BlogComponent } from './blog/blog.component';
 import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 import { BookingComponent } from './booking/booking.component';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -85,6 +86,14 @@ const routes: Routes = [
   {
     path:'page-not-found/:status',
     component:PageNotFoundComponent
+  },
+  {
+    path:'blog/:blogId',
+    component: BlogComponent
+  },
+  {
+    path:'blog',
+    component: BlogComponent
   },
 ];
 
