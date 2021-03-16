@@ -192,7 +192,7 @@ export class WebApiService {
   /********************************* FOR DOCTOR DASHBOARD DETAILS **********************/
 
   //GET DOCTOR DASHBOARD DETAILS
-  getDoctorDashboardDetails(limit: any, skip: any, listFor: any): Observable<any> {
+  getDoctorDashboardDetails(limit: any, skip: any, status: any): Observable<any> {
     try {
       let token: any;
       token = localStorage.getItem('token');
@@ -200,7 +200,7 @@ export class WebApiService {
       return this.http.get(apiUrl, {
         headers: new HttpHeaders()
           .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
-        params: new HttpParams().set('limit', limit).set('skip', skip).set('listFor', listFor)
+        params: new HttpParams().set('limit', limit).set('skip', skip).set('status', status)
       });
     } catch (error) {
       console.log(error.message);

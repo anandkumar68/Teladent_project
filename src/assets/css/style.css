@@ -571,8 +571,8 @@ button.bg-danger:hover {
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-    background-color: #09e5ab;
-    border-color: #09e5ab;
+    background-color: #007bff;
+    border-color: #007bff;
     color: #fff;
 }
 
@@ -11212,3 +11212,15 @@ button.btn.btn-primary.btn-lg.btn-grad.login-btn {
     margin-left: 82px;
 }
 
+
+.nav-tabs.nav-tabs-solid>li>a.pending.active, .nav-tabs.nav-tabs-solid>li>a.pending.active:hover, .nav-tabs.nav-tabs-solid>li>a.pending.active:focus {
+    background-color: brown;
+    border-color: brown;
+    color: #fff;
+}
+
+.nav-tabs.nav-tabs-solid>li>a.complete.active, .nav-tabs.nav-tabs-solid>li>a.complete.active:hover, .nav-tabs.nav-tabs-solid>li>a.complete.active:focus {
+    background-color: #00e65b;
+    border-color: #00e65b;
+    color: #fff;
+}

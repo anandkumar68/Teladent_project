@@ -107,11 +107,23 @@
                             <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
                                 <li class="nav-item">
                                     <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab"
-                                        (click)="checkTabValue('upComing')">Upcoming</a>
+                                        (click)="checkTabValue('all')">All</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pending" href="#today-appointments" data-toggle="tab"
+                                        (click)="checkTabValue('pending')">Pending</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#today-appointments" data-toggle="tab"
-                                        (click)="checkTabValue('uptoNow')">UPTO Now</a>
+                                        (click)="checkTabValue('confirm')">Confirmed</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link complete" href="#today-appointments" data-toggle="tab"
+                                        (click)="checkTabValue('completed')">Completed</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pending" href="#today-appointments" data-toggle="tab"
+                                        (click)="checkTabValue('reschedule')">Rescheduled</a>
                                 </li>
                             </ul>
                             <!-- /Appointment Tab -->
@@ -135,14 +147,14 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr
-                                                            *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, id: 'first' }, let i = index;">
+                                                            *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total }, let i = index;">
                                                             <td>
                                                                 <h2 class="table-avatar">
                                                                     <a href="javascript:void(0);"
                                                                         class="avatar avatar-sm mr-2"><img
                                                                             class="avatar-img rounded-circle"
-                                                                            src="assets/img/patients/patient.jpg"
-                                                                            alt="User Image"></a>
+                                                                            src="{{ list.patientImgUrl }}"
+                                                                            alt="{{ list.name }}"></a>
                                                                     <a href="javascript:void(0);">{{ list.name }} 
                                                                         <span>#{{ list.shortId }} <p class="reschedule" *ngIf="list.isReallocate"><i class="fa fa-registered"></i></p></span></a>
                                                                 </h2>
@@ -185,7 +197,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr *ngIf="dashboardData.length === 0">
+                                                        <tr *ngIf="total === 0">
                                                             <td class="text-center" colspan="6">
                                                                 <h3>Appointments not found</h3>
                                                             </td>
@@ -194,18 +206,17 @@
                                                 </table>
 
                                             </div>
-                                            <div class="row result-str" *ngIf="dashboardData.length !== 0">
+                                            <div class="row result-str" *ngIf="total !== 0">
                                                 <div class="col-sm-12 col-md-5 ">
                                                     <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
-                                                        * perPage), dashboardData.length) }} of {{ dashboardData.length
-                                                        }} entries </p>
+                                                        * perPage), total) }} of {{ total }} entries </p>
                                                 </div>
                                                 <div class="col-sm-12 col-md-7 text-right">
                                                     <pagination-controls [directionLinks]="directionLinks"
                                                         [autoHide]="autoHide" [responsive]="responsive"
                                                         [previousLabel]="labels.previousLabel"
                                                         [nextLabel]="labels.nextLabel"
-                                                        (pageChange)="currentPage = $event" id="first">
+                                                        (pageChange)="onPageChange($event)">
                                                     </pagination-controls>
                                                 </div>
                                             </div>
@@ -215,7 +226,7 @@
                                 <!-- /Upcoming Appointment Tab -->
 
                                 <!-- Today Appointment Tab -->
-                                <div class="tab-pane" id="today-appointments">
+                                <!-- <div class="tab-pane" id="today-appointments">
                                     <div class="card card-table mb-0">
                                         <div class="card-body">
                                             <div class="table-responsive">
@@ -307,7 +318,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- /Today Appointment Tab -->
 
                             </div>
@@ -389,7 +400,7 @@
 
 <!-- Complete Appointment Details Modal -->
 <div class="modal fade custom-modal" id="appt_comp_details">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Appointment Details</h5>
@@ -398,7 +409,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form">
+                <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Description</label>
+                      <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">R<sub>x</sub></label>
+                      <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
+                        <div class="field-wrap">
+                            <input class="form-control" id="fileChosen" type='file' accept=".png, .jpg, .jpeg, .gif" (change)="onSelectFile($event)" multiple>
+                        </div>
+                      </div>
+
+                      <button 
+                     
+                      type="submit" 
+                      (click)="submitCompleteRequest()" 
+                      class="btn btn-primary submit-btn">Submit</button>
+                  </form>
+                <!-- <div class="form">
       
                     <ul class="tab-group">
                       <li id="desc" class="tab"><a id="descLink" href="#description">Summary</a></li>
@@ -441,10 +474,10 @@
                         </form>
                       </div>
                       
-                    </div>
+                    </div> -->
                     <!-- tab-content -->
                     
-              </div>
+              <!-- </div> -->
             </div>
         </div>
     </div>
