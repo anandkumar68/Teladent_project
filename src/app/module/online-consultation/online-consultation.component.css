@@ -3,7 +3,7 @@
     background-color: #ececec;
 }
 .disabled {
-    background-color: #80edfd;
+    background-color: #478dd3 ;
     cursor: none;
     pointer-events: none;
 }
