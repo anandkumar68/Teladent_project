@@ -45,6 +45,18 @@ export class Constants {
   };
 
 
+   // Reset Value
+   public static resetForm(formData: Array<any>) {
+    try {
+      for (let i = 0; i < formData.length; i++) {
+        (document.getElementById(formData[i]) as HTMLInputElement).value = '';
+      }
+    } catch (err) {
+      return err;
+    }
+  }
+
+
   public static credentialsEncrypt(userId) {
     try {
       const encryptOutput = CryptoJS.AES.encrypt(userId.trim(), this.password.trim()).toString();
