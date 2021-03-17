@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { OnlineConsultGuard } from './auth-guard/online-consult/online-consult.guard';
 import { BlogComponent } from './blog/blog.component';
 import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 import { BookingComponent } from './booking/booking.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   {
     path: 'online-consultation',
     component: OnlineConsultationComponent,
+    canActivate:[OnlineConsultGuard]
   },
   {
     path: 'doctor-profile/:doctorId',
@@ -29,14 +31,17 @@ const routes: Routes = [
   {
     path: 'booking/:providerId',
     component: BookingComponent,
+    canActivate:[OnlineConsultGuard]
   },
   {
     path: 'checkout',
     component: CheckoutComponent,
+    canActivate:[OnlineConsultGuard]
   },
   {
     path: 'booking-confirm',
     component: BookingConfirmComponent,
+    canActivate:[OnlineConsultGuard]
   },
   {
     path: 'about-us',

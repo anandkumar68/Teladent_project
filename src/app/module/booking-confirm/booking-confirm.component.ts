@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-confirm',
@@ -9,7 +10,7 @@ export class BookingConfirmComponent implements OnInit {
 
   sessionValue: any;
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
 
@@ -21,8 +22,12 @@ export class BookingConfirmComponent implements OnInit {
 
     (document.getElementById('webmenu') as HTMLAnchorElement).removeAttribute('style');
 
-    this.sessionValue = JSON.parse(sessionStorage.getItem('checkout'));
-    sessionStorage.clear();
+    if(JSON.parse(sessionStorage.getItem('checkout')) === null || JSON.parse(sessionStorage.getItem('checkout')) === undefined) {
+      this.router.navigateByUrl('/index');
+    } else {
+      this.sessionValue = JSON.parse(sessionStorage.getItem('checkout'));
+      sessionStorage.clear();
+    }
 
   }
 

@@ -11224,3 +11224,8 @@ button.btn.btn-primary.btn-lg.btn-grad.login-btn {
     border-color: #00e65b;
     color: #fff;
 }
+
+.bg-confirm-light {
+    background-color: rgba(15, 183, 107, 0.12) !important;
+    color: #3f7fba !important;
+}

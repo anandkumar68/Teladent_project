@@ -185,7 +185,7 @@
                                                                     (click)="completeRequest(list._id)"
                                                                     data-toggle="modal" 
                                                                     data-target="#appt_comp_details"
-                                                                    data-backdrop="static">
+                                                                    data-backdrop="static" data-keyboard="false">
                                                                         <i class="fas fa-check"></i> Completed
                                                                     </a>
                                                                     <a *ngIf="list.currentStatus === 'Accept' "
@@ -223,103 +223,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /Upcoming Appointment Tab -->
-
-                                <!-- Today Appointment Tab -->
-                                <!-- <div class="tab-pane" id="today-appointments">
-                                    <div class="card card-table mb-0">
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-center mb-0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Patient Name</th>
-                                                            <th>Appt Date</th>
-                                                            <th>Purpose</th>
-                                                            <th class="text-center">Paid Amount</th>
-                                                            <th class="text-center">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr
-                                                            *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, id: 'first' }, let i = index;">
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="javascript:void(0);"
-                                                                        class="avatar avatar-sm mr-2"><img
-                                                                            class="avatar-img rounded-circle"
-                                                                            src="assets/img/patients/patient.jpg"
-                                                                            alt="User Image"></a>
-                                                                    <a href="javascript:void(0);">{{ list.name }}
-                                                                        <span>#{{ list.shortId }} <p class="reschedule" *ngIf="list.isReallocate"><i class="fa fa-registered"></i></p></span></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>{{ list.appointmentDate | date:'dd-MM-yyyy' }} <span
-                                                                    class="d-block text-info">{{ list.appointmentTime
-                                                                    }}</span></td>
-                                                            <td>{{ list.serviceType }}</td>
-                                                            <td class="text-center">₹{{ list.paid }}</td>
-                                                            <td class="text-right">
-                                                                <div class="table-action">
-                                                                    <a href="javascript:void(0);" id="{{list._id}}"
-                                                                        (click)="individualAppointmentDetails(list._id)"
-                                                                        class="btn btn-sm bg-info-light"
-                                                                        data-toggle="modal" data-target="#dash_details">
-                                                                        <i class="far fa-eye"></i> View
-                                                                    </a>
-                                                                    <a *ngIf="list.currentStatus === 'Pending' "
-                                                                        href="javascript:void(0);"
-                                                                        (click)="updateStatus('accept', list._id)"
-                                                                        class="btn btn-sm bg-success-light">
-                                                                        <i class="fas fa-check"></i> Confirm
-                                                                    </a>
-                                                                    <a 
-                                                                    *ngIf="list.currentStatus === 'Accept' " 
-                                                                    href="javascript:void(0);" 
-                                                                    class="btn btn-sm bg-success-light"
-                                                                    (click)="completeRequest(list._id)"
-                                                                    data-toggle="modal" 
-                                                                    data-target="#appt_comp_details"
-                                                                    data-backdrop="static">
-                                                                        <i class="fas fa-check"></i> Completed
-                                                                    </a>
-                                                                    <a *ngIf="list.currentStatus === 'Accept' "
-                                                                    (click)="updateStatus('reallocate', list._id)"
-                                                                        href="javascript:void(0);"
-                                                                        class="btn btn-sm bg-danger-light">
-                                                                        <i class="fas fa-times"></i> ReSchedule
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr *ngIf="dashboardData.length === 0">
-                                                            <td class="text-center" colspan="6">
-                                                                <h3>Appointments not found</h3>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-                                            <div class="row result-str" *ngIf="dashboardData.length !== 0">
-                                                <div class="col-sm-12 col-md-5 ">
-                                                    <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
-                                                        * perPage), dashboardData.length) }} of {{ dashboardData.length
-                                                        }} entries </p>
-                                                </div>
-                                                <div class="col-sm-12 col-md-7 text-right">
-                                                    <pagination-controls [directionLinks]="directionLinks"
-                                                        [autoHide]="autoHide" [responsive]="responsive"
-                                                        [previousLabel]="labels.previousLabel"
-                                                        [nextLabel]="labels.nextLabel"
-                                                        (pageChange)="currentPage = $event" id="second">
-                                                    </pagination-controls>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!-- /Today Appointment Tab -->
 
                             </div>
                         </div>
@@ -409,75 +312,46 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form [formGroup]="completeForm" (ngSubmit)="submitCompleteRequest()">
                     <div class="form-group">
-                      <label for="recipient-name" class="col-form-label">Description</label>
-                      <textarea class="form-control" id="message-text"></textarea>
+                      <label for="recipient-name" class="col-form-label">Description <span class="text-danger">*</span></label>
+                      <textarea 
+                      [ngClass]="completeValidation.description.errors ? 'is-invalid' : ''"
+                      class="form-control" 
+                      id="descArea" cols="10" rows="5" formControlName="description"></textarea>
+                      <div *ngIf="completeValidation.description.errors" class="invalid-feedback">
+                        <div *ngIf="completeValidation.description.errors.required">Description is Mandatory</div>
+                    </div>
                     </div>
                     <div class="form-group">
-                      <label for="message-text" class="col-form-label">R<sub>x</sub></label>
-                      <textarea class="form-control" id="message-text"></textarea>
+                      <label for="message-text" class="col-form-label"> Prescription (R<sub>x</sub>) <span class="text-danger">*</span></label>
+                      <textarea 
+                      [ngClass]="completeValidation.suggestion.errors ? 'is-invalid' : ''"
+                      class="form-control" 
+                      id="drug_suggestion" cols="10" rows="5" formControlName="suggestion"></textarea>
+                      <div *ngIf="completeValidation.suggestion.errors" class="invalid-feedback">
+                        <div *ngIf="completeValidation.suggestion.errors.required">Prescription is Mandatory</div>
+                    </div>
                     </div>
                     <div class="form-group">
-                        <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
+                        <div class="row">
+                            <div *ngFor='let url of urls, let i = index;' class="column container">
+                                <img [src]="url" style="width:100%"/>
+                                <p class="mod_title">R<sub>x</sub></p>
+                                <div class="mod_overlay"></div>
+                                <div class="mod_button"><a href="javascript:void(0);" (click)=removePhoto(i)> REMOVE </a></div>
+                            </div>
+                        </div>
                         <div class="field-wrap">
                             <input class="form-control" id="fileChosen" type='file' accept=".png, .jpg, .jpeg, .gif" (change)="onSelectFile($event)" multiple>
                         </div>
-                      </div>
-
+                    </div>
+                    
                       <button 
-                     
-                      type="submit" 
-                      (click)="submitCompleteRequest()" 
+                      [disabled] = 'completeForm.invalid'
+                      type="submit"
                       class="btn btn-primary submit-btn">Submit</button>
                   </form>
-                <!-- <div class="form">
-      
-                    <ul class="tab-group">
-                      <li id="desc" class="tab"><a id="descLink" href="#description">Summary</a></li>
-                      <li id="pesc" class="tab"><a id="pescLink" href="#prescription">Drug</a></li>
-                    </ul>
-                    
-                    <div class="pop-tab-content">
-                      <div id="description">   
-                        <h4 class="heading-popup">Summary is Required to Complete Appointment</h4>
-                        
-                        <form>
-                          <div class="field-wrap">
-                            <label id="descLabel">
-                              Atleast 10 Character<span class="req">*</span>
-                            </label>
-                            <textarea (keyup)="descriptionValidation()" name="" id="descArea" cols="10" rows="5"></textarea>
-                          </div>
-                        <button 
-                        [ngClass] = " isDescription === false ? 'disabled' : '' "
-                        type="submit" 
-                        (click)="submitCompleteRequest()" 
-                        class="button button-block">Submit</button>
-                        </form>
-              
-                      </div>
-                      
-                      <div id="prescription">                        
-                        <form>
-                          <div class="field-wrap">
-                          <label id="suggestionArea">
-                            Suggestions
-                          </label>
-                            <textarea id="drug_suggestion" cols="10" rows="3"></textarea>
-                        </div>
-                        <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
-                        <div class="field-wrap">
-                            <input id="fileChosen" type='file' accept=".png, .jpg, .jpeg, .gif" (change)="onSelectFile($event)" multiple>
-                        </div>
-                        <button (click)="submitDrug()" class="button button-block">Submit</button>
-                        </form>
-                      </div>
-                      
-                    </div> -->
-                    <!-- tab-content -->
-                    
-              <!-- </div> -->
             </div>
         </div>
     </div>

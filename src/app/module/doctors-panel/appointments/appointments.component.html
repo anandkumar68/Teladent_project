@@ -29,7 +29,7 @@
                 <div class="appointments">
                 
                     <!-- Appointment List -->
-                    <div class="appointment-list" *ngFor="let list of appointmentList |  paginate: { itemsPerPage: perPage, currentPage: currentPage }, let i = index;">
+                    <div class="appointment-list" *ngFor="let list of appointmentList |  paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total }, let i = index;">
                         <div class="profile-info-widget">
                             <a href="javascript:void(0);" class="booking-doc-img">
                                 <img src="{{ list.imageUrl }}" alt="User Image">
@@ -82,10 +82,10 @@
                     <!-- /Appointment List -->
                 </div>
 
-                <div class="row result-str" *ngIf="appointmentList.length !== 0">
+                <div class="row result-str" *ngIf="total !== 0">
                     <div class="col-sm-12 col-md-5 ">
                         <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
-                            * perPage), appointmentList.length) }} of {{ appointmentList.length }} entries </p>
+                            * perPage), total) }} of {{ total }} entries </p>
                     </div>
                     <div class="col-sm-12 col-md-7 text-right">
                         <pagination-controls [directionLinks]="directionLinks"
@@ -159,7 +159,7 @@
 
 <!-- Complete Appointment Details Modal -->
 <div class="modal fade custom-modal" id="appt_comp_details">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Appointment Details</h5>
@@ -168,53 +168,46 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form">
-      
-                    <ul class="tab-group">
-                      <li id="desc" class="tab"><a id="descLink" href="#description">Summary</a></li>
-                      <li id="pesc" class="tab"><a id="pescLink" href="#prescription">Drug</a></li>
-                    </ul>
-                    
-                    <div class="tab-content">
-                      <div id="description">   
-                        <h4 class="heading-popup">Summary is Required to Complete Appointment</h4>
-                        
-                        <form>
-                          <div class="field-wrap">
-                            <label id="descLabel">
-                              Atleast 10 Character<span class="req">*</span>
-                            </label>
-                            <textarea (keyup)="descriptionValidation()" name="" id="descArea" cols="10" rows="5"></textarea>
-                          </div>
-                        <button 
-                        [ngClass] = " isDescription === false ? 'disabled' : '' "
-                        type="submit" 
-                        (click)="submitCompleteRequest()" 
-                        class="button button-block">Submit</button>
-                        </form>
-              
-                      </div>
-                      
-                      <div id="prescription">                        
-                        <form>
-                          <div class="field-wrap">
-                          <label id="suggestionArea">
-                            Suggestions
-                          </label>
-                            <textarea id="drug_suggestion" cols="10" rows="3"></textarea>
-                        </div>
-                        <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
-                        <div class="field-wrap">
-                            <input id="fileChosen" type='file' accept=".png, .jpg, .jpeg, .gif" (change)="onSelectFile($event)" multiple>
-                        </div>
-                        <button (click)="submitDrug()" class="button button-block">Submit</button>
-                        </form>
-                      </div>
-                      
+                <form [formGroup]="completeForm" (ngSubmit)="submitCompleteRequest()">
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Description <span class="text-danger">*</span></label>
+                      <textarea 
+                      [ngClass]="completeValidation.description.errors ? 'is-invalid' : ''"
+                      class="form-control" 
+                      id="descArea" cols="10" rows="5" formControlName="description"></textarea>
+                      <div *ngIf="completeValidation.description.errors" class="invalid-feedback">
+                        <div *ngIf="completeValidation.description.errors.required">Description is Mandatory</div>
                     </div>
-                    <!-- tab-content -->
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label"> Prescription (R<sub>x</sub>) <span class="text-danger">*</span></label>
+                      <textarea 
+                      [ngClass]="completeValidation.suggestion.errors ? 'is-invalid' : ''"
+                      class="form-control" 
+                      id="drug_suggestion" cols="10" rows="5" formControlName="suggestion"></textarea>
+                      <div *ngIf="completeValidation.suggestion.errors" class="invalid-feedback">
+                        <div *ngIf="completeValidation.suggestion.errors.required">Prescription is Mandatory</div>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div *ngFor='let url of urls, let i = index;' class="column container">
+                                <img [src]="url" style="width:100%"/>
+                                <p class="mod_title">R<sub>x</sub></p>
+                                <div class="mod_overlay"></div>
+                                <div class="mod_button"><a href="javascript:void(0);" (click)=removePhoto(i)> REMOVE </a></div>
+                            </div>
+                        </div>
+                        <div class="field-wrap">
+                            <input class="form-control" id="fileChosen" type='file' accept=".png, .jpg, .jpeg, .gif" (change)="onSelectFile($event)" multiple>
+                        </div>
+                    </div>
                     
-              </div>
+                      <button 
+                      [disabled] = 'completeForm.invalid'
+                      type="submit"
+                      class="btn btn-primary submit-btn">Submit</button>
+                  </form>
             </div>
         </div>
     </div>

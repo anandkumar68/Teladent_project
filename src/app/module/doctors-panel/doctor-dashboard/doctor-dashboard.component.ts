@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { WebApiService } from 'src/app/shared/web-api/web-api.service';
@@ -35,10 +36,12 @@ export class DoctorDashboardComponent implements OnInit {
   urls = [];
   completeAppointId: any;
   isDescription = false;
+  completeForm: any;
   constructor(
     private api: WebApiService,
     public ngxLoader: NgxUiLoaderService,
     public toastr: ToastrService,
+    public fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -87,6 +90,7 @@ export class DoctorDashboardComponent implements OnInit {
     });
     this.todayDate = new Date();
     this.getDashboardDetails('all');
+    this.completeFormValidation();
   }
 
 
@@ -249,85 +253,59 @@ export class DoctorDashboardComponent implements OnInit {
   completeRequest(appointId) {
     try {
 
-      this.cleanModalBox();
-      (document.getElementById('pesc') as HTMLInputElement).classList.add('active');
-      (document.getElementById('pescLink') as HTMLInputElement).click();
       this.completeAppointId = appointId;
+      this.completeForm.get('appointId').setValue(appointId);
 
     } catch (error) {
       console.log(error);
     }
   }
 
-  submitDrug() {
-
-    let suggestion = (document.getElementById('drug_suggestion') as HTMLInputElement).value;
-    let formData = new FormData();
-
-    for (let file of this.updateDrug) {
-      formData.append('drug', file);
-    }
-    formData.append('suggestion', suggestion);
-
-    this.api.updatePrescription(formData, this.completeAppointId).subscribe((resolve) => {
-      this.ngxLoader.startLoader('loader-02');
-
-      if (resolve.status === 'success') {
-
-        this.toastr.success(resolve.message);
-        this.cleanModalBox();
-        (document.getElementById('desc') as HTMLInputElement).classList.add('active');
-        (document.getElementById('descLink') as HTMLInputElement).click();
-        this.ngxLoader.stopLoader('loader-02');
-
-      }
-
-      if (resolve.status === 'error') {
-
-        this.toastr.error(resolve.message);
-        this.ngxLoader.stopLoader('loader-02');
-
-      }
-
-    },
-      (err) => {
-        this.ngxLoader.stopLoader('loader-02');
-      }
-    )
-
-  }
-
-  descriptionValidation() {
-    try {
-
-      if ((document.getElementById('descArea') as HTMLInputElement).value.trim().length > 10) {
-        this.isDescription = true;
-      } else {
-        this.isDescription = false;
-      }
-
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
   submitCompleteRequest() {
-    try {
-
-      let body = {
-        status: 'completed',
-        appointId: this.completeAppointId,
-        description: (document.getElementById('descArea') as HTMLInputElement).value.trim()
-      }
-
+    try {      
+      
       this.ngxLoader.startLoader('loader-02');
-      this.api.updateAppointmentStatus(body).subscribe((res: any) => {
+      this.api.updateAppointmentStatus(this.completeForm.value).subscribe((res: any) => {
         this.ngxLoader.stopLoader('loader-02');
+
         if (res.status === 'success') {
-          this.toastr.success(res.message);
-          this.getDashboardDetails(this.dashboardTab);
-          this.cleanModalBox();
-          (document.getElementById('closeApp') as HTMLInputElement).click();
+
+          this.updateDrug.length === 0 ? this.toastr.success(res.message) : '';
+          this.updateDrug.length === 0 ? (document.getElementById('closeApp') as HTMLInputElement).click() : '';
+          this.updateDrug.length === 0 ? this.getDashboardDetails(this.dashboardTab) : '';
+          this.updateDrug.length === 0 ? this.ngxLoader.stopLoader('loader-02') : '';
+
+          if(this.updateDrug.length > 0) {
+
+            let formData = new FormData();
+
+            for (let file of this.updateDrug) {
+              formData.append('drug', file);
+            }
+
+            this.api.updatePrescription(formData, this.completeAppointId).subscribe((resolve) => {
+
+              if (resolve.status === 'success') {
+
+                (document.getElementById('closeApp') as HTMLInputElement).click()
+                this.toastr.success(res.message);
+                this.getDashboardDetails(this.dashboardTab);
+                this.ngxLoader.stopLoader('loader-02');
+        
+              }
+        
+              if (resolve.status === 'error') {
+        
+                this.toastr.error(resolve.message);
+                this.ngxLoader.stopLoader('loader-02');
+        
+              }
+  
+            },(err) => {
+              this.ngxLoader.stopLoader('loader-02');
+            });
+
+          }
 
         }
         if (res.status === 'error') {
@@ -343,26 +321,33 @@ export class DoctorDashboardComponent implements OnInit {
     }
   }
 
-  cleanModalBox() {
+  removePhoto(id) {
     try {
-
-      (document.getElementById('suggestionArea') as HTMLInputElement).classList.remove('active');
-      (document.getElementById('suggestionArea') as HTMLInputElement).classList.remove('highlight');
-      (document.getElementById('drug_suggestion') as HTMLInputElement).value = '';
-      (document.getElementById('fileChosen') as HTMLInputElement).value = '';
-      (document.getElementById('descArea') as HTMLInputElement).value = '';
-      (document.getElementById('descLabel') as HTMLInputElement).classList.remove('active');
-      (document.getElementById('descLabel') as HTMLInputElement).classList.remove('highlight');
-
-      this.urls = [];
-      this.updateDrug = [];
-      this.isDescription = false;
-
+      this.urls.splice(Number(id), 1);
+      this.updateDrug.splice(Number(id), 1);
     } catch (error) {
       console.log(error.message);
     }
   }
 
+  // FOR SUBMIT COMPLETE FORM
+  completeFormValidation() {
+    try {
+      this.completeForm = this.fb.group({
+        status: new FormControl('completed', Validators.required),
+        description: new FormControl('', Validators.required),
+        suggestion: new FormControl('', Validators.required),
+        appointId: new FormControl('', Validators.required)
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // FOR LOGIN FORM VALIDATION ERRORS
+  get completeValidation() {
+    return this.completeForm.controls;
+  }
 
 
 }

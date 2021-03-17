@@ -35,7 +35,7 @@ export class PatientDashboardComponent implements OnInit {
     serviceType: "",
     description: ""
   }
-
+  total = 0;
 
   public directionLinks: boolean = true;
   public autoHide: boolean = false;
@@ -44,7 +44,7 @@ export class PatientDashboardComponent implements OnInit {
     previousLabel: '',
     nextLabel: '',
   };
-  dashboardTab: string;
+  dashboardTab = 'appointment';
   constructor(
     private api: WebApiService,
     public ngxLoader: NgxUiLoaderService,
@@ -52,7 +52,7 @@ export class PatientDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getDashboardDetails('appointment');
+    this.getDashboardDetails(this.dashboardTab);
   }
 
 
@@ -65,6 +65,7 @@ export class PatientDashboardComponent implements OnInit {
         if (res.status === 'success') {
           this.dashboardData = [];
           this.dashboardData = res.data.dashboardList;
+          this.total = res.data.count;
 
         }
         if (res.status === 'error') {
