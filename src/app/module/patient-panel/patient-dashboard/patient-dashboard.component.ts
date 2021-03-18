@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { WebApiService } from 'src/app/shared/web-api/web-api.service';
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-patient-dashboard',
   templateUrl: './patient-dashboard.component.html',
   styleUrls: ['./patient-dashboard.component.css']
 })
 export class PatientDashboardComponent implements OnInit {
-
+  @ViewChild('htmlData') htmlData:ElementRef;
   math = Math;
 
   currentPage = 1;
@@ -205,5 +206,22 @@ export class PatientDashboardComponent implements OnInit {
       console.log(error);
     }
 }
+
+public openPDF():void {
+  let DATA = document.getElementById('htmlData');
+      
+  html2canvas(DATA).then(canvas => {
+      
+      let fileWidth = 500;
+      let fileHeight = canvas.height * fileWidth / canvas.width;
+      
+      const FILEURI = canvas.toDataURL('image/jpeg')
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+      
+      PDF.save('angular-demo.pdf');
+  });     
+  }
 
 }
