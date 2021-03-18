@@ -4425,7 +4425,7 @@ section.iq-features {
 
 .sortby-fliter {
     display: inline-block;
-    width: 120px;
+    /* width: 120px; */
 }
 
 .cal-icon {
@@ -11228,4 +11228,41 @@ button.btn.btn-primary.btn-lg.btn-grad.login-btn {
 .bg-confirm-light {
     background-color: rgba(15, 183, 107, 0.12) !important;
     color: #3f7fba !important;
+}
+
+.margin-bottom {
+    margin-bottom: 10px;
+}
+
+
+.form-control.filter {
+    min-height: 0px !important;
+}
+
+i.fa.fa-sync {
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+
+
+.bs-datepicker-body table td.week span 
+{
+  color: #15558d !important; 
+}
+
+.bs-datepicker-body table td span.selected,
+.bs-datepicker-head,
+.bs-datepicker-head, .bs-datepicker button:active,
+.bs-datepicker-body table td.selected span,
+.bs-datepicker-body table td span[class*="select-"]:after,
+.bs-datepicker-body table td[class*="select-"] span:after,
+.bs-datepicker-body table td.active-week span:hover 
+{
+  background-color: #15558d !important; 
+}
+
+
+.theme-blue .bs-datepicker-predefined-btns button.selected {
+    background-color:#15558d !important;
 }

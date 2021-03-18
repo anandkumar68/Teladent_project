@@ -33,16 +33,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BlogComponent } from './blog/blog.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
-  fgsColor: 'rgba(40,40,40,0.8)',
+  fgsColor: '#00d0f1',
   fgsPosition: POSITION.centerCenter,
-  fgsSize: 0,
-  fgsType: SPINNER.pulse,
+  fgsSize: 90,
+  fgsType: SPINNER.threeStrings,
+  blur:1,
 
   // For Background Loader
   bgsColor: '#00d0f1',
   bgsPosition: POSITION.centerCenter,
   bgsSize: 40,
-  bgsOpacity: 1,
+  bgsOpacity: 0,
+
 
   // For Progress bar
   hasProgressBar: true,
@@ -51,9 +53,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   pbThickness: 2, // progress bar thickness
   masterLoaderId: 'master',
 
-  logoPosition: "center-center",
-  logoSize: 200,
-  logoUrl: "assets/img/alias-web-loader.gif",
+  // logoPosition: "center-center",
+  // logoSize: 200,
+  // logoUrl: "assets/img/alias-web-loader.gif",
 };
 
 @NgModule({

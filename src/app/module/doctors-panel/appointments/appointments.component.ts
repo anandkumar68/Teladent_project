@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Constants } from 'src/app/shared/constant';
 import { WebApiService } from 'src/app/shared/web-api/web-api.service';
 import Swal from 'sweetalert2'
 
@@ -31,6 +33,11 @@ export class AppointmentsComponent implements OnInit {
   completeForm: any;
   total = 0;
 
+  maxDateType: Date;
+  maxDate: string;
+  startDate = '';
+  endDate = '';
+
   constructor(
     private api: WebApiService,
     public ngxLoader: NgxUiLoaderService,
@@ -39,49 +46,48 @@ export class AppointmentsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     $('.form').find('input, textarea').on('keyup blur focus', function (e) {
-  
+
       var $this = $(this),
-          label = $this.prev('label');
-    
-        if (e.type === 'keyup') {
-          if ($this.val() === '') {
-              label.removeClass('active highlight');
-            } else {
-              label.addClass('active highlight');
-            }
-        } else if (e.type === 'blur') {
-          if( $this.val() === '' ) {
-            label.removeClass('active highlight'); 
-          } else {
-            label.removeClass('highlight');   
-          }   
-        } else if (e.type === 'focus') {
-          
-          if( $this.val() === '' ) {
-            label.removeClass('highlight'); 
-          } 
-          else if( $this.val() !== '' ) {
-            label.addClass('highlight');
-          }
+        label = $this.prev('label');
+
+      if (e.type === 'keyup') {
+        if ($this.val() === '') {
+          label.removeClass('active highlight');
+        } else {
+          label.addClass('active highlight');
         }
-    
+      } else if (e.type === 'blur') {
+        if ($this.val() === '') {
+          label.removeClass('active highlight');
+        } else {
+          label.removeClass('highlight');
+        }
+      } else if (e.type === 'focus') {
+
+        if ($this.val() === '') {
+          label.removeClass('highlight');
+        }
+        else if ($this.val() !== '') {
+          label.addClass('highlight');
+        }
+      }
+
     });
-    
+
     $('.tab a').on('click', function (e) {
-      
+
       e.preventDefault();
-      
+
       $(this).parent().addClass('active');
       $(this).parent().siblings().removeClass('active');
-      
+
       const target = $(this).attr('href');
-    
+
       $('.tab-content > div').not(target).hide();
-      
+
       $(target).fadeIn(600);
-      
+
     });
 
     this.getAppointmentList();
@@ -119,7 +125,7 @@ export class AppointmentsComponent implements OnInit {
 
   async updateStatus(status, appointId) {
     try {
-      
+
       let body = {
         status: status,
         appointId: appointId,
@@ -162,7 +168,7 @@ export class AppointmentsComponent implements OnInit {
   // INDIVIDUAL APPOINTMENT DETAILS
   individualAppointmentDetails(appointId) {
     try {
-      
+
       let body = {
         appointId: appointId
       }
@@ -191,16 +197,16 @@ export class AppointmentsComponent implements OnInit {
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       this.updateDrug.push(event.target.files[0])
-        var filesAmount = event.target.files.length;
-        for (let i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
+      var filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
+        var reader = new FileReader();
 
-                reader.onload = (event:any) => {
-                   this.urls.push(event.target.result);
-                }
-
-                reader.readAsDataURL(event.target.files[i]);
+        reader.onload = (event: any) => {
+          this.urls.push(event.target.result);
         }
+
+        reader.readAsDataURL(event.target.files[i]);
+      }
     }
   }
 
@@ -216,8 +222,8 @@ export class AppointmentsComponent implements OnInit {
   }
 
   submitCompleteRequest() {
-    try {      
-      
+    try {
+
       this.ngxLoader.startLoader('loader-02');
       this.api.updateAppointmentStatus(this.completeForm.value).subscribe((res: any) => {
         this.ngxLoader.stopLoader('loader-02');
@@ -229,7 +235,7 @@ export class AppointmentsComponent implements OnInit {
           this.updateDrug.length === 0 ? this.getAppointmentList() : '';
           this.updateDrug.length === 0 ? this.ngxLoader.stopLoader('loader-02') : '';
 
-          if(this.updateDrug.length > 0) {
+          if (this.updateDrug.length > 0) {
 
             let formData = new FormData();
 
@@ -245,17 +251,17 @@ export class AppointmentsComponent implements OnInit {
                 this.toastr.success(res.message);
                 this.getAppointmentList();
                 this.ngxLoader.stopLoader('loader-02');
-        
+
               }
-        
+
               if (resolve.status === 'error') {
-        
+
                 this.toastr.error(resolve.message);
                 this.ngxLoader.stopLoader('loader-02');
-        
+
               }
-  
-            },(err) => {
+
+            }, (err) => {
               console.log(err.message);
               this.ngxLoader.stopLoader('loader-02');
             });
@@ -304,6 +310,35 @@ export class AppointmentsComponent implements OnInit {
     return this.completeForm.controls;
   }
 
-  
+  // FOR RANGE DATEPICKER 
+  rangeDatesUpdated(dateValues) {
+    try {
+      if (dateValues === null || dateValues === [null] || dateValues[0] === null || dateValues[1] === null) {
+        this.startDate = '';
+        this.endDate = '';
+      } else {
+        this.startDate = moment(dateValues[0]).format('YYYY-MM-DD');
+        this.endDate = moment(dateValues[1]).format('YYYY-MM-DD');
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+
+
+  // For reset filter table data
+  async reset() {
+    try {
+      var cleanIdValues = ['date'];
+      (document.getElementById('status') as HTMLInputElement).value = 'All';
+      Constants.resetForm(cleanIdValues);
+      this.getAppointmentList();
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+
 
 }
