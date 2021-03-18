@@ -91,6 +91,11 @@ export class DoctorDashboardComponent implements OnInit {
     this.todayDate = new Date();
     this.getDashboardDetails('all');
     this.completeFormValidation();
+    window.scroll({ // <- Scroll window instead of scrollContainer
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
 

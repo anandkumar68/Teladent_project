@@ -37,6 +37,7 @@ export class AppointmentsComponent implements OnInit {
   maxDate: string;
   startDate = '';
   endDate = '';
+  filterStatus: any;
 
   constructor(
     private api: WebApiService,
@@ -92,13 +93,24 @@ export class AppointmentsComponent implements OnInit {
 
     this.getAppointmentList();
     this.completeFormValidation();
+    window.scroll({ // <- Scroll window instead of scrollContainer
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   // FOR GET APPOINTMENT LIST
   getAppointmentList() {
     try {
       this.ngxLoader.startLoader('loader-02');
-      this.api.getDoctorAppiontmentlist(this.perPage, (this.currentPage * this.perPage) - this.perPage).subscribe((res: any) => {
+      this.api.getDoctorAppiontmentlist(
+        this.perPage, 
+        (this.currentPage * this.perPage) - this.perPage,
+        this.filterStatus,
+        this.startDate,
+        this.endDate
+        ).subscribe((res: any) => {
         this.ngxLoader.stopLoader('loader-02');
         if (res.status === 'success') {
           this.appointmentList = [];
@@ -317,28 +329,43 @@ export class AppointmentsComponent implements OnInit {
         this.startDate = '';
         this.endDate = '';
       } else {
+        
         this.startDate = moment(dateValues[0]).format('YYYY-MM-DD');
         this.endDate = moment(dateValues[1]).format('YYYY-MM-DD');
+
+        this.currentPage = 1;
+        this.getAppointmentList();
+        
       }
     } catch (error) {
       console.log(error.message);
     }
   }
 
-
-
   // For reset filter table data
   async reset() {
     try {
       var cleanIdValues = ['date'];
-      (document.getElementById('status') as HTMLInputElement).value = 'All';
+      (document.getElementById('status') as HTMLInputElement).value = 'all';
       Constants.resetForm(cleanIdValues);
+      this.startDate = '';
+      this.endDate = '';
+      this.currentPage = 1;
+      this.filterStatus = 'all'
       this.getAppointmentList();
     } catch (err) {
       console.log(err.message);
     }
   }
 
-
+  statusChange(value) {
+    try {
+      this.currentPage = 1;
+      this.filterStatus = value;
+      this.getAppointmentList();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
 }

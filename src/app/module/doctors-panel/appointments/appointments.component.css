@@ -66,4 +66,14 @@
 .container:hover .mod_button {
   opacity: 1;
 }
-  
+
+.no_appointment {
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  display: -ms-flexbox;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 20px;
+}

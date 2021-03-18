@@ -37,6 +37,7 @@ export class PatientDashboardComponent implements OnInit {
     description: ""
   }
   total = 0;
+  
 
   public directionLinks: boolean = true;
   public autoHide: boolean = false;
@@ -46,6 +47,8 @@ export class PatientDashboardComponent implements OnInit {
     nextLabel: '',
   };
   dashboardTab = 'appointment';
+  invoicePdfDetails = {};
+  
   constructor(
     private api: WebApiService,
     public ngxLoader: NgxUiLoaderService,
@@ -209,19 +212,45 @@ export class PatientDashboardComponent implements OnInit {
 
 public openPDF():void {
   let DATA = document.getElementById('htmlData');
+
+  console.log(DATA);
       
-  html2canvas(DATA).then(canvas => {
+  html2canvas(DATA).then( async canvas => {
       
-      let fileWidth = 500;
+      let fileWidth = 250;
       let fileHeight = canvas.height * fileWidth / canvas.width;
       
-      const FILEURI = canvas.toDataURL('image/jpeg')
+      const FILEURI = await canvas.toDataURL('image/jpeg')
       let PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 0;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+      let position = 20;
+      PDF.addImage(FILEURI, 'PNG', -20, position, fileWidth, fileHeight)
       
       PDF.save('angular-demo.pdf');
   });     
+  }
+
+  invoicePrint(pdfId) {
+    try {
+      this.ngxLoader.startLoader('loader-02');
+      this.api.pdfInvoiceDetails(pdfId).subscribe((resolve) => {
+        
+        if(resolve.status === 'success') {
+
+          this.invoicePdfDetails = resolve.data;
+          console.log(this.invoicePdfDetails);
+          this.ngxLoader.stopLoader('loader-02');
+
+        }
+
+      }, (error) => {
+          this.ngxLoader.stopLoader('loader-02');
+          console.log(error.message);
+      })
+
+    } catch (error) {
+      this.ngxLoader.stopLoader('loader-02');
+      console.log(error);
+    }
   }
 
 }

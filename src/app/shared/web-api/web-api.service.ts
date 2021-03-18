@@ -96,7 +96,7 @@ export class WebApiService {
   /********************************* FOR DOCTOR DASHBOARD **********************/
 
   // USER DOCTOR API LIST
-  getDoctorAppiontmentlist(limit: any, skip: any): Observable<any> {
+  getDoctorAppiontmentlist(limit: any, skip: any, status: any, startDate: any, endDate: any): Observable<any> {
     try {
       let token: any;
       token = localStorage.getItem('token');
@@ -104,7 +104,7 @@ export class WebApiService {
       return this.http.get(apiUrl, {
         headers: new HttpHeaders()
           .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
-        params: new HttpParams().set('limit', limit).set('skip', skip)
+        params: new HttpParams().set('limit', limit).set('skip', skip).set('status', status).set('startDate', startDate).set('endDate', endDate)
       });
     } catch (error) {
       console.log(error.message);
@@ -394,6 +394,27 @@ export class WebApiService {
       token = localStorage.getItem('adminToken');
       const apiUrl = `${this.BASE_URL}/user/list-web-individual-blog/${blogId}`;
       return this.http.get(apiUrl);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  /**********************************************************************************/
+  /********************************* PDF DOWNLOAD DETAILS API ****************************/
+  /**********************************************************************************/
+
+  // BLOG INDIVIDUAL LIST API
+  pdfInvoiceDetails(invoiceId: any): any {
+    try {
+
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/user/pdf-invoice-details/${invoiceId}`;
+      return this.http.get(apiUrl, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+
     } catch (error) {
       console.log(error.message);
     }

@@ -10,12 +10,12 @@
                 <div class="sort-by">
                     <span class="sort-title">Filter by</span>
                     <span class="sortby-fliter">
-                        <select class="select form-control filter" id="status">
-                            <option class="All">All</option>
-                            <option class="Pending">Pending</option>
-                            <option class="Completed">Completed</option>
-                            <option class="Confirmed">Confirmed</option>
-                            <option class="ReScheduled">ReScheduled</option>
+                        <select class="select form-control filter" id="status" (change)="statusChange($event.target.value)">
+                            <option class="All" value="all">All</option>
+                            <option class="Pending" value="pending">Pending</option>
+                            <option class="Completed" value="completed">Completed</option>
+                            <option class="Confirmed" value="confirm">Confirmed</option>
+                            <option class="ReScheduled" value="reschedule">ReScheduled</option>
                         </select>
                     </span>
                 </div>
@@ -91,6 +91,9 @@
                                 <i class="fas fa-times"></i> ReSchedule
                             </a>
                         </div>
+                    </div>
+                    <div class="no_appointment" *ngIf="total === 0">
+                        <h3 class="text-center">Appointments not found</h3>
                     </div>
                     <!-- /Appointment List -->
                 </div>
