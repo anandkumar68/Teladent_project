@@ -1,0 +1,4 @@
+export class LoginModal{
+    type!: string;
+    content!: string;
+  }

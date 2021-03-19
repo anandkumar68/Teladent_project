@@ -14,6 +14,7 @@ import {
   TooltipLabel,
 } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
+import { CommonFunctionService } from 'src/app/shared/common-function.service';
 import { Constants } from 'src/app/shared/constant';
 import { UserApiService } from 'src/app/shared/user-api/user-api.service';
 declare const $: any;
@@ -68,7 +69,8 @@ export class HeaderComponent implements OnInit {
     public fb: FormBuilder,
     private toastr: ToastrService,
     public api: UserApiService,
-    public router: Router
+    public router: Router,
+    public commonFunction:CommonFunctionService
   ) { }
 
   ngOnInit(): void {
@@ -115,6 +117,15 @@ export class HeaderComponent implements OnInit {
     let userId = Constants.credentialsDecrypt(localStorage.getItem('userId'));
     this.showUser = !userId ? false : true;
     this.loginUserDetails();
+
+
+    this.commonFunction.currentMessage.subscribe((message) => {
+     if(message === 'loginKey'){
+      let userId = Constants.credentialsDecrypt(localStorage.getItem('userId'));
+      this.showUser = !userId ? false : true;
+      this.loginUserDetails();
+     }
+    });
   }
 
   // FOR LOGIN USER DETAILS

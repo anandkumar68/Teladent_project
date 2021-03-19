@@ -10,6 +10,8 @@ export class PatientPanelComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // var element = (document.getElementById('show-nav') as HTMLInputElement);
+    // element.parentNode.removeChild(element);
   }
 
 }
