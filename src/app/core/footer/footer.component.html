@@ -54,7 +54,8 @@
                             <li><a (click)="patientRouter('login')" href="javascript:void(0); ">Login</a></li>
                             <li><a (click)="patientRouter('signup')" href="javascript:void(0);">Register</a></li>
                             <li><a (click)="patientRouter('booking')" href="javascript:void(0);">Booking Appointment</a></li>
-                            <li><a (click)="patientRouter('patientDash')" href="javascript:void(0);">Patient Dashboard</a></li>
+                            <li><a (click)="showDialog()" href="javascript:void(0);">Patient Dashboard</a></li>
+                            <app-login-modal #appDialog></app-login-modal>
                         </ul>
                     </div>
                     <!-- /Footer Widget -->
