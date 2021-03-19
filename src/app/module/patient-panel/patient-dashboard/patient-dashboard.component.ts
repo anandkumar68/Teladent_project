@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { WebApiService } from 'src/app/shared/web-api/web-api.service';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-patient-dashboard',
   templateUrl: './patient-dashboard.component.html',
@@ -53,6 +53,7 @@ export class PatientDashboardComponent implements OnInit {
     private api: WebApiService,
     public ngxLoader: NgxUiLoaderService,
     public toastr: ToastrService,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -210,45 +211,18 @@ export class PatientDashboardComponent implements OnInit {
     }
 }
 
-public openPDF():void {
-  let DATA = document.getElementById('htmlData');
-
-  console.log(DATA);
-      
-  html2canvas(DATA).then( async canvas => {
-      
-      let fileWidth = 250;
-      let fileHeight = canvas.height * fileWidth / canvas.width;
-      
-      const FILEURI = await canvas.toDataURL('image/jpeg')
-      let PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 20;
-      PDF.addImage(FILEURI, 'PNG', -20, position, fileWidth, fileHeight)
-      
-      PDF.save('angular-demo.pdf');
-  });     
-  }
-
   invoicePrint(pdfId) {
     try {
-      this.ngxLoader.startLoader('loader-02');
-      this.api.pdfInvoiceDetails(pdfId).subscribe((resolve) => {
-        
-        if(resolve.status === 'success') {
 
-          this.invoicePdfDetails = resolve.data;
-          console.log(this.invoicePdfDetails);
-          this.ngxLoader.stopLoader('loader-02');
+      // Converts the route into a string that can be used 
+      // with the window.open() function
+      const url = this.router.serializeUrl(
+        this.router.createUrlTree([`/patient-panel/invoice-details/${pdfId}`])
+      );
 
-        }
-
-      }, (error) => {
-          this.ngxLoader.stopLoader('loader-02');
-          console.log(error.message);
-      })
+      window.open(url, '_blank');
 
     } catch (error) {
-      this.ngxLoader.stopLoader('loader-02');
       console.log(error);
     }
   }

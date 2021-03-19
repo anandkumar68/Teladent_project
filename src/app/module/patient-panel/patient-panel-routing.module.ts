@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PatientAuthGuardGuard } from '../auth-guard/patient/patient-auth-guard.guard';
 import { FavouritesComponent } from './favourites/favourites.component';
+import { InvoicePdfComponent } from './invoice-pdf/invoice-pdf.component';
 import { PatientChangePasswordComponent } from './patient-change-password/patient-change-password.component';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { PatientPanelComponent } from './patient-panel.component';
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path:'reschedule-appointment/:providerId/:appointId',
         component: RescheduleAppointmentComponent,
+      },
+      {
+        path:'invoice-details/:pdfId',
+        component: InvoicePdfComponent,
       },
       {
         path: '',

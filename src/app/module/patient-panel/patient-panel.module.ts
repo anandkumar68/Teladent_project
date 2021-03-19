@@ -14,10 +14,11 @@ import { RescheduleAppointmentComponent } from './reschedule-appointment/resched
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { InvoicePdfComponent } from './invoice-pdf/invoice-pdf.component';
 
 
 @NgModule({
-  declarations: [PatientPanelComponent, PatientDashboardComponent, PatientSidebarComponent, FavouritesComponent, PatientProfileSettingsComponent, PatientChangePasswordComponent, RescheduleAppointmentComponent],
+  declarations: [PatientPanelComponent, PatientDashboardComponent, PatientSidebarComponent, FavouritesComponent, PatientProfileSettingsComponent, PatientChangePasswordComponent, RescheduleAppointmentComponent, InvoicePdfComponent],
   imports: [
     CommonModule,
     PatientPanelRoutingModule,
