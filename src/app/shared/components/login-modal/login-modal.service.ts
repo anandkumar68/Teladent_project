@@ -1,26 +1,18 @@
-import { LoginModalComponent } from './login-modal.component';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { LoginModal } from './login-modal';
 
+declare let $: any;
+
+@Injectable()
 export class LoginModalService {
 
-  registeredDialog: LoginModalComponent;
+    modalData = new Subject<LoginModal>();
 
-  register(dialog) {
-    this.registeredDialog = dialog;
-  }
+    modalDataEvent = this.modalData.asObservable();
 
-  show() {
-    return new Promise<void>((resolve, reject) => {
-      this.registeredDialog.show();
-      this.registeredDialog.onOk.subscribe(() => {
-        this.registeredDialog.hide();
-        resolve();
-      });
-      this.registeredDialog.onCancel.subscribe(() => {
-        this.registeredDialog.hide();
-        reject();
-      });
-
-    });
-  }
+    open(modalData: any) {
+        this.modalData.next(modalData);
+    }
 
 }

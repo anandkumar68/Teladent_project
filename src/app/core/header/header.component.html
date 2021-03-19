@@ -33,7 +33,7 @@
                 </div>
 
 
-                <nav class="tabs d-none d-md-block">
+                <nav class="tabs d-none d-md-block" id="show-nav">
 
                     <div class="selector" id="webmenu"></div>
                     <a href="#" class="active" id="home" (click)="navigateHeader('index')">Home</a>
@@ -77,14 +77,14 @@
                 </ul>
             </div>
 
-            <ul class="nav header-navbar-rht">
-                <li class="nav-item">
+            <ul class="nav header-navbar-rht" >
+                <li class="nav-item" id="show-nav-btn">
                     <a class="nav-link btn-grad" href="javascript:void(0);" (click)="navigateHeader('/online-consultation?limit=10&skip=0')">BOOK
                         AN APPOINTMENT </a>
                 </li>
 
                 <li class="nav-item" *ngIf="!showUser">
-                    <a class="nav-link btn-grad" href="login.html" data-toggle="modal" data-backdrop="static" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
+                    <a class="nav-link btn-grad" href="javascript:void(0);" data-toggle="modal" data-backdrop="static" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
                 </li>
                 <!-- <app-login-modal *ngIf="!showUser" [link]="'Abhi'"></app-login-modal> -->
 

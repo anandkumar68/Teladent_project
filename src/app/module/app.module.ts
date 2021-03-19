@@ -31,6 +31,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BlogComponent } from './blog/blog.component';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { CommonFunctionService } from '../shared/common-function.service';
+
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
   fgsColor: '#00d0f1',
@@ -86,6 +89,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ModalModule.forRoot(),
     NgOtpInputModule,
     HttpClientModule,
     RouterModule,
@@ -96,7 +100,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxPaginationModule,
     NgCircleProgressModule.forRoot()
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,CommonFunctionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

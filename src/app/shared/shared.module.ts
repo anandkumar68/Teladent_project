@@ -5,6 +5,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginModalService } from './components/login-modal/login-modal.service';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { CountdownModule } from 'ngx-countdown';
 
 
 
@@ -15,9 +17,11 @@ import { LoginModalService } from './components/login-modal/login-modal.service'
     NgxIntlTelInputModule,
     ToastrModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot(),
+    CountdownModule,
   ],
   exports:[LoginModalComponent],
-  providers:[LoginModalService]
+  providers:[BsModalService, LoginModalService]
 })
 export class SharedModule { }

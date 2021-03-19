@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
-import { LoginModalComponent } from 'src/app/shared/components/login-modal/login-modal.component';
+import { LoginModal } from 'src/app/shared/components/login-modal/login-modal';
 import { LoginModalService } from 'src/app/shared/components/login-modal/login-modal.service';
 import { Constants } from 'src/app/shared/constant';
 
@@ -12,8 +12,7 @@ import { Constants } from 'src/app/shared/constant';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  @ViewChild('appDialog') appDialog: LoginModalComponent;
-
+  modelData = new LoginModal();
   constructor(
     public router: Router,
     public toastr: ToastrService,
@@ -22,23 +21,16 @@ export class FooterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loginModalService.register(this.appDialog);
     document.getElementById("copyright").innerHTML =
     "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='javascript:void(0);'>Teladentist Solutions</a> ";
-
   }
 
-  showDialog() {
-    this.loginModalService.show()
-      .then((res) => {
-        console.warn('ok clicked');
-      })
-      .catch((err) => {
-        console.log(err);
-        
-        console.warn('rejected');
-      });
+  open(modalType: string, content:string) {
+    this.modelData.type = modalType;
+    this.modelData.content = content;
+    this.loginModalService.open(this.modelData);
   }
+
 
   // Router Link
   footerRouter(routerLink) {
