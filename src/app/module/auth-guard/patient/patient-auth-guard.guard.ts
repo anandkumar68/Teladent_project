@@ -56,26 +56,19 @@ export class PatientAuthGuardGuard implements CanActivate, CanActivateChild, Can
     let token = localStorage.getItem('token');
 
     if ( token === 'undefined' || token === null || !token) {
-
+      this.toastr.error('Please Login to Continue');
       status = false;
       
     } else {
 
       Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'onlineDoctors' ?
-      this.toastr.error('You are logged in as a Doctor. Please Login as a User.'): '';
+      this.toastr.error('You are logged in as a Dentist. Please Login as a User.'): '';
 
       if(Constants.credentialsDecrypt(localStorage.getItem('loginAs')) !== 'user') {
 
         if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
           (document.getElementById('logoutCall') as HTMLInputElement).click();
-          setTimeout(() => {
-            (document.getElementById('loginCall') as HTMLInputElement).click();
-          }, 200);
-
-        } else {
-
-          (document.getElementById('loginCall') as HTMLInputElement).click();
 
         }
 
@@ -91,13 +84,6 @@ export class PatientAuthGuardGuard implements CanActivate, CanActivateChild, Can
         if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
           (document.getElementById('logoutCall') as HTMLInputElement).click();
-          setTimeout(() => {
-            (document.getElementById('loginCall') as HTMLInputElement).click();
-          }, 200);
-
-        } else {
-
-          (document.getElementById('loginCall') as HTMLInputElement).click();
 
         }
 

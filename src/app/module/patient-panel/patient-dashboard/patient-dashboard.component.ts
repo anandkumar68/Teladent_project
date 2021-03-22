@@ -57,6 +57,7 @@ export class PatientDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     this.getDashboardDetails(this.dashboardTab);
   }
 
