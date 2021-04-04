@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { WebApiService } from 'src/app/shared/web-api/web-api.service';
@@ -15,6 +15,8 @@ export class InvoicePdfComponent implements OnInit {
   bankDetails : any;
   pdfId: any;
 
+  @ViewChild('htmlData') htmlData: ElementRef;
+
   constructor(
     public api: WebApiService,
     public ngxLoader: NgxUiLoaderService,
@@ -27,27 +29,34 @@ export class InvoicePdfComponent implements OnInit {
     this.loadPdfDetails();
 
   }
+  generarPDF() {
 
-  public openPDF():void {
-    let DATA = document.getElementById('htmlData');
-  
-    console.log(DATA);
-        
-    html2canvas(DATA).then( async canvas => {
-        
-        let fileWidth = 250;
-        let fileHeight = canvas.height * fileWidth / canvas.width;
-        // let fileHeight = 200;
-        
-        const FILEURI = canvas.toDataURL('image/jpeg')
-        let PDF = new jsPDF('p', 'mm', 'a4');
-        let position = 0;
-        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
-        
-        PDF.save('angular-demo.pdf');
-    });     
+    const div = document.getElementById('htmlData');
+    const options = {
+      background: 'white',
+      scale: 1  
+    };
+
+    html2canvas(div, options).then((canvas) => {
+
+      var img = canvas.toDataURL("image/PNG");
+      var doc = new jsPDF('p', 'mm', 'a4');
+
+      // Add image Canvas to PDF
+      const bufferX = 5;
+      const bufferY = 5;
+      const imgProps = (<any>doc).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      console.log(pdfWidth,pdfHeight);
+      
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+
+      return doc;
+    }).then((doc) => {
+      doc.save('invoice.pdf');  
+    });
   }
-
   loadPdfDetails () {
     try {
       this.ngxLoader.startLoader('loader-02');
