@@ -17,15 +17,15 @@ export class FooterComponent implements OnInit {
     public router: Router,
     public toastr: ToastrService,
     private loginModalService: LoginModalService
-    
+
   ) { }
 
   ngOnInit(): void {
     document.getElementById("copyright").innerHTML =
-    "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='javascript:void(0);'>Teladentist Solutions</a> ";
+      "&copy; 2021 Teladent. All rights reserved. | Designed By <a href='javascript:void(0);'>Teladentist Solutions</a> ";
   }
 
-  open(modalType: string, content:string) {
+  open(modalType: string, content: string) {
     this.modelData.type = modalType;
     this.modelData.content = content;
     this.loginModalService.open(this.modelData);
@@ -38,198 +38,176 @@ export class FooterComponent implements OnInit {
   }
 
   // Patient Link
-  patientRouter(linkType) {
+  patientRouter(linkType, modalType: string, content: string, allowUser: String) {
     try {
 
-      if(linkType === 'login' || linkType === 'signup') {
+      if (linkType === 'login' || linkType === 'signup') {
 
-        if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+        if ((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
           (document.getElementById('logoutCall') as HTMLInputElement).click();
-          setTimeout(() => {
-            (document.getElementById('loginCall') as HTMLInputElement).click();
-          }, 200);
-
-        } else {
-
-          (document.getElementById('loginCall') as HTMLInputElement).click();
 
         }
-        this.router.navigateByUrl('/index');
+
+        this.modelData.type = modalType;
+        this.modelData.content = content;
+        this.modelData.allowUser = allowUser;
+        this.loginModalService.open(this.modelData);
 
       }
 
-      if(linkType === 'booking' || linkType === 'patientDash') {
+      if (linkType === 'booking' || linkType === 'patientDash') {
 
-        if(!localStorage.getItem('token')) {
+        if (!localStorage.getItem('token')) {
 
-          console.log("Prataap")
-
-          if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+          if ((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
             (document.getElementById('logoutCall') as HTMLInputElement).click();
-            setTimeout(() => {
-              (document.getElementById('loginCall') as HTMLInputElement).click();
-            }, 200);
-
-          } else {
-
-            (document.getElementById('loginCall') as HTMLInputElement).click();
 
           }
+
+          this.modelData.type = modalType;
+          this.modelData.content = content;
+          this.modelData.allowUser = allowUser;
+          this.loginModalService.open(this.modelData);
 
         } else {
 
           Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'onlineDoctors' ?
-          this.toastr.error('You are logged in as a Doctor. Please Login as a User.'): '';
+            this.toastr.error('You are logged in as a Doctor. Please Login as a User.') : '';
 
-          if(Constants.credentialsDecrypt(localStorage.getItem('loginAs')) !== 'user') {
+          if (Constants.credentialsDecrypt(localStorage.getItem('loginAs')) !== 'user') {
 
-            if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+            if ((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
               (document.getElementById('logoutCall') as HTMLInputElement).click();
-              setTimeout(() => {
-                (document.getElementById('loginCall') as HTMLInputElement).click();
-              }, 200);
-  
-            } else {
-  
-              (document.getElementById('loginCall') as HTMLInputElement).click();
-  
+
             }
+
+            this.modelData.type = modalType;
+            this.modelData.content = content;
+            this.modelData.allowUser = allowUser;
+            this.loginModalService.open(this.modelData);
 
           } else {
 
-          const helper = new JwtHelperService();
-          const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
-          
-          if(isExpired) {
-  
-            if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+            const helper = new JwtHelperService();
+            const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
 
-              (document.getElementById('logoutCall') as HTMLInputElement).click();
-              setTimeout(() => {
-                (document.getElementById('loginCall') as HTMLInputElement).click();
-              }, 200);
-  
+            if (isExpired) {
+
+              if ((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+
+                (document.getElementById('logoutCall') as HTMLInputElement).click();
+
+              }
+
+              this.modelData.type = modalType;
+              this.modelData.content = content;
+              this.modelData.allowUser = allowUser;
+              this.loginModalService.open(this.modelData);
+
             } else {
-  
-              (document.getElementById('loginCall') as HTMLInputElement).click();
-  
+
+              linkType === 'booking' ?
+                this.router.navigateByUrl('/online-consultation?limit=10&skip=0') :
+                this.router.navigateByUrl('/patient-panel/patient-dashboard')
+
             }
-            
-          } else {
-
-            linkType === 'booking' ? 
-            this.router.navigateByUrl('/online-consultation?limit=10&skip=0') :
-            this.router.navigateByUrl('/patient-panel/patient-dashboard')
 
           }
 
-          }
+        }
 
       }
 
-      }
-      
     } catch (error) {
       console.log(error.message);
     }
   }
 
   // Dentist Link
-  densitRouter(linkType) {
+  densitRouter(linkType, modalType: string, content: string, allowUser: String) {
     try {
 
-      if(linkType === 'login' || linkType === 'signup') {
+      if (linkType === 'login' || linkType === 'signup') {
 
-        if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+        if ((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
           (document.getElementById('logoutCall') as HTMLInputElement).click();
-          setTimeout(() => {
-            (document.getElementById('loginCall') as HTMLInputElement).click();
-          }, 200);
 
-        } else {
-
-          (document.getElementById('loginCall') as HTMLInputElement).click();
-
-        }
-        this.router.navigateByUrl('/index');
+        } 
+        
+        this.modelData.type = modalType;
+        this.modelData.content = content;
+        this.modelData.allowUser = allowUser;
+        this.loginModalService.open(this.modelData);
 
       }
 
-      if(linkType === 'appointment' || linkType === 'doctorDash') {
+      if (linkType === 'appointment' || linkType === 'doctorDash') {
 
-        if(!localStorage.getItem('token')) {
-          
-          if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+        if (!localStorage.getItem('token')) {
+
+          if ((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
             (document.getElementById('logoutCall') as HTMLInputElement).click();
-            setTimeout(() => {
-              (document.getElementById('loginCall') as HTMLInputElement).click();
-            }, 200);
-
-          } else {
-
-            (document.getElementById('loginCall') as HTMLInputElement).click();
 
           }
+          this.modelData.type = modalType;
+          this.modelData.content = content;
+          this.modelData.allowUser = allowUser;
+          this.loginModalService.open(this.modelData);
 
         } else {
 
           Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'user' ?
-          this.toastr.error('You are logged in as a User. Please Login as a Doctor.'): '';
+            this.toastr.error('You are logged in as a User. Please Login as a Dentist.') : '';
 
-          if(Constants.credentialsDecrypt(localStorage.getItem('loginAs')) !== 'onlineDoctors') {
+          if (Constants.credentialsDecrypt(localStorage.getItem('loginAs')) !== 'onlineDoctors') {
 
-            if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+            if ((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
               (document.getElementById('logoutCall') as HTMLInputElement).click();
-              setTimeout(() => {
-                (document.getElementById('loginCall') as HTMLInputElement).click();
-              }, 200);
-  
-            } else {
-  
-              (document.getElementById('loginCall') as HTMLInputElement).click();
-  
+
             }
+
+            this.modelData.type = modalType;
+            this.modelData.content = content;
+            this.modelData.allowUser = allowUser;
+            this.loginModalService.open(this.modelData);
 
           } else {
 
-          const helper = new JwtHelperService();
-          const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
-          
-          if(isExpired) {
-  
-            if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+            const helper = new JwtHelperService();
+            const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
 
-              (document.getElementById('logoutCall') as HTMLInputElement).click();
-              setTimeout(() => {
-                (document.getElementById('loginCall') as HTMLInputElement).click();
-              }, 200);
-  
+            if (isExpired) {
+
+              if ((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+
+                (document.getElementById('logoutCall') as HTMLInputElement).click();
+
+              }
+              this.modelData.type = modalType;
+              this.modelData.content = content;
+              this.modelData.allowUser = allowUser;
+              this.loginModalService.open(this.modelData);
+
             } else {
-  
-              (document.getElementById('loginCall') as HTMLInputElement).click();
-  
+
+              linkType === 'doctorDash' ?
+                this.router.navigateByUrl('/doctor-dashboard') :
+                this.router.navigateByUrl('/doctors-panel/doctor-appointments')
+
             }
-            
-          } else {
-
-            linkType === 'doctorDash' ? 
-            this.router.navigateByUrl('/doctor-dashboard') :
-            this.router.navigateByUrl('/doctors-panel/doctor-appointments')
 
           }
 
-          }
+        }
 
       }
 
-      }
-      
     } catch (error) {
       console.log(error.message);
     }
