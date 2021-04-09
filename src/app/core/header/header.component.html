@@ -1,9 +1,9 @@
 <!-- Main Wrapper -->
 <div class="main-wrapper">
-    <div class="top-container">
+    <!-- <div class="top-container">
 
         <p class="animate__animated animate__heartBeat animate__slower animate__repeat-3 3 ">Book a Appointment on WhatsApp or Call on +91 9899799981</p>
-    </div>
+    </div> -->
 
 
     <!-- Header -->
@@ -78,13 +78,15 @@
             </div>
 
             <ul class="nav header-navbar-rht" >
+               
+
+                <li class="nav-item" *ngIf="!showUser" id="show-nav-btn">
+                    <a class="nav-link btn-grad" href="javascript:void(0);" data-toggle="modal" data-backdrop="static" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
+                </li>
+
                 <li class="nav-item" id="show-nav-btn">
                     <a class="nav-link btn-grad" href="javascript:void(0);" (click)="navigateHeader('/online-consultation?limit=10&skip=0')">BOOK
                         AN APPOINTMENT </a>
-                </li>
-
-                <li class="nav-item" *ngIf="!showUser">
-                    <a class="nav-link btn-grad" href="javascript:void(0);" data-toggle="modal" data-backdrop="static" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
                 </li>
                 <!-- <app-login-modal *ngIf="!showUser" [link]="'Abhi'"></app-login-modal> -->
 
