@@ -36,38 +36,38 @@
                 <nav class="tabs d-none d-md-block" id="show-nav">
 
                     <div class="selector" id="webmenu"></div>
-                    <a href="#" class="active" id="home" (click)="navigateHeader('index')">Home</a>
-                    <a href="#" id="about" (click)="navigateHeader('about-us')">About Us</a>
-                    <a href="#" id="bytes" (click)="navigateHeader('info-bytes')">Info Bytes</a>
-                    <a href="#" id="contact" (click)="navigateHeader('contact-us')">Contact Us</a>
-                    <a href="#" id="covid" (click)="navigateHeader('covid-guidelines')">Covid</a>
+                    <a href="#" class="active" id="home" (click)="navigateHeader('/web-panel/index')">Home</a>
+                    <a href="#" id="about" (click)="navigateHeader('/web-panel/about-us')">About Us</a>
+                    <a href="#" id="bytes" (click)="navigateHeader('/web-panel/info-bytes')">Info Bytes</a>
+                    <a href="#" id="contact" (click)="navigateHeader('/web-panel/contact-us')">Contact Us</a>
+                    <a href="#" id="covid" (click)="navigateHeader('/web-panel/covid-guidelines')">Covid</a>
 
                 </nav>
 
                 <ul class="main-nav ">
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('index')">Home</a>
+                        <a href="#" (click)="navigateHeader('/web-panel/index')">Home</a>
                     </li>
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('about-us')">About us</a>
+                        <a href="#" (click)="navigateHeader('/web-panel/about-us')">About us</a>
                     </li>
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('info-bytes')">Info Bytes</a>
+                        <a href="#" (click)="navigateHeader('/web-panel/info-bytes')">Info Bytes</a>
                     </li>
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('contact-us')">Contact Us</a>
+                        <a href="#" (click)="navigateHeader('/web-panel/contact-us')">Contact Us</a>
                     </li>
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('covid-guidelines')">Covid - 19</a>
+                        <a href="#" (click)="navigateHeader('/web-panel/covid-guidelines')">Covid - 19</a>
                     </li>
 
                     <li class="login-link">
-                        <a href="javascript:void(0);" (click)="navigateHeader('/online-consultation?limit=10&skip=0')">BOOK AN APPOINTMENT </a>
+                        <a href="javascript:void(0);" (click)="navigateHeader('/web-panel/online-consultation?limit=10&skip=0')">BOOK AN APPOINTMENT </a>
                     </li>
 
                     <li class="login-link">
@@ -86,7 +86,7 @@
 
                 <li class="nav-item" id="show-nav-btn">
                     <a class="nav-link btn-grad kkh" href="javascript:void(0);"
-                        (click)="navigateHeader('/online-consultation?limit=10&skip=0')">BOOK
+                        (click)="navigateHeader('/web-panel/online-consultation?limit=10&skip=0')">BOOK
                         AN APPOINTMENT </a>
                 </li>
                 <!-- <app-login-modal *ngIf="!showUser" [link]="'Abhi'"></app-login-modal> -->
