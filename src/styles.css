@@ -1,5 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
 
+.kk
+{
+    width: 20%;
+    background: #3a9cd8 !important;
+    color: white;
+    font-size: 14px;
+}
+
+.w100
+{
+    width: 100% !important;
+}
+
+.btn-grad.kkh:hover {
+    background: #3a9cd8 !important;
+    color: white !important;
+}
+
+.btn-grad.kkall:hover {
+    background: #3a9cd8 !important;
+    color: white !important;
+}
+
+.btn-grad.kk:hover {
+    background: #3a9cd8 !important;
+    color: white !important;
+}
+
+.btn-grad.kk2:hover {
+    background: #3a9cd8 !important;
+    color: white !important;
+}
+
+.btn-grad:hover {
+    background-position: right center;
+    color: #3a9cd8 !important;
+    text-decoration: none;
+    background: transparent !important;
+}
+
+.kkh {
+    width: 100%;
+    background: #3a9cd8 !important;
+    color: white !important;
+    font-size: 14px;
+}
+
+.kkall {
+    
+    background: #3a9cd8 !important;
+    color: white !important;
+    font-size: 14px;
+}
 
 .btn-grad {
     margin: 18px 5px;
