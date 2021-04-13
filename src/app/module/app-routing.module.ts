@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ReviewComponent } from './review/review.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'page-not-found',
     component: PageNotFoundComponent,
+  },
+  {
+    path: 'web-review',
+    component: ReviewComponent,
   },
   {
     path:'page-not-found/:status',

@@ -1,0 +1,171 @@
+.top-buffer{
+    margin-top:40px;
+  }
+  .font-consistent {color:#737b7b;font-family: Helvetica, Arial, sans-serif;}
+  
+  *, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    // background: #323232;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  $darkColor: #c8ced3;
+  $activeDarkColor: #655e53;
+  $activeYellowColor: #ffd68c;
+  
+  $contW: 800px;
+  $contPad: 75px;
+  @media screen and ( max-width: 700px ) {
+    h1 {
+       font-size: 30px;
+    }
+    $contW: 200px;
+  $contPad: 25px;
+  }
+  $smileSize: 76px;
+  $activeSmileSize: 110px;
+  
+  $dragContW: $contW - $contPad*2 - $smileSize;
+  
+  $animTime: 0.5s;
+  
+  .fb {
+  
+    &-cont {
+      overflow: hidden;
+      position: relative;
+      margin:  auto;
+      width: $contW;
+      padding: $contPad;
+      padding-bottom: $contPad + 65px;
+      background: #fff;
+      
+      &__inner {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        
+        &:before {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 90%;
+          height: 4px;
+          margin-top: -2px;
+          background: rgba($darkColor, 0.5);
+          border-radius: 2px;
+          transform: translateX(-50%);
+        }
+      }
+      
+      &__drag-cont {
+        z-index: 2;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: $dragContW;
+        height: 100%;
+        margin-left: $dragContW/-2;
+        pointer-events: none;
+        transform: translate3d(50%,0,0);
+      }
+    }
+    
+    &-emote {
+      z-index: 1;
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: $smileSize;
+      height: $smileSize;
+      cursor: pointer;
+      
+      svg {
+        display: block;
+        margin-bottom: 15px;
+        width: 100%;
+        height: 100%;
+        background: $darkColor;
+        border-radius: 50%;
+        transition: transform $animTime;
+      }
+      
+      &.s--active svg {
+        transform: scale(0.7);
+      }
+      
+      &__caption {
+        text-align: center;
+        font-size: 26px;
+        font-weight: 700;
+        color: $darkColor;
+        transition: all $animTime;
+        
+        .fb-emote.s--active & {
+          color: $activeDarkColor;
+          transform: translateY(15px);
+        }
+      }
+      
+      &__eye {
+        stroke: none;
+        fill: #fff;
+      }
+      
+      &__smile {
+        stroke: #fff;
+        stroke-width: 10;
+        stroke-linecap: round;
+        fill: none;
+      }
+    }
+    
+    &-active-emote {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: $activeSmileSize;
+      height: $activeSmileSize;
+      margin-left: $activeSmileSize/-2;
+      margin-top: $activeSmileSize/-2;
+      background: $activeYellowColor;
+      border-radius: 50%;
+      
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+      
+      &__eye {
+        stroke: none;
+        fill: $activeDarkColor;
+      }
+      
+      &__smile {
+        stroke: $activeDarkColor;
+        stroke-width: 10;
+        stroke-linecap: round;
+        fill: none;
+      }
+    }
+  }
+  
+  .icon-link {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 32px;
+  
+    img {
+      width: 100%;
+      vertical-align: top;
+    }
+  
+  }

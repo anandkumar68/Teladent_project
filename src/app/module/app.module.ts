@@ -19,6 +19,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { CommonFunctionService } from '../shared/common-function.service';
+import { ReviewComponent } from './review/review.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
@@ -50,7 +51,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent,    
+    PageNotFoundComponent,
+    ReviewComponent,    
   ],
   imports: [
     BrowserAnimationsModule,
