@@ -33,8 +33,9 @@ export class InvoicePdfComponent implements OnInit {
 
     const div = document.getElementById('htmlData');
     const options = {
-      background: 'white',
-      scale: 1  
+      scale: 6,
+      x:240,
+      y:0  
     };
 
     html2canvas(div, options).then((canvas) => {
@@ -43,12 +44,11 @@ export class InvoicePdfComponent implements OnInit {
       var doc = new jsPDF('p', 'mm', 'a4');
 
       // Add image Canvas to PDF
-      const bufferX = 5;
-      const bufferY = 5;
+      const bufferX = 10;
+      const bufferY = 10;
       const imgProps = (<any>doc).getImageProperties(img);
       const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      console.log(pdfWidth,pdfHeight);
       
       doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
 
