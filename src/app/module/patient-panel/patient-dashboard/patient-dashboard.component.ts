@@ -218,7 +218,7 @@ export class PatientDashboardComponent implements OnInit {
       // Converts the route into a string that can be used 
       // with the window.open() function
       const url = this.router.serializeUrl(
-        this.router.createUrlTree([`/patient-panel/invoice-details/${pdfId}`])
+        this.router.createUrlTree([`/web-panel/patient-panel/invoice-details/${pdfId}`])
       );
 
       window.open(url, '_blank');

@@ -41,7 +41,7 @@ export class OnlineConsultGuard implements CanActivate, CanActivateChild, CanDea
 
   verifyLogin():any {
     if (!this.isLoggedIn()) {
-      this.router.navigateByUrl('/index');
+      this.router.navigateByUrl('/web-panel/index');
       return false;
     } else if (this.isLoggedIn()) {
       return true;

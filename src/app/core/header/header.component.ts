@@ -538,7 +538,7 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('loginAs', null);
       localStorage.setItem('token', null);
       this.showUser = false;
-      this.router.navigateByUrl('/index')
+      this.router.navigateByUrl('/web-panel/index')
     } catch (error) {
       console.error(error);
     }
@@ -580,14 +580,14 @@ export class HeaderComponent implements OnInit {
 
             if(Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'user') {
               linkType === 'dashboard' ?
-              this.router.navigateByUrl('/patient-panel/patient-dashboard') : 
-              this.router.navigateByUrl('/patient-panel/patient-profile-setting');
+              this.router.navigateByUrl('/web-panel/patient-panel/patient-dashboard') : 
+              this.router.navigateByUrl('/web-panel/patient-panel/patient-profile-setting');
             }
 
             if(Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'onlineDoctors') {
               linkType === 'dashboard' ?
-              this.router.navigateByUrl('/doctor-dashboard') : 
-              this.router.navigateByUrl('/doctors-panel/doctor-profile-setting');
+              this.router.navigateByUrl('/web-panel/doctor-dashboard') : 
+              this.router.navigateByUrl('/web-panel/doctors-panel/doctor-profile-setting');
             }
 
           }

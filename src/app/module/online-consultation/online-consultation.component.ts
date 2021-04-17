@@ -176,7 +176,7 @@ export class OnlineConsultationComponent implements OnInit {
 
       searchValidationValue ? this.isDisabledClassActive = false : this.isDisabledClassActive = true;
       if (!searchValidationValue) {
-        this.router.navigate(['/online-consultation'], { queryParams: { limit: this.limit, skip: 0 } });
+        this.router.navigate(['/web-panel/online-consultation'], { queryParams: { limit: this.limit, skip: 0 } });
       }
 
     } catch (error) {
@@ -209,7 +209,7 @@ export class OnlineConsultationComponent implements OnInit {
 
       queryParams['limit'] = this.limit;
       queryParams['skip'] = (this.pageNum * this.limit) - this.limit;
-      this.router.navigate(['/online-consultation'], { queryParams: queryParams });
+      this.router.navigate(['/web-panel/online-consultation'], { queryParams: queryParams });
 
     } catch (error) {
       console.log(error);
@@ -234,7 +234,7 @@ export class OnlineConsultationComponent implements OnInit {
           }, 200);
 
         } else {
-          this.router.navigateByUrl(`/booking/${doctorId}`);
+          this.router.navigateByUrl(`/web-panel/booking/${doctorId}`);
         }
       }
 
@@ -259,7 +259,7 @@ export class OnlineConsultationComponent implements OnInit {
           }, 200);
 
         } else {
-          this.router.navigateByUrl(`/doctor-profile/${doctorId}`);
+          this.router.navigateByUrl(`/web-panel/doctor-profile/${doctorId}`);
         }
       }
 

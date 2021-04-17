@@ -43,7 +43,7 @@ export class OnlineDoctorAuthGuardGuard implements CanActivate, CanActivateChild
 
   verifyLogin():any {
     if (!this.isLoggedIn()) {
-      this.router.navigateByUrl('/index');
+      this.router.navigateByUrl('/web-panel/index');
       return false;
     } else if (this.isLoggedIn()) {
       return true;
