@@ -110,8 +110,8 @@ export class FooterComponent implements OnInit {
             } else {
 
               linkType === 'booking' ?
-                this.router.navigateByUrl('/online-consultation?limit=10&skip=0') :
-                this.router.navigateByUrl('/patient-panel/patient-dashboard')
+                this.router.navigateByUrl('/web-panel/online-consultation?limit=10&skip=0') :
+                this.router.navigateByUrl('/web-panel/patient-panel/patient-dashboard')
 
             }
 
@@ -197,8 +197,8 @@ export class FooterComponent implements OnInit {
             } else {
 
               linkType === 'doctorDash' ?
-                this.router.navigateByUrl('/doctor-dashboard') :
-                this.router.navigateByUrl('/doctors-panel/doctor-appointments')
+                this.router.navigateByUrl('/web-panel/doctor-dashboard') :
+                this.router.navigateByUrl('/web-panel/doctors-panel/doctor-appointments')
 
             }
 

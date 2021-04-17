@@ -146,7 +146,7 @@ export class CheckoutComponent implements OnInit {
       console.log(resolve);
 
       if(resolve.status ==='success') {
-        this.router.navigateByUrl('/booking-confirm')
+        this.router.navigateByUrl('/web-panel/booking-confirm')
         this.ngxLoader.stopLoader('loader-01');
       }
 

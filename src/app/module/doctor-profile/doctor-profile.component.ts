@@ -71,7 +71,7 @@ export class DoctorProfileComponent implements OnInit {
         if(isExpired) {
           (document.getElementById('loginCall') as HTMLInputElement).click();
         } else {
-          this.router.navigateByUrl(`/booking/${doctorId}`);
+          this.router.navigateByUrl(`/web-panel/booking/${doctorId}`);
         }
       }
       

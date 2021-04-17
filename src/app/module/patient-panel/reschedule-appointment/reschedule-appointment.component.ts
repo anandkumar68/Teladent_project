@@ -128,13 +128,13 @@ export class RescheduleAppointmentComponent implements OnInit {
         if(resolve.status === 'success') {
           this.toastr.success(resolve.message)
           this.ngxLoader.stopLoader('loader-02')
-          this.router.navigateByUrl('/patient-panel/patient-dashboard')
+          this.router.navigateByUrl('/web-panel/patient-panel/patient-dashboard')
         }
 
         if(resolve.status === 'error') {
           this.toastr.error(resolve.message);
           this.ngxLoader.stopLoader('loader-02');
-          this.router.navigateByUrl('/patient-panel/patient-dashboard')
+          this.router.navigateByUrl('/web-panel/patient-panel/patient-dashboard')
         }
 
       },

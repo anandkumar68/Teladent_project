@@ -23,7 +23,7 @@ export class BookingConfirmComponent implements OnInit {
     (document.getElementById('webmenu') as HTMLAnchorElement).removeAttribute('style');
 
     if(JSON.parse(sessionStorage.getItem('checkout')) === null || JSON.parse(sessionStorage.getItem('checkout')) === undefined) {
-      this.router.navigateByUrl('/index');
+      this.router.navigateByUrl('/web-panel/index');
     } else {
       this.sessionValue = JSON.parse(sessionStorage.getItem('checkout'));
       sessionStorage.clear();

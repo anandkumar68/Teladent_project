@@ -47,11 +47,11 @@ export class IndexComponent implements OnInit {
   }
 
   blogRouting(blogId: any) {
-    this.router.navigateByUrl(`/blog/${blogId}`)
+    this.router.navigateByUrl(`/web-panel/blog/${blogId}`)
   }
 
   viewBlogRoute() {
-    this.router.navigateByUrl(`/blog`)
+    this.router.navigateByUrl(`/web-panel/blog`)
   }
 
 }

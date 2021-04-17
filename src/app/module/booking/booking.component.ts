@@ -123,7 +123,7 @@ export class BookingComponent implements OnInit {
 
           sessionStorage.setItem('checkout', JSON.stringify(resolve.data));
           this.ngxLoader.stopLoader('loader-01')
-          this.router.navigateByUrl('/checkout');
+          this.router.navigateByUrl('/web-panel/checkout');
         }
 
         if(resolve.status === 'error') {
