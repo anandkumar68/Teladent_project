@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare const TweenMax;
 
 @Component({
   selector: 'app-review',
@@ -54,11 +55,11 @@ export class ReviewComponent implements OnInit {
         $$('.fb-emote.s--active').classList.remove('s--active');
         this.classList.add('s--active');
         
-        // TweenMax.to($activeEmote, animTime, {backgroundColor: bgColor});
-        // TweenMax.to($dragCont, animTime, {x: progressTo * 100 + '%'});
-        // TweenMax.to($leftEye, animTime, {morphSVG: $lEye});
-        // TweenMax.to($rightEye, animTime, {morphSVG: $rEye});
-        // TweenMax.to($smile, animTime, {attr: {d: smileTargetD}});
+        TweenMax.to($activeEmote, animTime, {backgroundColor: bgColor});
+        TweenMax.to($dragCont, animTime, {x: progressTo * 100 + '%'});
+        TweenMax.to($leftEye, animTime, {morphSVG: $lEye});
+        TweenMax.to($rightEye, animTime, {morphSVG: $rEye});
+        TweenMax.to($smile, animTime, {attr: {d: smileTargetD}});
       });
     });
     
