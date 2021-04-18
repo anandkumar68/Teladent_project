@@ -7,7 +7,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { NgOtpInputModule } from  'ng-otp-input';
+import { NgOtpInputModule } from 'ng-otp-input';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -20,14 +20,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { CommonFunctionService } from '../shared/common-function.service';
 import { ReviewComponent } from './review/review.component';
-
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
   fgsColor: '#00d0f1',
   fgsPosition: POSITION.centerCenter,
   fgsSize: 90,
   fgsType: SPINNER.threeStrings,
-  blur:1,
+  blur: 1,
 
   // For Background Loader
   bgsColor: '#00d0f1',
@@ -52,7 +56,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    ReviewComponent,    
+    ReviewComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -71,9 +75,29 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     ToastrModule.forRoot(),
     NgxPaginationModule,
-    NgCircleProgressModule.forRoot()
+    NgCircleProgressModule.forRoot(),
+    SocialLoginModule
   ],
-  providers: [DatePipe,CommonFunctionService],
+  providers: [DatePipe, CommonFunctionService,  
+    {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            '1059788798801-7nvvm10dq7afgukkbpst9mia1qi6tfln.apps.googleusercontent.com'
+          )
+        },
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider('clientId')
+        }
+      ]
+    } as SocialAuthServiceConfig,
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

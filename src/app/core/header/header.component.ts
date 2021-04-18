@@ -17,6 +17,13 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonFunctionService } from 'src/app/shared/common-function.service';
 import { Constants } from 'src/app/shared/constant';
 import { UserApiService } from 'src/app/shared/user-api/user-api.service';
+
+import { SocialAuthService } from 'angularx-social-login';
+import { SocialUser } from 'angularx-social-login';
+import { GoogleLoginProvider, } from 'angularx-social-login';
+
+
+
 declare const $: any;
 @Component({
   selector: 'app-header',
@@ -65,12 +72,17 @@ export class HeaderComponent implements OnInit {
   setNewPasswordForm: FormGroup;
   setNewPasswordSubmit = false;
 
+
+  user: SocialUser;
+  loggedIn: boolean;
+
   constructor(
     public fb: FormBuilder,
     private toastr: ToastrService,
     public api: UserApiService,
     public router: Router,
-    public commonFunction:CommonFunctionService
+    public commonFunction: CommonFunctionService,
+    private authService: SocialAuthService
   ) { }
 
   ngOnInit(): void {
@@ -120,11 +132,17 @@ export class HeaderComponent implements OnInit {
 
 
     this.commonFunction.currentMessage.subscribe((message) => {
-     if(message === 'loginKey'){
-      let userId = Constants.credentialsDecrypt(localStorage.getItem('userId'));
-      this.showUser = !userId ? false : true;
-      this.loginUserDetails();
-     }
+      if (message === 'loginKey') {
+        let userId = Constants.credentialsDecrypt(localStorage.getItem('userId'));
+        this.showUser = !userId ? false : true;
+        this.loginUserDetails();
+      }
+    });
+
+
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
     });
   }
 
@@ -558,42 +576,64 @@ export class HeaderComponent implements OnInit {
   headerRouter(linkType) {
     try {
 
-          const helper = new JwtHelperService();
-          const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
-          
-          if(isExpired) {
-  
-            if((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
+      const helper = new JwtHelperService();
+      const isExpired = helper.isTokenExpired(Constants.credentialsDecrypt(localStorage.getItem('token')));
 
-              (document.getElementById('logoutCall') as HTMLInputElement).click();
-              setTimeout(() => {
-                (document.getElementById('loginCall') as HTMLInputElement).click();
-              }, 200);
-  
-            } else {
-  
-              (document.getElementById('loginCall') as HTMLInputElement).click();
-  
-            }
-            
-          } else {
+      if (isExpired) {
 
-            if(Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'user') {
-              linkType === 'dashboard' ?
-              this.router.navigateByUrl('/web-panel/patient-panel/patient-dashboard') : 
-              this.router.navigateByUrl('/web-panel/patient-panel/patient-profile-setting');
-            }
+        if ((document.getElementById('logoutCall') as HTMLInputElement) !== null) {
 
-            if(Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'onlineDoctors') {
-              linkType === 'dashboard' ?
-              this.router.navigateByUrl('/web-panel/doctor-dashboard') : 
-              this.router.navigateByUrl('/web-panel/doctors-panel/doctor-profile-setting');
-            }
+          (document.getElementById('logoutCall') as HTMLInputElement).click();
+          setTimeout(() => {
+            (document.getElementById('loginCall') as HTMLInputElement).click();
+          }, 200);
 
-          }
-      
+        } else {
+
+          (document.getElementById('loginCall') as HTMLInputElement).click();
+
+        }
+
+      } else {
+
+        if (Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'user') {
+          linkType === 'dashboard' ?
+            this.router.navigateByUrl('/web-panel/patient-panel/patient-dashboard') :
+            this.router.navigateByUrl('/web-panel/patient-panel/patient-profile-setting');
+        }
+
+        if (Constants.credentialsDecrypt(localStorage.getItem('loginAs')) === 'onlineDoctors') {
+          linkType === 'dashboard' ?
+            this.router.navigateByUrl('/web-panel/doctor-dashboard') :
+            this.router.navigateByUrl('/web-panel/doctors-panel/doctor-profile-setting');
+        }
+
+      }
+
     } catch (error) {
       console.log(error.message);
     }
   }
+
+
+
+
+
+  // ****************************************************************
+  // ***********************  Google Login  *************************
+  // ****************************************************************
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => console.log(x)).catch(err => {
+      console.log(err);
+      
+    });
+  }
+
+
+
+
+
+
+
 }
