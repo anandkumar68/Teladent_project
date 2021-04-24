@@ -275,6 +275,10 @@ export class HeaderComponent implements OnInit {
               this.showUser = true;
               this.loginUserDetails();
               (document.getElementById('closeModal') as HTMLElement).click();
+
+              response.data.userType === 'user' ? this.router.navigateByUrl('/web-panel/patient-panel/patient-dashboard') :
+              this.router.navigateByUrl('/web-panel/doctor-dashboard')
+
             }
 
             if (response.status === 'error') {

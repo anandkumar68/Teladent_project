@@ -16,7 +16,8 @@
                                 <p><img src="../../../assets/img/home/group_23.png"><span class="tt">&nbsp;&nbsp;    Access to Specialised Dentists</span></p>
                                 <p><img src="../../../assets/img/home/safe.png"><span class="tt">&nbsp;&nbsp;    Highest Safety measures</span></p>
 
-                                <a  href="javascript:void(0);" class="nav-link btn-grad kk">BOOK AN APPOINTMENT </a>
+                                <a  href="javascript:void(0);" class="nav-link btn-grad kk" (click)="patientRouter('online', 'login-modal', '/web-panel/online-consultation?limit=10&skip=0', 'user')">BOOK AN APPOINTMENT </a>
+
                             </div>
 
                         </div>
@@ -269,16 +270,16 @@
                     <!-- Section Header -->
                     <div class="section-header text-center">
                         <h2 class="grad-text t">Blogs and Articles</h2>
-                        <div class="row text-sm-left">
-                            <div class="col-sm-3">
+                        <!-- <div class="row text-sm-left">
+                            <div class="col-sm-3" *ngFor="let blog of webBlogDetails">
                                 <div class="card blog">
                                     <a href=""><img class="card-img-top" src="assets/img/blog/blog-02.jpg" alt="Card image cap"></a>
                                     <div class="card-body">
                                        
                                         <p><img class="du" src="assets/img/blog/blog-02.jpg"><span class="ltl">DR. Ruby Perrrin</span></p>
-                                        <p class="ttt"><img src="../../../assets/img/home/clock.svg"><span class="timet">12 Mar 2021</span></p>
-                                      <h5 class="card-title"><a class="bt" href="">Blogs and Articles title</a></h5>
-                                      <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                        <p class="ttt"><img src="../../../assets/img/home/clock.svg"><span class="timet">{{ blog?.createdAt | date: 'dd MMM yyyy' }}</span></p>
+                                      <h5 class="card-title"><a class="bt" href="">{{blog?.blogTitle}}</a></h5>
+                                      <p class="card-text">{{ blog?.shortDesc }}</p>
                                       
                                     </div>
                                   </div>
@@ -327,7 +328,7 @@
                             </div>
 
                             
-                        </div>
+                        </div> -->
                     </div>
                     <!-- /Section Header -->
 
