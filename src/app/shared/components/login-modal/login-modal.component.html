@@ -100,7 +100,7 @@
                             <input [type]="showPasswordIcon ? 'text' : 'password'" class="form-control floating"
                                 formControlName="password">
                             <label class="focus-label">Password</label>
-
+                            <div class="info-password-icon"><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Your password must contain at least one uppercase, one lowercase, one digit and one special characters"></i></div>
                             <div *ngIf="!showPasswordIcon" class="login-password-icon"
                                 (click)="showPassword('showPasswordIcon')"><i class="fa fa-eye"></i></div>
                             <div *ngIf="showPasswordIcon" class="login-password-icon"
@@ -198,7 +198,7 @@
                             <input [type]="setPassIcon ? 'text' : 'password'" class="form-control floating"
                                 formControlName="password">
                             <label class="focus-label">Password</label>
-
+                            <div class="info-password-icon"><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Your password must contain at least one uppercase, one lowercase, one digit and one special characters"></i></div>
                             <div *ngIf="!setPassIcon" class="login-password-icon" (click)="showPassword('setPassIcon')">
                                 <i class="fa fa-eye"></i></div>
                             <div *ngIf="setPassIcon" class="login-password-icon" (click)="showPassword('setPassIcon')">

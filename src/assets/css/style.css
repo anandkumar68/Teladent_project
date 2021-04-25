@@ -11279,3 +11279,12 @@ i.fa.fa-sync {
     top: 17px;
     cursor: pointer;
 }
+
+/* PASSWORD INFO ICON */
+.info-password-icon {
+    position: absolute;
+    right: -23px;
+    top: 14px;
+    cursor: pointer;
+    font-size: 18px;
+}
