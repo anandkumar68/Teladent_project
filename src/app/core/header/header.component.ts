@@ -72,6 +72,19 @@ export class HeaderComponent implements OnInit {
   setNewPasswordForm: FormGroup;
   setNewPasswordSubmit = false;
 
+  // FOR SHOW PASSWORD ICON
+  showPasswordIcon: boolean;
+  showConfirmPasswordIcon: boolean;
+
+
+  // FOR SET PASSWORD ICON
+  setPassIcon: boolean;
+  setConfirmPassIcon: boolean;
+
+  // FOR LOGIN PASSWORD ICON
+  loginPassIcon: boolean;
+
+
 
   user: SocialUser;
   loggedIn: boolean;
@@ -277,7 +290,7 @@ export class HeaderComponent implements OnInit {
               (document.getElementById('closeModal') as HTMLElement).click();
 
               response.data.userType === 'user' ? this.router.navigateByUrl('/web-panel/patient-panel/patient-dashboard') :
-              this.router.navigateByUrl('/web-panel/doctor-dashboard')
+                this.router.navigateByUrl('/web-panel/doctor-dashboard')
 
             }
 
@@ -400,6 +413,11 @@ export class HeaderComponent implements OnInit {
       this.showHideForm.otp = false;
       this.showHideForm.forgotPassword = false;
       this.showHideForm.setNewPassword = false;
+      this.showConfirmPasswordIcon = false;
+      this.showPasswordIcon = false;
+      this.setPassIcon = false;
+      this.setConfirmPassIcon = false;
+      this.loginPassIcon = false;
 
       this.loginForm.reset();
       this.loginSubmit = false;
@@ -620,6 +638,31 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  // FOR SHOW PASSWORD ICON
+  showPassword(value) {
+    try {
+      if (value === 'showPasswordIcon') {
+        this.showPasswordIcon = !this.showPasswordIcon;
+      }
+      if (value === 'showConfirmPasswordIcon') {
+        this.showConfirmPasswordIcon = !this.showConfirmPasswordIcon;
+      }
+      if (value === 'setPassIcon') {
+        this.setPassIcon = !this.setPassIcon;
+      }
+      if (value === 'setConfirmPassIcon') {
+        this.setConfirmPassIcon = !this.setConfirmPassIcon;
+      }
+
+      if (value === 'loginPassIcon') {
+        this.loginPassIcon = !this.loginPassIcon;
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+
 
 
 
@@ -630,7 +673,7 @@ export class HeaderComponent implements OnInit {
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => console.log(x)).catch(err => {
       console.log(err);
-      
+
     });
   }
 

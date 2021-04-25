@@ -8830,16 +8830,17 @@ section.iq-features {
 }
 
 .vertical-tabs .nav-link.active {
-    color: #fff;
     border-bottom: none;
     border-radius: 50px;
     transition-duration: 0.6s;
     transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    background: #1c5993;
+    background: #3a9cd8 !important;
+    color: white !important;
+    /* background: #1c5993;
     background: -moz-linear-gradient(45deg, #1c5993 0%, #259cd7 100%);
     background: -webkit-linear-gradient(45deg, #1c5993 0%, #259cd7 100%);
     background: linear-gradient(45deg, #1c5993 0%, #259cd7 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#1c5993', endColorstr='#259cd7', GradientType=1);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#1c5993', endColorstr='#259cd7', GradientType=1); */
 }
 
 .vertical-tabs .tab-content {
@@ -11267,4 +11268,23 @@ i.fa.fa-sync {
 
 .theme-blue .bs-datepicker-predefined-btns button.selected {
     background-color:#15558d !important;
+}
+
+
+
+/* LOGIN MODAL PASSWORD ICON */
+.login-password-icon {
+    position: absolute;
+    right: 25px;
+    top: 17px;
+    cursor: pointer;
+}
+
+/* PASSWORD INFO ICON */
+.info-password-icon {
+    position: absolute;
+    right: -23px;
+    top: 14px;
+    cursor: pointer;
+    font-size: 18px;
 }

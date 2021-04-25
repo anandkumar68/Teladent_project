@@ -1,9 +1,10 @@
-
-<div class="modal fade login-modal" bsModal #myModal1="bs-modal"  tabindex="-1" aria-labelledby="exampleModalLabel"  [config]="{backdrop: 'static'}">
+<div class="modal fade login-modal" bsModal #myModal1="bs-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    [config]="{backdrop: 'static'}">
     <div class="modal-dialog">
-        <div class="modal-content" >
+        <div class="modal-content">
             <div class="modal-header">
-                <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close" (click)="myModal1.hide()">
+                <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close"
+                    (click)="myModal1.hide()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -12,20 +13,32 @@
                     <img src="../../../assets/img/teladent.png" alt="">
                 </div>
                 <!-- FOR LOGIN -->
-                <div class="login-form" *ngIf="showHideForm.login" >
+                <div class="login-form" *ngIf="showHideForm.login">
                     <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
                         <div class="form-group">
-                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true" [customPlaceholder]="'XXXXXXXXXX'" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
-                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry" [tooltipField]="TooltipLabel.Name" [phoneValidation]="true" [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
+                                [enablePlaceholder]="true" [searchCountryFlag]="true" [customPlaceholder]="'XXXXXXXXXX'"
+                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
+                                [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
                             </ngx-intl-tel-input>
                             <div *ngIf="loginSubmit && loginValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="loginValidation.phone.errors.required">Phone No. is Mandatory</div>
-                                <div *ngIf="loginValidation.phone.invalid && !loginValidation.phone.errors.required">Invalid Phone No.</div>
+                                <div *ngIf="loginValidation.phone.invalid && !loginValidation.phone.errors.required">
+                                    Invalid Phone No.</div>
                             </div>
                         </div>
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="password">
+                            <input [type]="loginPassIcon ? 'text' : 'password'" class="form-control floating"
+                                formControlName="password">
                             <label class="focus-label">Password</label>
+
+
+                            <div *ngIf="!loginPassIcon" class="login-password-icon"
+                                (click)="showPassword('loginPassIcon')"><i class="fa fa-eye"></i></div>
+                            <div *ngIf="loginPassIcon" class="login-password-icon"
+                                (click)="showPassword('loginPassIcon')"><i class="fa fa-eye-slash"></i></div>
                             <div *ngIf="loginSubmit && loginValidation.password.errors" class="invalid-feedback">
                                 <div *ngIf="loginValidation.password.errors.required">Password is Mandatory</div>
                             </div>
@@ -62,24 +75,37 @@
                 <div class="login-form" *ngIf="showHideForm.signup">
                     <form [formGroup]="signupForm" (ngSubmit)="submitSignup()">
                         <div class="form-group form-focus">
-                            <input type="text" class="form-control floating" placeholder="Fullname" formControlName="name">
+                            <input type="text" class="form-control floating" placeholder="Fullname"
+                                formControlName="name">
                             <label class="focus-label">Fullname</label>
                             <div *ngIf="signupSubmit && signupValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="signupValidation.phone.errors.required">Name is Mandatory</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]" [selectFirstCountry]="false"
-                                [selectedCountryISO]="setCountry" [tooltipField]="TooltipLabel.Name" [phoneValidation]="true" [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
+                                [enablePlaceholder]="true" [searchCountryFlag]="true"
+                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
+                                [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
                             </ngx-intl-tel-input>
                             <div *ngIf="signupSubmit && signupValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="signupValidation.phone.errors.required">Phone No. is Mandatory</div>
-                                <div *ngIf="signupValidation.phone.invalid && !signupValidation.phone.errors.required">Invalid Phone No.</div>
+                                <div *ngIf="signupValidation.phone.invalid && !signupValidation.phone.errors.required">
+                                    Invalid Phone No.</div>
                             </div>
                         </div>
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="password">
+                            <input [type]="showPasswordIcon ? 'text' : 'password'" class="form-control floating"
+                                formControlName="password">
                             <label class="focus-label">Password</label>
+                            <div class="info-password-icon"><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Your password must contain at least one uppercase, one lowercase, one digit and one special characters"></i></div>
+                            <div *ngIf="!showPasswordIcon" class="login-password-icon"
+                                (click)="showPassword('showPasswordIcon')"><i class="fa fa-eye"></i></div>
+                            <div *ngIf="showPasswordIcon" class="login-password-icon"
+                                (click)="showPassword('showPasswordIcon')"><i class="fa fa-eye-slash"></i></div>
+
                             <div *ngIf="signupSubmit && signupValidation.password.errors" class="invalid-feedback">
                                 <div *ngIf="signupValidation.password.errors.required">Password is Mandatory</div>
                                 <div *ngIf="signupValidation.password.errors.pattern">Invalid Password</div>
@@ -87,10 +113,19 @@
                         </div>
 
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="confirmPassword">
+                            <input [type]="showConfirmPasswordIcon ? 'text' : 'password'" class="form-control floating"
+                                formControlName="confirmPassword">
                             <label class="focus-label">Confirm Password</label>
-                            <div *ngIf="signupSubmit && signupValidation.confirmPassword.errors" class="invalid-feedback">
-                                <div *ngIf="signupValidation.confirmPassword.errors.required">Confirm Password is Mandatory
+
+                            <div *ngIf="!showConfirmPasswordIcon" class="login-password-icon"
+                                (click)="showPassword('showConfirmPasswordIcon')"><i class="fa fa-eye"></i></div>
+                            <div *ngIf="showConfirmPasswordIcon" class="login-password-icon"
+                                (click)="showPassword('showConfirmPasswordIcon')"><i class="fa fa-eye-slash"></i></div>
+
+                            <div *ngIf="signupSubmit && signupValidation.confirmPassword.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="signupValidation.confirmPassword.errors.required">Confirm Password is
+                                    Mandatory
                                 </div>
                                 <div *ngIf="signupValidation.confirmPassword.errors.mustMatch">Password Mismatch</div>
                             </div>
@@ -108,12 +143,17 @@
                 <div class="login-form" *ngIf="showHideForm.forgotPassword">
                     <form [formGroup]="forgotForm" (ngSubmit)="submitForgot()">
                         <div class="form-group">
-                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]" [selectFirstCountry]="false"
-                                [selectedCountryISO]="setCountry" [tooltipField]="TooltipLabel.Name" [phoneValidation]="true" [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false"
+                                [enablePlaceholder]="true" [searchCountryFlag]="true"
+                                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                                [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
+                                [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
                             </ngx-intl-tel-input>
                             <div *ngIf="forgotSubmit && forgotValidation.phone.errors" class="invalid-feedback">
                                 <div *ngIf="forgotValidation.phone.errors.required">Phone No. is Mandatory</div>
-                                <div *ngIf="forgotValidation.phone.invalid && !forgotValidation.phone.errors.required">Invalid Phone No.</div>
+                                <div *ngIf="forgotValidation.phone.invalid && !forgotValidation.phone.errors.required">
+                                    Invalid Phone No.</div>
 
                             </div>
                         </div>
@@ -133,7 +173,8 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 col-sm-6 col-lg-6">
-                                <countdown #countdown [config]="{leftTime: timer, format: 'mm:ss'}" (event)="handleEvent($event)"></countdown> Min
+                                <countdown #countdown [config]="{leftTime: timer, format: 'mm:ss'}"
+                                    (event)="handleEvent($event)"></countdown> Min
                             </div>
 
                             <div class="col-md-6 col-sm-6 col-lg-6 text-right">
@@ -141,7 +182,8 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary login-btn btn-lg btn-grad" type="submit" [disabled]="otp?.length < 6">Submit</button>
+                        <button class="btn btn-primary login-btn btn-lg btn-grad" type="submit"
+                            [disabled]="otp?.length < 6">Submit</button>
 
                         <div class="text-center dont-have">Don’t have an account?
                             <a href="javascript:void(0);" (click)="signup()">Register</a>
@@ -153,21 +195,41 @@
                 <div class="login-form" *ngIf="showHideForm.setNewPassword">
                     <form [formGroup]="setNewPasswordForm" (ngSubmit)="submitNewPassword()">
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="password">
+                            <input [type]="setPassIcon ? 'text' : 'password'" class="form-control floating"
+                                formControlName="password">
                             <label class="focus-label">Password</label>
-                            <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.password.errors" class="invalid-feedback">
-                                <div *ngIf="setNewPasswordValidation.password.errors.required">Password is Mandatory</div>
+                            <div class="info-password-icon"><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Your password must contain at least one uppercase, one lowercase, one digit and one special characters"></i></div>
+                            <div *ngIf="!setPassIcon" class="login-password-icon" (click)="showPassword('setPassIcon')">
+                                <i class="fa fa-eye"></i></div>
+                            <div *ngIf="setPassIcon" class="login-password-icon" (click)="showPassword('setPassIcon')">
+                                <i class="fa fa-eye-slash"></i></div>
+
+
+                            <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.password.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="setNewPasswordValidation.password.errors.required">Password is Mandatory
+                                </div>
                                 <div *ngIf="setNewPasswordValidation.password.errors.pattern">Invalid Password</div>
                             </div>
                         </div>
 
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="confirmPassword">
+                            <input [type]="setConfirmPassIcon ? 'text' : 'password'" class="form-control floating"
+                                formControlName="confirmPassword">
                             <label class="focus-label">Confirm Password</label>
-                            <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.confirmPassword.errors" class="invalid-feedback">
-                                <div *ngIf="setNewPasswordValidation.confirmPassword.errors.required">Confirm Password is Mandatory
+
+                            <div *ngIf="!setConfirmPassIcon" class="login-password-icon"
+                                (click)="showPassword('setConfirmPassIcon')"><i class="fa fa-eye"></i></div>
+                            <div *ngIf="setConfirmPassIcon" class="login-password-icon"
+                                (click)="showPassword('setConfirmPassIcon')"><i class="fa fa-eye-slash"></i></div>
+
+                            <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.confirmPassword.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="setNewPasswordValidation.confirmPassword.errors.required">Confirm Password
+                                    is Mandatory
                                 </div>
-                                <div *ngIf="setNewPasswordValidation.confirmPassword.errors.mustMatch">Password Mismatch</div>
+                                <div *ngIf="setNewPasswordValidation.confirmPassword.errors.mustMatch">Password Mismatch
+                                </div>
                             </div>
                         </div>
 
