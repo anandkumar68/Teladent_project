@@ -36,42 +36,42 @@
                 <nav class="tabs d-none d-md-block" id="show-nav">
 
                     <div class="selector" id="webmenu"></div>
-                    <a href="#" class="active" id="home" (click)="navigateHeader('/web-panel/index')">Home</a>
-                    <a href="#" id="about" (click)="navigateHeader('/web-panel/about-us')">About Us</a>
-                    <a href="#" id="bytes" (click)="navigateHeader('/web-panel/info-bytes')">Info Bytes</a>
-                    <a href="#" id="contact" (click)="navigateHeader('/web-panel/contact-us')">Contact Us</a>
-                    <a href="#" id="covid" (click)="navigateHeader('/web-panel/covid-guidelines')">Covid</a>
+                    <a href="javascript:void(0);" class="active" id="home" (click)="navigateHeader('/web-panel/index')">Home</a>
+                    <a href="javascript:void(0);" id="about" (click)="navigateHeader('/web-panel/about-us')">About Us</a>
+                    <a href="javascript:void(0);" id="bytes" (click)="navigateHeader('/web-panel/info-bytes')">Info Bytes</a>
+                    <a href="javascript:void(0);" id="contact" (click)="navigateHeader('/web-panel/contact-us')">Contact Us</a>
+                    <a href="javascript:void(0);" id="covid" (click)="navigateHeader('/web-panel/covid-guidelines')">COVID-19</a>
 
                 </nav>
 
                 <ul class="main-nav ">
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('/web-panel/index')">Home</a>
+                        <a href="javascript:void(0);" (click)="navigateHeader('/web-panel/index')">Home</a>
                     </li>
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('/web-panel/about-us')">About us</a>
+                        <a href="javascript:void(0);" (click)="navigateHeader('/web-panel/about-us')">About us</a>
                     </li>
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('/web-panel/info-bytes')">Info Bytes</a>
+                        <a href="javascript:void(0);" (click)="navigateHeader('/web-panel/info-bytes')">Info Bytes</a>
                     </li>
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('/web-panel/contact-us')">Contact Us</a>
+                        <a href="javascript:void(0);" (click)="navigateHeader('/web-panel/contact-us')">Contact Us</a>
                     </li>
 
                     <li class="login-link">
-                        <a href="#" (click)="navigateHeader('/web-panel/covid-guidelines')">Covid - 19</a>
+                        <a href="javascript:void(0);" (click)="navigateHeader('/web-panel/covid-guidelines')">Covid - 19</a>
                     </li>
 
                     <li class="login-link">
                         <a href="javascript:void(0);" (click)="navigateHeader('/web-panel/online-consultation?limit=10&skip=0')">BOOK AN APPOINTMENT </a>
                     </li>
 
-                    <li class="login-link">
-                        <a href="login.html">Login </a>
+                    <li class="login-link" *ngIf="!showUser" id="show-nav-btn">
+                        <a href="javascript:void(0);" data-toggle="modal" data-backdrop="static" data-target="#exampleModal" (click)="login()" id="loginCall">Login </a>
                     </li>
 
                 </ul>
@@ -147,8 +147,13 @@
                             </div>
                         </div>
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="password">
+                            <input [type]="loginPassIcon ? 'text' : 'password'" class="form-control floating" formControlName="password">
                             <label class="focus-label">Password</label>
+
+
+                            <div *ngIf="!loginPassIcon" class="login-password-icon" (click)="showPassword('loginPassIcon')"><i class="fa fa-eye"></i></div>
+                            <div *ngIf="loginPassIcon" class="login-password-icon" (click)="showPassword('loginPassIcon')"><i class="fa fa-eye-slash"></i></div>
+
                             <div *ngIf="loginSubmit && loginValidation.password.errors" class="invalid-feedback">
                                 <div *ngIf="loginValidation.password.errors.required">Password is Mandatory</div>
                             </div>
@@ -159,7 +164,7 @@
                         </div>
                         <button class="btn btn-primary btn-lg btn-grad login-btn" type="submit">Login</button>
 
-                        <!-- <div class="login-or">
+                        <div class="login-or">
                             <span class="or-line"></span>
                             <span class="span-or">or</span>
                         </div>
@@ -174,7 +179,7 @@
                                     <i class="fab fa-google mr-1"></i> Login
                                 </a>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="text-center dont-have">Don’t have an account?
                             <a href="javascript:void(0);" (click)="signup()">Register</a>
                         </div>
@@ -201,8 +206,13 @@
                             </div>
                         </div>
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="password">
+                            <input [type]="showPasswordIcon ? 'text' : 'password'" class="form-control floating" formControlName="password">
                             <label class="focus-label">Password</label>
+
+                             <div *ngIf="!showPasswordIcon" class="login-password-icon" (click)="showPassword('showPasswordIcon')"><i class="fa fa-eye"></i></div>
+                             <div *ngIf="showPasswordIcon" class="login-password-icon" (click)="showPassword('showPasswordIcon')"><i class="fa fa-eye-slash"></i></div>
+
+
                             <div *ngIf="signupSubmit && signupValidation.password.errors" class="invalid-feedback">
                                 <div *ngIf="signupValidation.password.errors.required">Password is Mandatory</div>
                                 <div *ngIf="signupValidation.password.errors.pattern">Invalid Password</div>
@@ -210,8 +220,13 @@
                         </div>
 
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="confirmPassword">
+                            <input [type]="showConfirmPasswordIcon ? 'text' : 'password'" class="form-control floating" formControlName="confirmPassword">
                             <label class="focus-label">Confirm Password</label>
+
+                            <div *ngIf="!showConfirmPasswordIcon" class="login-password-icon" (click)="showPassword('showConfirmPasswordIcon')"><i class="fa fa-eye"></i></div>
+                            <div *ngIf="showConfirmPasswordIcon" class="login-password-icon" (click)="showPassword('showConfirmPasswordIcon')"><i class="fa fa-eye-slash"></i></div>
+
+
                             <div *ngIf="signupSubmit && signupValidation.confirmPassword.errors" class="invalid-feedback">
                                 <div *ngIf="signupValidation.confirmPassword.errors.required">Confirm Password is Mandatory
                                 </div>
@@ -276,8 +291,13 @@
                 <div class="login-form" *ngIf="showHideForm.setNewPassword">
                     <form [formGroup]="setNewPasswordForm" (ngSubmit)="submitNewPassword()">
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="password">
+                            <input [type]="setPassIcon ? 'text' : 'password'" class="form-control floating" formControlName="password">
                             <label class="focus-label">Password</label>
+
+                            <div *ngIf="!setPassIcon" class="login-password-icon" (click)="showPassword('setPassIcon')"><i class="fa fa-eye"></i></div>
+                            <div *ngIf="setPassIcon" class="login-password-icon" (click)="showPassword('setPassIcon')"><i class="fa fa-eye-slash"></i></div>
+
+
                             <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.password.errors" class="invalid-feedback">
                                 <div *ngIf="setNewPasswordValidation.password.errors.required">Password is Mandatory</div>
                                 <div *ngIf="setNewPasswordValidation.password.errors.pattern">Invalid Password</div>
@@ -285,8 +305,13 @@
                         </div>
 
                         <div class="form-group form-focus">
-                            <input type="password" class="form-control floating" formControlName="confirmPassword">
+                            <input [type]="setConfirmPassIcon ? 'text' : 'password'" class="form-control floating" formControlName="confirmPassword">
                             <label class="focus-label">Confirm Password</label>
+
+                            <div *ngIf="!setConfirmPassIcon" class="login-password-icon" (click)="showPassword('setConfirmPassIcon')"><i class="fa fa-eye"></i></div>
+                            <div *ngIf="setConfirmPassIcon" class="login-password-icon" (click)="showPassword('setConfirmPassIcon')"><i class="fa fa-eye-slash"></i></div>
+
+
                             <div *ngIf="setNewPasswordSubmit && setNewPasswordValidation.confirmPassword.errors" class="invalid-feedback">
                                 <div *ngIf="setNewPasswordValidation.confirmPassword.errors.required">Confirm Password is Mandatory
                                 </div>

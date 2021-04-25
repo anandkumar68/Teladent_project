@@ -61,6 +61,20 @@ export class LoginModalComponent implements OnInit {
   setNewPasswordSubmit = false;
   allowUserToLogin: any;
 
+
+  // FOR SHOW PASSWORD ICON
+  showPasswordIcon: boolean;
+  showConfirmPasswordIcon: boolean;
+
+
+  // FOR SET PASSWORD ICON
+  setPassIcon: boolean;
+  setConfirmPassIcon: boolean;
+
+  // FOR LOGIN PASSWORD ICON
+  loginPassIcon: boolean;
+
+
   constructor(
     private modalService: LoginModalService,
     public fb: FormBuilder,
@@ -225,7 +239,7 @@ export class LoginModalComponent implements OnInit {
                 this.data ? this.router.navigateByUrl(this.data) : '';
               } else {
                 this.allowUserToLogin === 'user' ? this.toastr.error('You are Logging in as a Dentist. Please Login as User.') :
-                this.toastr.error('You are Logging in as a User. Please Login as Dentist.')
+                  this.toastr.error('You are Logging in as a User. Please Login as Dentist.')
               }
 
 
@@ -350,6 +364,11 @@ export class LoginModalComponent implements OnInit {
       this.showHideForm.otp = false;
       this.showHideForm.forgotPassword = false;
       this.showHideForm.setNewPassword = false;
+      this.showPasswordIcon = false;
+      this.showConfirmPasswordIcon = false;
+      this.setPassIcon = false;
+      this.setConfirmPassIcon = false;
+      this.loginPassIcon = false;
 
       this.loginForm.reset();
       this.loginSubmit = false;
@@ -501,6 +520,32 @@ export class LoginModalComponent implements OnInit {
       console.error(error);
     }
   }
+
+
+
+  // FOR SHOW PASSWORD ICON
+  showPassword(value) {
+    try {
+      if (value === 'showPasswordIcon') {
+        this.showPasswordIcon = !this.showPasswordIcon;
+      }
+      if (value === 'showConfirmPasswordIcon') {
+        this.showConfirmPasswordIcon = !this.showConfirmPasswordIcon;
+      }
+      if (value === 'setPassIcon') {
+        this.setPassIcon = !this.setPassIcon;
+      }
+      if (value === 'setConfirmPassIcon') {
+        this.setConfirmPassIcon = !this.setConfirmPassIcon;
+      }
+      if (value === 'loginPassIcon') {
+        this.loginPassIcon = !this.loginPassIcon;
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
 
 }
 
