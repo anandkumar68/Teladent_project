@@ -40,11 +40,13 @@
 
                         <!-- Blog Details-->
                         <div class="blog-view">
+
                             <div class="blog blog-single-post">
-                                <div class="blog-image">
+                        <h3 class="blog-title">{{blogDetails?.blogTitle}}</h3>
+
+                                <div class="blog-image image-size">
                                     <a href="javascript:void(0);"><img alt="" src="{{blogDetails?.blogImage}}" class="img-fluid"></a>
                                 </div>
-                                <h3 class="blog-title">{{blogDetails?.blogTitle}}</h3>
                                 <div class="blog-info clearfix">
                                     <div class="post-left">
                                         <ul>
@@ -60,17 +62,17 @@
                                     </div>
                                 </div>
                                 <div class="blog-content">
-                                    <p *ngFor="let blog of blogDetails?.blogDesc">{{ blog }}</p>
+                                    <p class="stbs" *ngFor="let blog of blogDetails?.blogDesc">{{ blog }}</p>
                                 </div>
                                 <br/>
                                 <div class="blog-content" *ngFor="let subtitle of blogDetails?.subTitle">
                                     <h5>{{subtitle?.subTitleHeading}}</h5>
                                     <h6 *ngFor="let heading of subtitle.heading, let i = index;">
                                         <strong *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0">{{i + 1}}. {{heading?.title}}</strong>
-                                        <p *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0"> {{ heading?.description }} </p>
+                                        <p class="stbs" *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0"> {{ heading?.description }} </p>
                                     </h6>
                                     
-                                    <p *ngFor="let subDesc of subtitle?.subDescArray">{{subDesc}}</p>
+                                    <p class="stbs" *ngFor="let subDesc of subtitle?.subDescArray">{{subDesc}}</p>
                                     <br/>
                                     
                                 </div>
@@ -89,7 +91,7 @@
                                         </div>
                                         <div class="author-details">
                                             <a href="doctor-profile.html" class="blog-author-name">Dr. Darren Elder</a>
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                                            <p class="mb-0 stbs">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -101,13 +103,33 @@
                 </div>
 
                 <div class="row" *ngIf="blogId === null">
+
+
+                     
                     <div class="col-sm-12">
 
+                            <!-- Blog Pagination -->
+                            <div class="row">
+                                 <div class="col-md-12">
+                                     <div class="blog-pagination">
+                                         <div class="row result-str" *ngIf="total !== 0">
+                                             <div class="col-sm-12 col-md-5 ">
+                                                 <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage * perPage), total) }} of {{ total }} entries </p>
+                                             </div>
+                                             <div class="col-sm-12 col-md-7 text-right">
+                                                 <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)">
+                                                 </pagination-controls>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                            </div>
+                            <!-- /Blog Pagination -->
 
                         <!-- Blog Details-->
                         <div class="blog-view" *ngFor="let blogDetails of allBlogDetails | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total }, let i = index;">
                             <div class="blog blog-single-post">
-                                <div class="blog-image">
+                                <div class="blog-image image-size">
                                     <a href="javascript:void(0);"><img alt="" src="{{blogDetails?.blogImage}}" class="img-fluid"></a>
                                 </div>
                                 <h3 class="blog-title">{{blogDetails?.blogTitle}}</h3>
@@ -126,17 +148,17 @@
                                     </div>
                                 </div>
                                 <div class="blog-content">
-                                    <p *ngFor="let blog of blogDetails?.blogDesc">{{ blog }}</p>
+                                    <p class="stbs" *ngFor="let blog of blogDetails?.blogDesc">{{ blog }}</p>
                                 </div>
                                 <br/>
                                 <div class="blog-content" *ngFor="let subtitle of blogDetails?.subTitle">
                                     <h5>{{subtitle?.subTitleHeading}}</h5>
                                     <h6 *ngFor="let heading of subtitle.heading, let i = index;">
-                                        <strong *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0">{{i + 1}}. {{heading?.title}}</strong>
-                                        <p *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0"> {{ heading?.description }} </p>
+                                        <strong *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0">{{i + 1}}. {{heading?.title}}</strong> 
+                                        <p class="stbs" *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0"> {{ heading?.description }} </p>
                                     </h6>
                                     
-                                    <p *ngFor="let subDesc of subtitle?.subDescArray">{{subDesc}}</p>
+                                    <p class="stbs" *ngFor="let subDesc of subtitle?.subDescArray">{{subDesc}}</p>
                                     <br/>
                                     
                                 </div>
@@ -155,7 +177,7 @@
                                         </div>
                                         <div class="author-details">
                                             <a href="doctor-profile.html" class="blog-author-name">Dr. Darren Elder</a>
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                                            <p class="mb-0 stbs">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -163,23 +185,7 @@
 
                         </div>
                         <!-- /Blog Details-->
-                        <!-- Blog Pagination -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="blog-pagination">
-                                    <div class="row result-str" *ngIf="total !== 0">
-                                        <div class="col-sm-12 col-md-5 ">
-                                            <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage * perPage), total) }} of {{ total }} entries </p>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7 text-right">
-                                            <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)">
-                                            </pagination-controls>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Blog Pagination -->
+                       
                     </div>
                 </div>
 
