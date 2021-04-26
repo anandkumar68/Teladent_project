@@ -50,6 +50,8 @@ span.dd {
 
 p.iconp {
     padding-top: 17px;
+    font-size: larger;
+    font-weight: bold;
 }
 
 .pr
@@ -82,7 +84,7 @@ p.iconp {
 
 .icontext
 {
-    font-size: 15px;
+    font-size: 14px;
     padding-top: 16px;
     font-weight: 500;
     color: #272b41;
@@ -209,5 +211,10 @@ p.iconp {
     padding-top: 5px;
     font-size: 15px;
 }
+}
+
+.tela-text{
+    font-size: 15px !important;
+    color: black !important;
 }
 

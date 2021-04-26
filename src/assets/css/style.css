@@ -8494,6 +8494,11 @@ section.iq-features {
     margin-bottom: 30px;
 }
 
+.blog-image.image-size{
+    padding: 0px 120px 0px 120px;
+
+}
+
 .blog-content {
     position: relative;
 }
@@ -11287,4 +11292,21 @@ i.fa.fa-sync {
     top: 14px;
     cursor: pointer;
     font-size: 18px;
+}
+
+p.stbs {
+    font-size: 14px;
+    color: #696060;
+    font-weight: 500;
+  }
+
+  .tela-text{
+    font-size: 15px !important;
+    color: black !important;
+}
+
+p.stb {
+  font-size: 2.15rem;
+  font-weight: bolder;
+  line-height: 39px;
 }
