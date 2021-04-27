@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutUsComponent } from '../about-us/about-us.component';
 import { OnlineConsultGuard } from '../auth-guard/online-consult/online-consult.guard';
 import { BlogComponent } from '../blog/blog.component';
+import { BookAnAppointmentComponent } from '../book-an-appointment/book-an-appointment.component';
 import { BookingConfirmComponent } from '../booking-confirm/booking-confirm.component';
 import { BookingComponent } from '../booking/booking.component';
 import { CheckoutComponent } from '../checkout/checkout.component';
@@ -46,6 +47,11 @@ const routes: Routes = [
       {
         path: 'booking-confirm',
         component: BookingConfirmComponent,
+        canActivate:[OnlineConsultGuard]
+      },
+      {
+        path: 'book-an-appointment',
+        component: BookAnAppointmentComponent,
         canActivate:[OnlineConsultGuard]
       },
       {

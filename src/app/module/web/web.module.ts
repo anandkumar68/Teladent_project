@@ -30,6 +30,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { DoctorsPanelModule } from '../doctors-panel/doctors-panel.module';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER } from 'ngx-ui-loader';
 import { BlogComponent } from '../blog/blog.component';
+import { BookAnAppointmentComponent } from '../book-an-appointment/book-an-appointment.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
@@ -72,7 +73,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ContactUsComponent,
     CovidComponent,
     WebComponent,
-    BlogComponent
+    BlogComponent,
+    BookAnAppointmentComponent
   ],
   imports: [
     CommonModule,
