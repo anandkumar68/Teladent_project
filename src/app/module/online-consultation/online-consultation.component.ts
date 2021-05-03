@@ -234,7 +234,8 @@ export class OnlineConsultationComponent implements OnInit {
           }, 200);
 
         } else {
-          this.router.navigateByUrl(`/web-panel/booking/${doctorId}`);
+          this.router.navigateByUrl(`/web-panel/book-an-appointment/${doctorId}`);
+
         }
       }
 

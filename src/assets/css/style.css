@@ -11256,7 +11256,7 @@ i.fa.fa-sync {
 
 .bs-datepicker-body table td.week span 
 {
-  color: #15558d !important; 
+  color: #4e9cd8 !important; 
 }
 
 .bs-datepicker-body table td span.selected,
@@ -11267,12 +11267,12 @@ i.fa.fa-sync {
 .bs-datepicker-body table td[class*="select-"] span:after,
 .bs-datepicker-body table td.active-week span:hover 
 {
-  background-color: #15558d !important; 
+  background-color: #4e9cd8 !important; 
 }
 
 
 .theme-blue .bs-datepicker-predefined-btns button.selected {
-    background-color:#15558d !important;
+    background-color:#4e9cd8 !important;
 }
 
 

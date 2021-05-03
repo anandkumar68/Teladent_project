@@ -304,3 +304,10 @@ a.makebtn{
     margin-bottom: 15px;
 }
 }
+
+.disabled-slot {
+    background-color: #c34f4f !important;
+    cursor: none;
+    pointer-events: none;
+    color: white !important;
+}

@@ -50,7 +50,7 @@ const routes: Routes = [
         canActivate:[OnlineConsultGuard]
       },
       {
-        path: 'book-an-appointment',
+        path: 'book-an-appointment/:providerId',
         component: BookAnAppointmentComponent,
         canActivate:[OnlineConsultGuard]
       },

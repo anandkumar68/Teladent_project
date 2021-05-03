@@ -31,6 +31,7 @@ import { DoctorsPanelModule } from '../doctors-panel/doctors-panel.module';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER } from 'ngx-ui-loader';
 import { BlogComponent } from '../blog/blog.component';
 import { BookAnAppointmentComponent } from '../book-an-appointment/book-an-appointment.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
@@ -95,6 +96,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxPaginationModule,
     NgCircleProgressModule.forRoot(),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    FormsModule,
+    ReactiveFormsModule
 
   ]
 })

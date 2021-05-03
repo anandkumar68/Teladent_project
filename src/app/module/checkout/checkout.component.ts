@@ -143,8 +143,6 @@ export class CheckoutComponent implements OnInit {
       sessionValue: this.sessionValue
     }).subscribe((resolve) => {
 
-      console.log(resolve);
-
       if(resolve.status ==='success') {
         this.router.navigateByUrl('/web-panel/booking-confirm')
         this.ngxLoader.stopLoader('loader-01');
