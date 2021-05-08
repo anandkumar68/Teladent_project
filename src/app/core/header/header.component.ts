@@ -20,7 +20,7 @@ import { UserApiService } from 'src/app/shared/user-api/user-api.service';
 
 import { SocialAuthService } from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
-import { GoogleLoginProvider, } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 
 
 
@@ -672,6 +672,13 @@ export class HeaderComponent implements OnInit {
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => console.log(x)).catch(err => {
+      console.log(err);
+
+    });
+  }
+
+   signInWithFb(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(x => console.log(x)).catch(err => {
       console.log(err);
 
     });
