@@ -92,7 +92,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
         },
         {
           id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider('clientId')
+          provider: new FacebookLoginProvider('322828905851181')
         }
       ]
     } as SocialAuthServiceConfig,

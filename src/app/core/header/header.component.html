@@ -77,16 +77,15 @@
                 </ul>
             </div>
 
-            <ul class="nav header-navbar-rht" >
-               
+            <ul class="nav header-navbar-rht">
+
 
                 <li class="nav-item" *ngIf="!showUser" id="show-nav-btn">
                     <a class="nav-link btn-grad" href="javascript:void(0);" data-toggle="modal" data-backdrop="static" data-target="#exampleModal" (click)="login()"> <i class="fa fa-user " aria-hidden="true" id="loginCall"></i> </a>
                 </li>
 
                 <li class="nav-item" id="show-nav-btn">
-                    <a class="nav-link btn-grad kkh" href="javascript:void(0);"
-                        (click)="navigateHeader('/web-panel/online-consultation?limit=10&skip=0')">BOOK
+                    <a class="nav-link btn-grad kkh" href="javascript:void(0);" (click)="navigateHeader('/web-panel/online-consultation?limit=10&skip=0')">BOOK
                         AN APPOINTMENT </a>
                 </li>
                 <!-- <app-login-modal *ngIf="!showUser" [link]="'Abhi'"></app-login-modal> -->
@@ -124,7 +123,7 @@
 <!-- Modal -->
 <div class="modal fade login-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog">
-        <div class="modal-content" >
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -135,7 +134,7 @@
                     <img src="../../../assets/img/teladent.png" alt="">
                 </div>
                 <!-- FOR LOGIN -->
-                <div class="login-form" *ngIf="showHideForm.login" >
+                <div class="login-form" *ngIf="showHideForm.login">
                     <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
                         <div class="form-group">
                             <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true" [customPlaceholder]="'XXXXXXXXXX'" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
@@ -170,7 +169,7 @@
                         </div>
                         <div class="row form-row social-login">
                             <div class="col-6">
-                                <a href="javascript:void(0);" class="btn btn-facebook btn-block">
+                                <a href="javascript:void(0);" class="btn btn-facebook btn-block" (click)="signInWithFb()">
                                     <i class="fab fa-facebook-f mr-1"></i> Login
                                 </a>
                             </div>
@@ -211,8 +210,8 @@
 
                             <div class="info-password-icon"><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Your password must contain at least one uppercase, one lowercase, one digit and one special characters"></i></div>
 
-                             <div *ngIf="!showPasswordIcon" class="login-password-icon" (click)="showPassword('showPasswordIcon')"><i class="fa fa-eye"></i></div>
-                             <div *ngIf="showPasswordIcon" class="login-password-icon" (click)="showPassword('showPasswordIcon')"><i class="fa fa-eye-slash"></i></div>
+                            <div *ngIf="!showPasswordIcon" class="login-password-icon" (click)="showPassword('showPasswordIcon')"><i class="fa fa-eye"></i></div>
+                            <div *ngIf="showPasswordIcon" class="login-password-icon" (click)="showPassword('showPasswordIcon')"><i class="fa fa-eye-slash"></i></div>
 
 
                             <div *ngIf="signupSubmit && signupValidation.password.errors" class="invalid-feedback">
