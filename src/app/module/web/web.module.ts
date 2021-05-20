@@ -31,6 +31,7 @@ import { DoctorsPanelModule } from '../doctors-panel/doctors-panel.module';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER } from 'ngx-ui-loader';
 import { BlogComponent } from '../blog/blog.component';
 import { BookAnAppointmentComponent } from '../book-an-appointment/book-an-appointment.component';
+import { OralSelfAsessmentComponent } from '../oral-self-asessment/oral-self-asessment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
@@ -75,7 +76,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CovidComponent,
     WebComponent,
     BlogComponent,
-    BookAnAppointmentComponent
+    BookAnAppointmentComponent,
+    OralSelfAsessmentComponent,
+
   ],
   imports: [
     CommonModule,

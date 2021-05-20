@@ -13,6 +13,7 @@ import { DoctorProfileComponent } from '../doctor-profile/doctor-profile.compone
 import { IndexComponent } from '../index/index.component';
 import { InfobytesComponent } from '../infobytes/infobytes.component';
 import { OnlineConsultationComponent } from '../online-consultation/online-consultation.component';
+import { OralSelfAsessmentComponent } from '../oral-self-asessment/oral-self-asessment.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { WebComponent } from './web.component';
 
@@ -69,6 +70,10 @@ const routes: Routes = [
       {
         path: 'covid-guidelines',
         component: CovidComponent,
+      },
+      {
+        path: 'oral-self-assessment',
+        component: OralSelfAsessmentComponent,
       },
       {
         path: '',
