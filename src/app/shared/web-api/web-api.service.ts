@@ -420,4 +420,22 @@ export class WebApiService {
     }
   }
 
+  /**********************************************************************************/
+  /********************************* COUPON API ****************************/
+  /**********************************************************************************/
+
+  // UPDATE USER AVATAR
+  applyCoupon(data: any): Observable<any> {
+    try {
+      let token: any;
+      token = localStorage.getItem('token');
+      const apiUrl = `${this.BASE_URL}/admin/apply-coupon`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+          .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 }

@@ -1,3 +1,5 @@
+<ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
+
 <!-- Page Content -->
 <div class="content">
 
@@ -11,144 +13,193 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="leftdiv">
                         <div class="firstdiv">
-                         <div class="topdiv">
-                             <span> <img src="assets/img/bookanappointment/oneimg.png"> </span>
-                             <span class="headspn">Choose service(s)</span>
-                         </div>
-
-                        <form class="formcheck">
-                            <div class="form-check form-check-inline boxchek">
-                                <span> <img src="assets/img/bookanappointment/teeth1.svg" class="chekimg"> </span>
-                                <label class="form-check-label lebalc" for="chk_red">Pain or tooth decay</label>
-                                <input class="form-check-input" type="checkbox" id="chk_red">
-                                
-                            </div>
-                            <div class="form-check form-check-inline boxchek">
-                                <span> <img src="assets/img/bookanappointment/teeth2.svg" class="chekimg"> </span>
-                                <label class="form-check-label lebalc" for="chk_green">Sensitivity</label>
-                                <input class="form-check-input" type="checkbox" id="chk_green">
-                                
-                            </div>
-                            <div class="form-check form-check-inline boxchek">
-                                <span> <img src="assets/img/bookanappointment/teeth3.svg" class="chekimg"> </span>
-                                <label class="form-check-label lebalc" for="chk_blue">Bleeding
-                                    gums</label>
-                                <input class="form-check-input" type="checkbox" id="chk_blue">
-                                
-                            </div>
-                        </form>
-
-                        <form class="formcheck">
-                            <div class="form-check form-check-inline boxchek">
-                                <span> <img src="assets/img/bookanappointment/child.svg" class="chekimg"> </span>
-                                <label class="form-check-label lebalc" for="chk_red">Child care</label>
-                                <input class="form-check-input" type="checkbox" id="chk_red">
-                        
-                            </div>
-                            <div class="form-check form-check-inline boxchek">
-                                <span> <img src="assets/img/bookanappointment/openion.svg" class="chekimg"> </span>
-                                <label class="form-check-label lebalc" for="chk_green">Second
-                                opinion</label>
-                                <input class="form-check-input" type="checkbox" id="chk_green">
-                        
-                            </div>
-                            <div class="form-check form-check-inline boxchek">
-                                <span> <img src="assets/img/bookanappointment/other.svg" class="chekimg"> </span>
-                                <label class="form-check-label lebalc" for="chk_blue">Other</label>
-                                <input class="form-check-input" type="checkbox" id="chk_blue">
-                        
-                            </div>
-                        </form>
-
-                        <form class="secondform">
-                            <div class="form-group">
-                                
-                                <input type="email" class="form-control" 
-                                    placeholder="Please specify here">
-                                
-                            </div>
-                            
-                        </form>
-
-                        
-                        </div>
-                        <div class="borderdiv"></div>
-                        <div class="seconddiv">
-                        
-                        <div class="topdiv">
-                            <span> <img src="assets/img/bookanappointment/twoimg.png"> </span>
-                            <span class="headspn">Choose date and time</span>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <form>
-                                    <div class="row daterow">
-                                        <div class="form-group col-lg-6 col-12">
-                                            <label for="newdate">Choose date</label> 
-                                            <input type="date" class="form-control" id="newdate" placeholder="Name">
-                                        </div>
-                                        <div class="form-group col-lg-6 col-12">
-                                            <label for="newdate">Available time slots on selected date</label> 
-                                            <select class="form-select form-control" aria-label="Default select example">
-                                                <option selected>Choose time slot</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                        
-                                    </div>
-                        
-                        
-                                </form>
-                            </div>
-                        </div>
-
-                        </div>
-
-                        <div class="borderdiv"></div>
-                        <div class="seconddiv">
-                        
                             <div class="topdiv">
-                                <span> <img src="assets/img/bookanappointment/threeimg.png"> </span>
-                                <span class="headspn">Payment</span>
+                                <span> <img src="assets/img/bookanappointment/oneimg.png"> </span>
+                                <span class="headspn">Choose service(s)</span>
                             </div>
-                        
-                            <div class="row daterow">
+
+                            <form class="formcheck" [formGroup]="bookingForm">
+                                <div class="form-check form-check-inline boxchek">
+                                    <span> <img src="assets/img/bookanappointment/teeth1.svg" class="chekimg"> </span>
+                                    <label class="form-check-label lebalc" for="chk_pain_decay">Pain or tooth
+                                        decay</label>
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_pain_decay
+                                        id="chk_pain_decay" (click)="selectService('chk_pain_decay')">
+
+                                </div>
+                                <div class="form-check form-check-inline boxchek">
+                                    <span> <img src="assets/img/bookanappointment/teeth2.svg" class="chekimg"> </span>
+                                    <label class="form-check-label lebalc" for="chk_sensitivity">Sensitivity</label>
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_sensitivity
+                                        id="chk_sensitivity" (click)="selectService('chk_sensitivity')">
+
+                                </div>
+                                <div class="form-check form-check-inline boxchek">
+                                    <span> <img src="assets/img/bookanappointment/teeth3.svg" class="chekimg"> </span>
+                                    <label class="form-check-label lebalc" for="chk_bleeding">Bleeding
+                                        gums</label>
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_bleeding
+                                        id="chk_bleeding" (click)="selectService('chk_bleeding')">
+
+                                </div>
+                            </form>
+
+                            <form class="formcheck" [formGroup]="bookingForm">
+                                <div class="form-check form-check-inline boxchek">
+                                    <span> <img src="assets/img/bookanappointment/child.svg" class="chekimg"> </span>
+                                    <label class="form-check-label lebalc" for="chk_child_care">Child care</label>
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_child_care
+                                        id="chk_child_care" (click)="selectService('chk_child_care')">
+
+                                </div>
+                                <div class="form-check form-check-inline boxchek">
+                                    <span> <img src="assets/img/bookanappointment/openion.svg" class="chekimg"> </span>
+                                    <label class="form-check-label lebalc" for="chk_second_opinion">Second
+                                        opinion</label>
+                                    <input class="form-check-input" type="checkbox"
+                                        [checked]=services?.chk_second_opinion id="chk_second_opinion"
+                                        (click)="selectService('chk_second_opinion')">
+
+                                </div>
+                                <div class="form-check form-check-inline boxchek">
+                                    <span> <img src="assets/img/bookanappointment/other.svg" class="chekimg"> </span>
+                                    <label class="form-check-label lebalc" for="chk_other">Other</label>
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_other
+                                        id="chk_other" (click)="selectService('chk_other')">
+
+                                </div>
+                            </form>
+
+                            <form class="secondform" [formGroup]="bookingForm">
+                                <div class="form-group">
+
+                                    <input *ngIf="allowForOtherOpt === false" type="text" class="form-control"
+                                        id="other_txt" placeholder="Please specify here" readonly>
+                                    <input *ngIf="allowForOtherOpt === true" type="text" class="form-control"
+                                        id="other_txt_active" placeholder="Please specify here"
+                                        (keyup)="otherOpinion()">
+
+                                </div>
+                                <div *ngIf="submitted && validation.serviceType.errors" class="invalid-feedback">
+                                    <div *ngIf="validation.serviceType.errors.required">Service Type is Mandatory
+                                    </div>
+                                </div>
+
+                            </form>
+
+
+                        </div>
+                        <div class="borderdiv"></div>
+                        <div class="seconddiv">
+
+                            <div class="topdiv">
+                                <span> <img src="assets/img/bookanappointment/twoimg.png"> </span>
+                                <span class="headspn">Choose date and time</span>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-sm-12">
-                                    <p class="slots">Available time slots on selected date</p>
-                                    <div class="form-check form-check-inline slotsbox">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="a" checked>
-                                        <label class="form-check-label" for="exampleRadios1">
-                                            Debit card
-                                        </label>
-                                    </div>
-                                    
-                                    <div class="form-check form-check-inline slotsbox">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="b">
-                                        <label class="form-check-label" for="exampleRadios2">
-                                            Credit Card
-                                        </label>
-                                    </div>
-                                    
-                                    <div class="form-check form-check-inline slotsbox">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="c">
-                                        <label class="form-check-label" for="exampleRadios3">
-                                            UPI
-                                        </label>
-                                    </div>
-                                   <div>
-                                    <a class="makebtn">MAKE PAYMENT</a>
-                                   </div>
+                                    <form [formGroup]="bookingForm">
+                                        <div class="row daterow">
+                                            <div class="form-group col-lg-6 col-12">
+                                                <label for="newdate">Choose date</label>
+                                                <input type="text" class="form-control" bsDatepicker [minDate]="minDate"
+                                                    [maxDate]="maxDate"
+                                                    [bsConfig]="{ containerClass : 'theme-blue', dateInputFormat:'DD-MM-YYYY', isAnimated:true, showWeekNumbers:false }"
+                                                    (bsValueChange)="onDateSelect($event)" formControlName="slotDate"
+                                                    [ngClass]="submitted && validation.slotDate.errors ? 'is-invalid' : ''">
+                                                <div *ngIf="submitted && validation.slotDate.errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="validation.slotDate.errors.required">Slot Date is
+                                                        Mandatory
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-12">
+                                                <label for="newdate">Available time slots on selected date</label>
+                                                <select class="form-select form-control"
+                                                    aria-label="Default select example" formControlName="timeslot"
+                                                    (change)="slotChange($event.target.value)"
+                                                    [ngClass]="submitted && validation.timeslot.errors ? 'is-invalid' : ''">
+                                                    <option selected value="">Choose time slot</option>
+                                                    <option *ngFor="let slot of currentSlot" [value]=slot?.value
+                                                    [ngClass]="slot?.value === 'No Slot Available For Today' ? 'disabled-slot' : ''">
+                                                        {{slot?.value}}</option>
+                                                </select>
+                                                <div *ngIf="submitted && validation.timeslot.errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="validation.timeslot.errors.required">Slot Time is
+                                                        Mandatory
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </form>
                                 </div>
                             </div>
-                        
+
                         </div>
 
+                        <div class="borderdiv"></div>
+                        <div class="seconddiv">
 
+                            <div class="topdiv">
+                                <span> <img src="assets/img/bookanappointment/threeimg.png"> </span>
+                                <span class="headspn">User Info</span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form [formGroup]="bookingForm">
+                                        <div class="row daterow">
+                                            <div class="form-group col-lg-6 col-12">
+                                                <label for="newdate">First Name</label>
+                                                <input type="text" class="form-control" placeholder="FirstName"
+                                                    formControlName="firstName">
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-12">
+                                                <label for="newdate">Last Name</label>
+                                                <input type="text" class="form-control" placeholder="LastName"
+                                                    formControlName="lastName">
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-12">
+                                                <label for="newdate">Email</label>
+                                                <input type="text" class="form-control" placeholder="Email"
+                                                    formControlName="email"
+                                                    [ngClass]="submitted && validation.email.errors ? 'is-invalid' : ''">
+                                                <div *ngIf="submitted && validation.email.errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="validation.email.errors.required">Email is
+                                                        Mandatory
+                                                    </div>
+                                                    <div *ngIf="validation.email.errors.pattern">Invalid Email
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div *ngIf="appointmentPrice > 0">
+                                            <a class="makebtn" (click)="onSubmit()">MAKE PAYMENT</a>
+                                        </div>
+                                        <div *ngIf="appointmentPrice === 0">
+                                            <a class="makebtn" (click)="onSubmit()">MAKE APPOINTMENT</a>
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    
+
 
                 </div>
 
@@ -157,13 +208,35 @@
                         <div class="smhead">Booking Summary</div>
                         <div class="borderdiv"></div>
                         <div class="booking_desc">
-                           <div class="imgsec">
+                            <div class="imgsec">
                                 <div class="doctimg">
-                                 <img src="assets/img/bookanappointment/doctors.jpg">
+                                    <img src="{{doctorDetail?.imageUrl}}">
                                 </div>
                                 <div class="namedetails">
-                                   <h6>Dr. Pearl Jaggi</h6>
-                                   <div class="star-rating">
+                                    <h6>{{doctorDetail?.name}}</h6>
+                                    <div class="rating">
+                                        <i *ngIf="doctorDetail?.rating === 1 || doctorDetail?.rating > 1"
+                                            class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 1" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctorDetail?.rating === 2 || doctorDetail?.rating > 2"
+                                            class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 2" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctorDetail?.rating === 3 || doctorDetail?.rating > 3"
+                                            class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 3" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctorDetail?.rating === 4 || doctorDetail?.rating > 4"
+                                            class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 4" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctorDetail?.rating === 5" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating < 5" class="fas fa-star"></i>
+                                        <span
+                                            class="d-inline-block average-rating">({{doctorDetail?.totalReview}})</span>
+                                    </div>
+                                    <!-- <div class="star-rating">
                                     <input type="radio" id="5-stars" name="rating" value="5" />
                                     <label for="5-stars" class="star">&#9733;</label>
                                     <input type="radio" id="4-stars" name="rating" value="4" />
@@ -174,57 +247,57 @@
                                     <label for="2-stars" class="star">&#9733;</label>
                                     <input type="radio" id="1-star" name="rating" value="1" />
                                     <label for="1-star" class="star">&#9733;</label>
-                                    <span class="ratnum">(0)</span>
-                                   </div>
-                                   
-                                   <div class="loctn">
-                                      <span>
-                                          <img src="assets/img/bookanappointment/location.png" class="locimg">
-                                      </span>
-                                      <span class="locatext">Delhi, Delhi</span>
-                                   </div>
+                                    <span class="ratnum">({{doctorDetail?.totalReview}})</span>
+                                   </div> -->
+
+                                    <div class="loctn">
+                                        <span>
+                                            <img src="assets/img/bookanappointment/location.png" class="locimg">
+                                        </span>
+                                        <span class="locatext">{{doctorDetail?.city}}, {{doctorDetail?.state}}</span>
+                                    </div>
 
                                 </div>
-                           </div>
-                           <div class="date_time_cons">
-                               <div class="commondiv">
-                                   <div class="lefhead">Date</div>
-                                   <div class="righthead">15 Apr 2021</div>
-                               </div>
-                            <div class="commondiv">
-                                <div class="lefhead">Time</div>
-                                <div class="righthead">12:00 AM - 1:00 AM</div>
                             </div>
-                            <div class="commondiv">
-                                <div class="lefhead">Consulting Fee</div>
-                                <div class="righthead">&#8377; 400</div>
+                            <div class="date_time_cons">
+                                <div class="commondiv">
+                                    <div class="lefhead">Date</div>
+                                    <div class="righthead">{{appointmentDate | date: 'dd MMM yyyy'}}</div>
+                                </div>
+                                <div class="commondiv">
+                                    <div class="lefhead">Time</div>
+                                    <div class="righthead">{{appointmentTime}}</div>
+                                </div>
+                                <div class="commondiv">
+                                    <div class="lefhead">Consulting Fee</div>
+                                    <div class="righthead">&#8377; {{appointmentPrice}}</div>
+                                </div>
                             </div>
-                           </div>
 
                             <div class="totaldiv">
                                 <div class="totalhead">Total</div>
-                                <div class="totalrupee">&#8377; 400</div>
+                                <div class="totalrupee">&#8377; {{appointmentPrice}}</div>
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="codesec">
-                       <h6>Apply promo code</h6>
+                    <div class="codesec" *ngIf="appointmentPrice > 0">
+                        <h6>Apply promo code</h6>
                         <div class="buttonInside">
-                            <input placeholder="Enter promo code">
-                            <button id="erase">APPLY</button>
+                            <input placeholder="Enter promo code" id="coupon">
+                            <button id="erase" (click)="applyCoupon()">APPLY</button>
                         </div>
 
                     </div>
-                
+
                 </div>
 
-                
+
 
             </div>
 
-           
+
         </div>
     </section>
 

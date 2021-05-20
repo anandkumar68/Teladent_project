@@ -25,6 +25,8 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../../environments/environment';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
   fgsColor: '#00d0f1',
@@ -76,7 +78,13 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ToastrModule.forRoot(),
     NgxPaginationModule,
     NgCircleProgressModule.forRoot(),
-    SocialLoginModule
+    SocialLoginModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [DatePipe, CommonFunctionService,  
     {
