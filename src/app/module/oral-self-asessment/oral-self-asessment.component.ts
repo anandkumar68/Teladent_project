@@ -8,15 +8,21 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 })
 export class OralSelfAsessmentComponent implements OnInit {
 
-  title = 'angulartoastr';
-
   step: any = 1;
 
-  
+  tabSteps = {
+    step1: true,
+    step2: false,
+    step3: false,
+  }
+
+  currentSteps: any;
+
+
   showModal: boolean;
   registerForm: FormGroup;
   submitted = false;
-  oralModalForm:FormGroup;
+  oralModalForm: FormGroup;
   constructor(private formBuilder: FormBuilder) { }
   show() {
     this.showModal = true; // Show-Hide Modal Check
@@ -33,20 +39,69 @@ export class OralSelfAsessmentComponent implements OnInit {
     body.style.height = 'auto';
     body.style.overflowY = 'scroll';
     (document.getElementById('mainHeader') as HTMLElement).classList.add('sticky');
-    
-  }
-  ngOnInit():void {
-   this.oralModalForm = this.formBuilder.group({
-     name:new FormControl(),
-     number:new FormControl(),
-     email:new FormControl(),
-     agenumber:new FormControl(),
-   })
-  }
- 
-  onSubmit() {
-   
 
   }
+  ngOnInit(): void {
+    this.oralModalForm = this.formBuilder.group({
+      name: new FormControl(),
+      number: new FormControl(),
+      email: new FormControl(),
+      agenumber: new FormControl(),
+    });
+    this.currentSteps = 'step1';
+
+
+  }
+
+  onSubmit() { }
+
+
+  changeSteps(value: any) {
+    try {
+      this.currentSteps = value;
+      if (value === 'step1') {
+        this.tabSteps.step1 = true;
+        this.tabSteps.step2 = false;
+        this.tabSteps.step3 = false;
+      }
+      if (value === 'step2') {
+        this.tabSteps.step1 = false;
+        this.tabSteps.step2 = true;
+        this.tabSteps.step3 = false;
+
+      }
+      if (value === 'step3') {
+        this.tabSteps.step1 = false;
+        this.tabSteps.step2 = false;
+        this.tabSteps.step3 = true;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  changeBtnSteps(value: any) {
+    try {
+      if (value === 'next') {
+        if (this.currentSteps === 'step1') {
+          this.changeSteps('step2')
+        } else if (this.currentSteps === 'step2') {
+          this.changeSteps('step3')
+        }
+      }
+      if (value === 'pre') {
+        if (this.currentSteps === 'step3') {
+          this.changeSteps('step2')
+        } else if (this.currentSteps === 'step2') {
+          this.changeSteps('step1')
+        }
+      }
+
+    } catch (error) {
+      console.error(error);
+
+    }
+  }
+
 
 }

@@ -1,7 +1,7 @@
 <ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
 
 <!-- Page Content -->
-<div class="content">
+<div class="content comgap1">
 
 
 
@@ -23,23 +23,20 @@
                                     <span> <img src="assets/img/bookanappointment/teeth1.svg" class="chekimg"> </span>
                                     <label class="form-check-label lebalc" for="chk_pain_decay">Pain or tooth
                                         decay</label>
-                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_pain_decay
-                                        id="chk_pain_decay" (click)="selectService('chk_pain_decay')">
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_pain_decay id="chk_pain_decay" (click)="selectService('chk_pain_decay')">
 
                                 </div>
                                 <div class="form-check form-check-inline boxchek">
                                     <span> <img src="assets/img/bookanappointment/teeth2.svg" class="chekimg"> </span>
                                     <label class="form-check-label lebalc" for="chk_sensitivity">Sensitivity</label>
-                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_sensitivity
-                                        id="chk_sensitivity" (click)="selectService('chk_sensitivity')">
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_sensitivity id="chk_sensitivity" (click)="selectService('chk_sensitivity')">
 
                                 </div>
                                 <div class="form-check form-check-inline boxchek">
                                     <span> <img src="assets/img/bookanappointment/teeth3.svg" class="chekimg"> </span>
                                     <label class="form-check-label lebalc" for="chk_bleeding">Bleeding
                                         gums</label>
-                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_bleeding
-                                        id="chk_bleeding" (click)="selectService('chk_bleeding')">
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_bleeding id="chk_bleeding" (click)="selectService('chk_bleeding')">
 
                                 </div>
                             </form>
@@ -48,24 +45,20 @@
                                 <div class="form-check form-check-inline boxchek">
                                     <span> <img src="assets/img/bookanappointment/child.svg" class="chekimg"> </span>
                                     <label class="form-check-label lebalc" for="chk_child_care">Child care</label>
-                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_child_care
-                                        id="chk_child_care" (click)="selectService('chk_child_care')">
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_child_care id="chk_child_care" (click)="selectService('chk_child_care')">
 
                                 </div>
                                 <div class="form-check form-check-inline boxchek">
                                     <span> <img src="assets/img/bookanappointment/openion.svg" class="chekimg"> </span>
                                     <label class="form-check-label lebalc" for="chk_second_opinion">Second
                                         opinion</label>
-                                    <input class="form-check-input" type="checkbox"
-                                        [checked]=services?.chk_second_opinion id="chk_second_opinion"
-                                        (click)="selectService('chk_second_opinion')">
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_second_opinion id="chk_second_opinion" (click)="selectService('chk_second_opinion')">
 
                                 </div>
                                 <div class="form-check form-check-inline boxchek">
                                     <span> <img src="assets/img/bookanappointment/other.svg" class="chekimg"> </span>
                                     <label class="form-check-label lebalc" for="chk_other">Other</label>
-                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_other
-                                        id="chk_other" (click)="selectService('chk_other')">
+                                    <input class="form-check-input" type="checkbox" [checked]=services?.chk_other id="chk_other" (click)="selectService('chk_other')">
 
                                 </div>
                             </form>
@@ -73,11 +66,8 @@
                             <form class="secondform" [formGroup]="bookingForm">
                                 <div class="form-group">
 
-                                    <input *ngIf="allowForOtherOpt === false" type="text" class="form-control"
-                                        id="other_txt" placeholder="Please specify here" readonly>
-                                    <input *ngIf="allowForOtherOpt === true" type="text" class="form-control"
-                                        id="other_txt_active" placeholder="Please specify here"
-                                        (keyup)="otherOpinion()">
+                                    <input *ngIf="allowForOtherOpt === false" type="text" class="form-control" id="other_txt" placeholder="Please specify here" readonly>
+                                    <input *ngIf="allowForOtherOpt === true" type="text" class="form-control" id="other_txt_active" placeholder="Please specify here" (keyup)="otherOpinion()">
 
                                 </div>
                                 <div *ngIf="submitted && validation.serviceType.errors" class="invalid-feedback">
@@ -103,34 +93,24 @@
                                         <div class="row daterow">
                                             <div class="form-group col-lg-6 col-12">
                                                 <label for="newdate">Choose date</label>
-                                                <input type="text" class="form-control" bsDatepicker [minDate]="minDate"
-                                                    [maxDate]="maxDate"
-                                                    [bsConfig]="{ containerClass : 'theme-blue', dateInputFormat:'DD-MM-YYYY', isAnimated:true, showWeekNumbers:false }"
-                                                    (bsValueChange)="onDateSelect($event)" formControlName="slotDate"
+                                                <input type="text" class="form-control" bsDatepicker [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{ containerClass : 'theme-blue', dateInputFormat:'DD-MM-YYYY', isAnimated:true, showWeekNumbers:false }" (bsValueChange)="onDateSelect($event)" formControlName="slotDate"
                                                     [ngClass]="submitted && validation.slotDate.errors ? 'is-invalid' : ''">
-                                                <div *ngIf="submitted && validation.slotDate.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="validation.slotDate.errors.required">Slot Date is
-                                                        Mandatory
+                                                <div *ngIf="submitted && validation.slotDate.errors" class="invalid-feedback">
+                                                    <div *ngIf="validation.slotDate.errors.required">Slot Date is Mandatory
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-lg-6 col-12">
                                                 <label for="newdate">Available time slots on selected date</label>
-                                                <select class="form-select form-control"
-                                                    aria-label="Default select example" formControlName="timeslot"
-                                                    (change)="slotChange($event.target.value)"
-                                                    [ngClass]="submitted && validation.timeslot.errors ? 'is-invalid' : ''">
+                                                <select class="form-select form-control" aria-label="Default select example" formControlName="timeslot" (change)="slotChange($event.target.value)" [ngClass]="submitted && validation.timeslot.errors ? 'is-invalid' : ''">
                                                     <option selected value="">Choose time slot</option>
                                                     <option *ngFor="let slot of currentSlot" [value]=slot?.value
                                                     [ngClass]="slot?.value === 'No Slot Available For Today' ? 'disabled-slot' : ''">
                                                         {{slot?.value}}</option>
                                                 </select>
-                                                <div *ngIf="submitted && validation.timeslot.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="validation.timeslot.errors.required">Slot Time is
-                                                        Mandatory
+                                                <div *ngIf="submitted && validation.timeslot.errors" class="invalid-feedback">
+                                                    <div *ngIf="validation.timeslot.errors.required">Slot Time is Mandatory
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,25 +138,19 @@
                                         <div class="row daterow">
                                             <div class="form-group col-lg-6 col-12">
                                                 <label for="newdate">First Name</label>
-                                                <input type="text" class="form-control" placeholder="FirstName"
-                                                    formControlName="firstName">
+                                                <input type="text" class="form-control" placeholder="FirstName" formControlName="firstName">
                                             </div>
 
                                             <div class="form-group col-lg-6 col-12">
                                                 <label for="newdate">Last Name</label>
-                                                <input type="text" class="form-control" placeholder="LastName"
-                                                    formControlName="lastName">
+                                                <input type="text" class="form-control" placeholder="LastName" formControlName="lastName">
                                             </div>
 
                                             <div class="form-group col-lg-6 col-12">
                                                 <label for="newdate">Email</label>
-                                                <input type="text" class="form-control" placeholder="Email"
-                                                    formControlName="email"
-                                                    [ngClass]="submitted && validation.email.errors ? 'is-invalid' : ''">
-                                                <div *ngIf="submitted && validation.email.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="validation.email.errors.required">Email is
-                                                        Mandatory
+                                                <input type="text" class="form-control" placeholder="Email" formControlName="email" [ngClass]="submitted && validation.email.errors ? 'is-invalid' : ''">
+                                                <div *ngIf="submitted && validation.email.errors" class="invalid-feedback">
+                                                    <div *ngIf="validation.email.errors.required">Email is Mandatory
                                                     </div>
                                                     <div *ngIf="validation.email.errors.pattern">Invalid Email
                                                     </div>
@@ -215,26 +189,21 @@
                                 <div class="namedetails">
                                     <h6>{{doctorDetail?.name}}</h6>
                                     <div class="rating">
-                                        <i *ngIf="doctorDetail?.rating === 1 || doctorDetail?.rating > 1"
-                                            class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating === 1 || doctorDetail?.rating > 1" class="fas fa-star filled"></i>
                                         <i *ngIf="doctorDetail?.rating < 1" class="fas fa-star"></i>
 
-                                        <i *ngIf="doctorDetail?.rating === 2 || doctorDetail?.rating > 2"
-                                            class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating === 2 || doctorDetail?.rating > 2" class="fas fa-star filled"></i>
                                         <i *ngIf="doctorDetail?.rating < 2" class="fas fa-star"></i>
 
-                                        <i *ngIf="doctorDetail?.rating === 3 || doctorDetail?.rating > 3"
-                                            class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating === 3 || doctorDetail?.rating > 3" class="fas fa-star filled"></i>
                                         <i *ngIf="doctorDetail?.rating < 3" class="fas fa-star"></i>
 
-                                        <i *ngIf="doctorDetail?.rating === 4 || doctorDetail?.rating > 4"
-                                            class="fas fa-star filled"></i>
+                                        <i *ngIf="doctorDetail?.rating === 4 || doctorDetail?.rating > 4" class="fas fa-star filled"></i>
                                         <i *ngIf="doctorDetail?.rating < 4" class="fas fa-star"></i>
 
                                         <i *ngIf="doctorDetail?.rating === 5" class="fas fa-star filled"></i>
                                         <i *ngIf="doctorDetail?.rating < 5" class="fas fa-star"></i>
-                                        <span
-                                            class="d-inline-block average-rating">({{doctorDetail?.totalReview}})</span>
+                                        <span class="d-inline-block average-rating">({{doctorDetail?.totalReview}})</span>
                                     </div>
                                     <!-- <div class="star-rating">
                                     <input type="radio" id="5-stars" name="rating" value="5" />
@@ -308,18 +277,15 @@
             <div class="row justify-content-center">
                 <div class="col-xl-10 d-flex flex-column align-items-center">
                     <h2>Get a Free Consultation</h2>
-                    <p class="gc">Let our team handle all your dental healthcare issues.
-                        Call now to get a free consultation from our expert advisors on below numbers.</p>
+                    <p class="gc">Let our team handle all your dental healthcare issues. Call now to get a free consultation from our expert advisors on below numbers.</p>
 
                     <a class="wow  text-xxl font-weight-bold" href="tel:#">
                         <h4> +91 9899799981 <span class="dd">|</span> +91 9899799982</h4>
 
                     </a>
                     <div class="row">
-                        <a class="button button-primary button-shadow button-md button-xxl btn-grad  animate__delay-5s 5s"
-                            href="javascript:void(0);">Request a Callback</a>
-                        <a class="button button-primary button-shadow button-md button-xxl btn-grad kkall animate__delay-5s 5s"
-                            routerLink="/online-consultation" [queryParams]="{limit: 10, skip: 0 }">Book An
+                        <a class="button button-primary button-shadow button-md button-xxl btn-grad  animate__delay-5s 5s" href="javascript:void(0);">Request a Callback</a>
+                        <a class="button button-primary button-shadow button-md button-xxl btn-grad kkall animate__delay-5s 5s" routerLink="/online-consultation" [queryParams]="{limit: 10, skip: 0 }">Book An
                             Appointment</a>
                     </div>
                 </div>
