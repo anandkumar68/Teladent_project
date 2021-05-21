@@ -33,6 +33,7 @@ import { BlogComponent } from '../blog/blog.component';
 import { BookAnAppointmentComponent } from '../book-an-appointment/book-an-appointment.component';
 import { OralSelfAsessmentComponent } from '../oral-self-asessment/oral-self-asessment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AssessmentResultComponent } from '../assessment-result/assessment-result.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
@@ -78,7 +79,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     BlogComponent,
     BookAnAppointmentComponent,
     OralSelfAsessmentComponent,
-
+    AssessmentResultComponent
   ],
   imports: [
     CommonModule,
