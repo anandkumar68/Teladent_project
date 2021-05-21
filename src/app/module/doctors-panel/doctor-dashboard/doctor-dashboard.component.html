@@ -1,19 +1,7 @@
 <ngx-ui-loader [loaderId]="'loader-02'"></ngx-ui-loader>
 
-<!-- Breadcrumb -->
-<div class="breadcrumb-bar">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title">Dashboard</h2>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /Breadcrumb -->
-
 <!-- Page Content -->
-<div class="content">
+<div class="content comgap1">
     <div class="container-fluid">
 
         <div class="row">
@@ -35,13 +23,8 @@
 
                                         <div class="dash-widget dct-border-rht">
                                             <div class="circle-bar">
-                                                <circle-progress [percent]="progressData?.totalPatientPercentage"
-                                                    [radius]="40" [space]="-5" [outerStrokeWidth]="5"
-                                                    [outerStrokeColor]="'#da3f81'" [innerStrokeColor]="'#ffffff'"
-                                                    [innerStrokeWidth]="5" [imageSrc]="'assets/img/icon-01.png'"
-                                                    [animation]="true" [showImage]="true" [imageHeight]="35"
-                                                    [imageWidth]="35" [showBackground]="false"
-                                                    [animationDuration]="1100">
+                                                <circle-progress [percent]="progressData?.totalPatientPercentage" [radius]="40" [space]="-5" [outerStrokeWidth]="5" [outerStrokeColor]="'#da3f81'" [innerStrokeColor]="'#ffffff'" [innerStrokeWidth]="5" [imageSrc]="'assets/img/icon-01.png'" [animation]="true"
+                                                    [showImage]="true" [imageHeight]="35" [imageWidth]="35" [showBackground]="false" [animationDuration]="1100">
                                                 </circle-progress>
                                             </div>
 
@@ -56,13 +39,8 @@
                                     <div class="col-md-12 col-lg-4">
                                         <div class="dash-widget dct-border-rht">
                                             <div class="circle-bar">
-                                                <circle-progress [percent]="progressData?.todayPaitentPercent"
-                                                    [radius]="40" [space]="-5" [outerStrokeWidth]="5"
-                                                    [outerStrokeColor]="'#68dda9'" [innerStrokeColor]="'#ffffff'"
-                                                    [innerStrokeWidth]="5" [imageSrc]="'assets/img/icon-02.png'"
-                                                    [animation]="true" [showImage]="true" [imageHeight]="35"
-                                                    [imageWidth]="35" [showBackground]="false"
-                                                    [animationDuration]="1100">
+                                                <circle-progress [percent]="progressData?.todayPaitentPercent" [radius]="40" [space]="-5" [outerStrokeWidth]="5" [outerStrokeColor]="'#68dda9'" [innerStrokeColor]="'#ffffff'" [innerStrokeWidth]="5" [imageSrc]="'assets/img/icon-02.png'" [animation]="true"
+                                                    [showImage]="true" [imageHeight]="35" [imageWidth]="35" [showBackground]="false" [animationDuration]="1100">
                                                 </circle-progress>
                                             </div>
                                             <div class="dash-widget-info">
@@ -76,13 +54,8 @@
                                     <div class="col-md-12 col-lg-4">
                                         <div class="dash-widget">
                                             <div class="circle-bar">
-                                                <circle-progress [percent]="progressData?.appointmentPercent"
-                                                    [radius]="40" [space]="-5" [outerStrokeWidth]="5"
-                                                    [outerStrokeColor]="'#1b5a90'" [innerStrokeColor]="'#ffffff'"
-                                                    [innerStrokeWidth]="5" [imageSrc]="'assets/img/icon-03.png'"
-                                                    [animation]="true" [showImage]="true" [imageHeight]="35"
-                                                    [imageWidth]="35" [showBackground]="false"
-                                                    [animationDuration]="1100">
+                                                <circle-progress [percent]="progressData?.appointmentPercent" [radius]="40" [space]="-5" [outerStrokeWidth]="5" [outerStrokeColor]="'#1b5a90'" [innerStrokeColor]="'#ffffff'" [innerStrokeWidth]="5" [imageSrc]="'assets/img/icon-03.png'" [animation]="true"
+                                                    [showImage]="true" [imageHeight]="35" [imageWidth]="35" [showBackground]="false" [animationDuration]="1100">
                                                 </circle-progress>
                                             </div>
                                             <div class="dash-widget-info">
@@ -106,24 +79,19 @@
                             <!-- Appointment Tab -->
                             <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab"
-                                        (click)="checkTabValue('all')">All</a>
+                                    <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab" (click)="checkTabValue('all')">All</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link pending" href="#today-appointments" data-toggle="tab"
-                                        (click)="checkTabValue('pending')">Pending</a>
+                                    <a class="nav-link pending" href="#today-appointments" data-toggle="tab" (click)="checkTabValue('pending')">Pending</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#today-appointments" data-toggle="tab"
-                                        (click)="checkTabValue('confirm')">Confirmed</a>
+                                    <a class="nav-link" href="#today-appointments" data-toggle="tab" (click)="checkTabValue('confirm')">Confirmed</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link complete" href="#today-appointments" data-toggle="tab"
-                                        (click)="checkTabValue('completed')">Completed</a>
+                                    <a class="nav-link complete" href="#today-appointments" data-toggle="tab" (click)="checkTabValue('completed')">Completed</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link pending" href="#today-appointments" data-toggle="tab"
-                                        (click)="checkTabValue('reschedule')">Rescheduled</a>
+                                    <a class="nav-link pending" href="#today-appointments" data-toggle="tab" (click)="checkTabValue('reschedule')">Rescheduled</a>
                                 </li>
                             </ul>
                             <!-- /Appointment Tab -->
@@ -146,52 +114,30 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr
-                                                            *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total }, let i = index;">
+                                                        <tr *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total }, let i = index;">
                                                             <td>
                                                                 <h2 class="table-avatar">
-                                                                    <a href="javascript:void(0);"
-                                                                        class="avatar avatar-sm mr-2"><img
-                                                                            class="avatar-img rounded-circle"
-                                                                            src="{{ list.patientImgUrl }}"
-                                                                            alt="{{ list.name }}"></a>
+                                                                    <a href="javascript:void(0);" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ list.patientImgUrl }}" alt="{{ list.name }}"></a>
                                                                     <a href="javascript:void(0);">{{ list.name }} 
                                                                         <span>#{{ list.shortId }} <p class="reschedule" *ngIf="list.isReallocate"><i class="fa fa-registered"></i></p></span></a>
                                                                 </h2>
                                                             </td>
-                                                            <td>{{ list.appointmentDate | date:'dd-MM-yyyy'}} <span
-                                                                    class="d-block text-info">{{ list.appointmentTime
+                                                            <td>{{ list.appointmentDate | date:'dd-MM-yyyy'}} <span class="d-block text-info">{{ list.appointmentTime
                                                                     }}</span></td>
                                                             <td>{{ list.serviceType }}</td>
                                                             <td class="text-center">₹{{ list.paid }}</td>
                                                             <td class="text-right">
                                                                 <div class="table-action">
-                                                                    <a href="javascript:void(0);" id="{{list._id}}"
-                                                                        (click)="individualAppointmentDetails(list._id)"
-                                                                        class="btn btn-sm bg-info-light"
-                                                                        data-toggle="modal" data-target="#dash_details">
+                                                                    <a href="javascript:void(0);" id="{{list._id}}" (click)="individualAppointmentDetails(list._id)" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#dash_details">
                                                                         <i class="far fa-eye"></i> View
                                                                     </a>
-                                                                    <a *ngIf="list.currentStatus === 'Pending' "
-                                                                        href="javascript:void(0);"
-                                                                        (click)="updateStatus('accept', list._id)"
-                                                                        class="btn btn-sm bg-success-light">
+                                                                    <a *ngIf="list.currentStatus === 'Pending' " href="javascript:void(0);" (click)="updateStatus('accept', list._id)" class="btn btn-sm bg-success-light">
                                                                         <i class="fas fa-check"></i> Confirm
                                                                     </a>
-                                                                    <a 
-                                                                    *ngIf="list.currentStatus === 'Accept' " 
-                                                                    href="javascript:void(0);" 
-                                                                    class="btn btn-sm bg-success-light"
-                                                                    (click)="completeRequest(list._id)"
-                                                                    data-toggle="modal" 
-                                                                    data-target="#appt_comp_details"
-                                                                    data-backdrop="static" data-keyboard="false">
+                                                                    <a *ngIf="list.currentStatus === 'Accept' " href="javascript:void(0);" class="btn btn-sm bg-success-light" (click)="completeRequest(list._id)" data-toggle="modal" data-target="#appt_comp_details" data-backdrop="static" data-keyboard="false">
                                                                         <i class="fas fa-check"></i> Completed
                                                                     </a>
-                                                                    <a *ngIf="list.currentStatus === 'Accept' "
-                                                                    (click)="updateStatus('reallocate', list._id)"
-                                                                        href="javascript:void(0);"
-                                                                        class="btn btn-sm bg-danger-light">
+                                                                    <a *ngIf="list.currentStatus === 'Accept' " (click)="updateStatus('reallocate', list._id)" href="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                         <i class="fas fa-times"></i> ReSchedule
                                                                     </a>
                                                                 </div>
@@ -208,15 +154,10 @@
                                             </div>
                                             <div class="row result-str" *ngIf="total !== 0">
                                                 <div class="col-sm-12 col-md-5 ">
-                                                    <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
-                                                        * perPage), total) }} of {{ total }} entries </p>
+                                                    <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage * perPage), total) }} of {{ total }} entries </p>
                                                 </div>
                                                 <div class="col-sm-12 col-md-7 text-right">
-                                                    <pagination-controls [directionLinks]="directionLinks"
-                                                        [autoHide]="autoHide" [responsive]="responsive"
-                                                        [previousLabel]="labels.previousLabel"
-                                                        [nextLabel]="labels.nextLabel"
-                                                        (pageChange)="onPageChange($event)">
+                                                    <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)">
                                                     </pagination-controls>
                                                 </div>
                                             </div>
@@ -262,18 +203,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-right">
-                                        <button *ngIf="individualDetails?.currentStatus === 'Accept' " type="button"
-                                            disabled class="btn bg-success-light btn-sm"
-                                            id="topup_status">Confirm</button>
-                                        <button *ngIf="individualDetails?.currentStatus === 'Completed' " type="button"
-                                            disabled class="btn bg-success-light btn-sm"
-                                            id="topup_status">Completed</button>
-                                        <button *ngIf="individualDetails?.currentStatus === 'Reallocate' " type="button"
-                                            disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">ReSchedule</button>
-                                        <button *ngIf="individualDetails?.currentStatus === 'Pending' " type="button"
-                                            disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">Pending</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Accept' " type="button" disabled class="btn bg-success-light btn-sm" id="topup_status">Confirm</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Completed' " type="button" disabled class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Reallocate' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">ReSchedule</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Pending' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">Pending</button>
                                     </div>
                                 </div>
                             </div>
@@ -314,29 +247,23 @@
             <div class="modal-body">
                 <form [formGroup]="completeForm" (ngSubmit)="submitCompleteRequest()">
                     <div class="form-group">
-                      <label for="recipient-name" class="col-form-label">Description <span class="text-danger">*</span></label>
-                      <textarea 
-                      [ngClass]="completeValidation.description.errors ? 'is-invalid' : ''"
-                      class="form-control" 
-                      id="descArea" cols="10" rows="5" formControlName="description"></textarea>
-                      <div *ngIf="completeValidation.description.errors" class="invalid-feedback">
-                        <div *ngIf="completeValidation.description.errors.required">Description is Mandatory</div>
-                    </div>
+                        <label for="recipient-name" class="col-form-label">Description <span class="text-danger">*</span></label>
+                        <textarea [ngClass]="completeValidation.description.errors ? 'is-invalid' : ''" class="form-control" id="descArea" cols="10" rows="5" formControlName="description"></textarea>
+                        <div *ngIf="completeValidation.description.errors" class="invalid-feedback">
+                            <div *ngIf="completeValidation.description.errors.required">Description is Mandatory</div>
+                        </div>
                     </div>
                     <div class="form-group">
-                      <label for="message-text" class="col-form-label"> Prescription (R<sub>x</sub>) <span class="text-danger">*</span></label>
-                      <textarea 
-                      [ngClass]="completeValidation.suggestion.errors ? 'is-invalid' : ''"
-                      class="form-control" 
-                      id="drug_suggestion" cols="10" rows="5" formControlName="suggestion"></textarea>
-                      <div *ngIf="completeValidation.suggestion.errors" class="invalid-feedback">
-                        <div *ngIf="completeValidation.suggestion.errors.required">Prescription is Mandatory</div>
-                    </div>
+                        <label for="message-text" class="col-form-label"> Prescription (R<sub>x</sub>) <span class="text-danger">*</span></label>
+                        <textarea [ngClass]="completeValidation.suggestion.errors ? 'is-invalid' : ''" class="form-control" id="drug_suggestion" cols="10" rows="5" formControlName="suggestion"></textarea>
+                        <div *ngIf="completeValidation.suggestion.errors" class="invalid-feedback">
+                            <div *ngIf="completeValidation.suggestion.errors.required">Prescription is Mandatory</div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div *ngFor='let url of urls, let i = index;' class="column container">
-                                <img [src]="url" style="width:100%"/>
+                                <img [src]="url" style="width:100%" />
                                 <p class="mod_title">R<sub>x</sub></p>
                                 <div class="mod_overlay"></div>
                                 <div class="mod_button"><a href="javascript:void(0);" (click)=removePhoto(i)> REMOVE </a></div>
@@ -346,12 +273,9 @@
                             <input class="form-control" id="fileChosen" type='file' accept=".png, .jpg, .jpeg, .gif" (change)="onSelectFile($event)" multiple>
                         </div>
                     </div>
-                    
-                      <button 
-                      [disabled] = 'completeForm.invalid'
-                      type="submit"
-                      class="btn btn-primary submit-btn">Submit</button>
-                  </form>
+
+                    <button [disabled]='completeForm.invalid' type="submit" class="btn btn-primary submit-btn">Submit</button>
+                </form>
             </div>
         </div>
     </div>

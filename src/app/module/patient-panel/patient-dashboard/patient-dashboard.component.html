@@ -1,19 +1,9 @@
 <ngx-ui-loader [loaderId]="'loader-02'"></ngx-ui-loader>
 
-<!-- Breadcrumb -->
-<div class="breadcrumb-bar">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title">Patient Dashboard</h2>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /Breadcrumb -->
+
 
 <!-- Page Content -->
-<div class="content">
+<div class="content comgap1">
     <div class="container-fluid">
 
         <div class="row">
@@ -31,20 +21,16 @@
                         <nav class="user-tabs mb-4">
                             <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#pat_appointments" data-toggle="tab"
-                                        (click)="checkTabValue('appointment')">Appointments</a>
+                                    <a class="nav-link active" href="#pat_appointments" data-toggle="tab" (click)="checkTabValue('appointment')">Appointments</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#pat_prescriptions" data-toggle="tab"
-                                        (click)="checkTabValue('prescription')">Prescriptions</a>
+                                    <a class="nav-link" href="#pat_prescriptions" data-toggle="tab" (click)="checkTabValue('prescription')">Prescriptions</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#pat_medical_records" data-toggle="tab"
-                                        (click)="checkTabValue('booking')">Medical Records</a>
+                                    <a class="nav-link" href="#pat_medical_records" data-toggle="tab" (click)="checkTabValue('booking')">Medical Records</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#pat_billing" data-toggle="tab"
-                                        (click)="checkTabValue('invoice')">Billing</a>
+                                    <a class="nav-link" href="#pat_billing" data-toggle="tab" (click)="checkTabValue('invoice')">Billing</a>
                                 </li>
                             </ul>
                         </nav>
@@ -70,14 +56,11 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr
-                                                        *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'first' }, let i = index;">
+                                                    <tr *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'first' }, let i = index;">
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="javascript:void(0);"
-                                                                    class="avatar avatar-sm mr-2">
-                                                                    <img class="avatar-img rounded-circle"
-                                                                        src="{{ list?.doctorImage }}" alt="User Image">
+                                                                <a href="javascript:void(0);" class="avatar avatar-sm mr-2">
+                                                                    <img class="avatar-img rounded-circle" src="{{ list?.doctorImage }}" alt="User Image">
                                                                 </a>
                                                                 <a href="javascript:void(0);">{{ list.name }}
                                                                     <span>{{ list.dentistType }} <p class="reschedule"
@@ -86,29 +69,20 @@
                                                                     </span></a>
                                                             </h2>
                                                         </td>
-                                                        <td>{{ list.appointmentDate | date:'dd MMM yyyy' }}<span
-                                                                class="d-block text-info">{{ list.appointmentTime
+                                                        <td>{{ list.appointmentDate | date:'dd MMM yyyy' }}<span class="d-block text-info">{{ list.appointmentTime
                                                                 }}</span>
                                                         </td>
                                                         <td>{{ list.bookingDate | date:'dd MMM yyyy' }}</td>
                                                         <td>₹{{ list.paidAmount }}</td>
                                                         <td class="text-center">
-                                                            <span class="badge badge-pill bg-success-light"
-                                                                *ngIf="list.currentStatus === 'Completed'">Completed</span>
-                                                            <span class="badge badge-pill bg-danger-light cur-pointer"
-                                                                *ngIf="list.currentStatus === 'Reallocate'"
-                                                                routerLink="/web-panel/patient-panel/reschedule-appointment/{{ list.doctorId }}/{{ list._id }}">Rescheduled</span>
-                                                            <span class="badge badge-pill bg-danger-light"
-                                                                *ngIf="list.currentStatus === 'Pending'">Pending</span>
-                                                            <span class="badge badge-pill bg-confirm-light"
-                                                                *ngIf="list.currentStatus === 'Accept'">Confirmed</span>
+                                                            <span class="badge badge-pill bg-success-light" *ngIf="list.currentStatus === 'Completed'">Completed</span>
+                                                            <span class="badge badge-pill bg-danger-light cur-pointer" *ngIf="list.currentStatus === 'Reallocate'" routerLink="/web-panel/patient-panel/reschedule-appointment/{{ list.doctorId }}/{{ list._id }}">Rescheduled</span>
+                                                            <span class="badge badge-pill bg-danger-light" *ngIf="list.currentStatus === 'Pending'">Pending</span>
+                                                            <span class="badge badge-pill bg-confirm-light" *ngIf="list.currentStatus === 'Accept'">Confirmed</span>
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="table-action">
-                                                                <a href="javascript:void(0);" id="{{list._id}}"
-                                                                    (click)="individualAppointmentDetails(list._id)"
-                                                                    class="btn btn-sm bg-info-light" data-toggle="modal"
-                                                                    data-target="#dash_details">
+                                                                <a href="javascript:void(0);" id="{{list._id}}" (click)="individualAppointmentDetails(list._id)" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#dash_details">
                                                                     <i class="far fa-eye"></i> View
                                                                 </a>
                                                             </div>
@@ -124,15 +98,10 @@
                                         </div>
                                         <div class="row result-str" *ngIf="total !== 0">
                                             <div class="col-sm-12 col-md-5 ">
-                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
-                                                    * perPage), total) }} of {{ total }} entries </p>
+                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage * perPage), total) }} of {{ total }} entries </p>
                                             </div>
                                             <div class="col-sm-12 col-md-7 text-right">
-                                                <pagination-controls [directionLinks]="directionLinks"
-                                                    [autoHide]="autoHide" [responsive]="responsive"
-                                                    [previousLabel]="labels.previousLabel"
-                                                    [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)"
-                                                    id="first">
+                                                <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)" id="first">
                                                 </pagination-controls>
                                             </div>
                                         </div>
@@ -156,16 +125,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr
-                                                        *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'second' }, let i = index;">
+                                                    <tr *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'second' }, let i = index;">
                                                         <td>{{list?.createdAt | date:'dd MMM yyyy'}}</td>
                                                         <td>Prescription {{i + 1}}</td>
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="javascript:void(0);"
-                                                                    class="avatar avatar-sm mr-2">
-                                                                    <img class="avatar-img rounded-circle"
-                                                                        src="{{list?.doctorImage}}" alt="User Image">
+                                                                <a href="javascript:void(0);" class="avatar avatar-sm mr-2">
+                                                                    <img class="avatar-img rounded-circle" src="{{list?.doctorImage}}" alt="User Image">
                                                                 </a>
                                                                 <a href="javascript:void(0);">{{list?.name}}
                                                                     <span>{{list?.dentistType}}</span></a>
@@ -173,17 +139,10 @@
                                                         </td>
                                                         <td class="text-right">
                                                             <div class="table-action">
-                                                                <a href="javascript:void(0);" id="{{list._id}}_view"
-                                                                    (click)="prescriptionDetailsView(list._id)"
-                                                                    class="btn btn-sm bg-info-light" data-toggle="modal"
-                                                                    data-target="#pres_details">
+                                                                <a href="javascript:void(0);" id="{{list._id}}_view" (click)="prescriptionDetailsView(list._id)" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#pres_details">
                                                                     <i class="far fa-eye"></i> View
                                                                 </a>
-                                                                <a href="javascript:void(0);" id="{{list._id}}_print"
-                                                                    (click)="prescriptionDetailsView(list._id)"
-                                                                    class="btn btn-sm bg-primary-light"
-                                                                    data-toggle="modal"
-                                                                    data-target="#pres_print_details">
+                                                                <a href="javascript:void(0);" id="{{list._id}}_print" (click)="prescriptionDetailsView(list._id)" class="btn btn-sm bg-primary-light" data-toggle="modal" data-target="#pres_print_details">
                                                                     <i class="far fa-eye"></i> Print
                                                                 </a>
                                                             </div>
@@ -194,15 +153,10 @@
                                         </div>
                                         <div class="row result-str" *ngIf="total !== 0">
                                             <div class="col-sm-12 col-md-5 ">
-                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
-                                                    * perPage), total) }} of {{ total }} entries </p>
+                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage * perPage), total) }} of {{ total }} entries </p>
                                             </div>
                                             <div class="col-sm-12 col-md-7 text-right">
-                                                <pagination-controls [directionLinks]="directionLinks"
-                                                    [autoHide]="autoHide" [responsive]="responsive"
-                                                    [previousLabel]="labels.previousLabel"
-                                                    [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)"
-                                                    id="second">
+                                                <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)" id="second">
                                                 </pagination-controls>
                                             </div>
                                         </div>
@@ -227,18 +181,15 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr
-                                                        *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'fourth' }, let i = index;">
+                                                    <tr *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'fourth' }, let i = index;">
                                                         <td><a href="javascript:void(0);">#{{list?.appointmentId}}</a>
                                                         </td>
                                                         <td>{{list?.createdAt | date: 'dd MMM yyy'}}</td>
                                                         <td>{{list?.serviceType}}</td>
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="javascript:void(0);"
-                                                                    class="avatar avatar-sm mr-2">
-                                                                    <img class="avatar-img rounded-circle"
-                                                                        src="{{list?.doctorImage}}" alt="User Image">
+                                                                <a href="javascript:void(0);" class="avatar avatar-sm mr-2">
+                                                                    <img class="avatar-img rounded-circle" src="{{list?.doctorImage}}" alt="User Image">
                                                                 </a>
                                                                 <a href="javascript:void(0);">{{list?.name}}
                                                                     <span>{{list?.dentistType}}</span></a>
@@ -246,10 +197,7 @@
                                                         </td>
                                                         <td class="text-right">
                                                             <div class="table-action">
-                                                                <a href="javascript:void(0);" id="{{list._id}}_view"
-                                                                    (click)="prescriptionDetailsView(list._id)"
-                                                                    class="btn btn-sm bg-info-light" data-toggle="modal"
-                                                                    data-target="#med_view_details">
+                                                                <a href="javascript:void(0);" id="{{list._id}}_view" (click)="prescriptionDetailsView(list._id)" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#med_view_details">
                                                                     <i class="far fa-eye"></i> View
                                                                 </a>
                                                                 <!-- <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
@@ -263,15 +211,10 @@
                                         </div>
                                         <div class="row result-str" *ngIf="total !== 0">
                                             <div class="col-sm-12 col-md-5 ">
-                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
-                                                    * perPage), total) }} of {{ total }} entries </p>
+                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage * perPage), total) }} of {{ total }} entries </p>
                                             </div>
                                             <div class="col-sm-12 col-md-7 text-right">
-                                                <pagination-controls [directionLinks]="directionLinks"
-                                                    [autoHide]="autoHide" [responsive]="responsive"
-                                                    [previousLabel]="labels.previousLabel"
-                                                    [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)"
-                                                    id="fourth">
+                                                <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)" id="fourth">
                                                 </pagination-controls>
                                             </div>
                                         </div>
@@ -296,17 +239,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr
-                                                        *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'third' }, let i = index;">
+                                                    <tr *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'third' }, let i = index;">
                                                         <td>
                                                             <a href="javascript:void(0);">#{{list?.invoiceId}}</a>
                                                         </td>
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="javascript:void(0);"
-                                                                    class="avatar avatar-sm mr-2">
-                                                                    <img class="avatar-img rounded-circle"
-                                                                        src="{{list?.doctorImage}}" alt="User Image">
+                                                                <a href="javascript:void(0);" class="avatar avatar-sm mr-2">
+                                                                    <img class="avatar-img rounded-circle" src="{{list?.doctorImage}}" alt="User Image">
                                                                 </a>
                                                                 <a href="javascript:void(0);">{{list?.name}}
                                                                     <span>{{list?.dentistType}}</span></a>
@@ -316,18 +256,13 @@
                                                         <td>{{list?.paymentDate | date: 'dd MMM yyyy'}}</td>
                                                         <td class="text-right">
                                                             <div class="table-action">
-                                                                <a href="javascript:void(0);" id="{{list._id}}_view"
-                                                                    (click)="prescriptionDetailsView(list._id)"
-                                                                    class="btn btn-sm bg-info-light" data-toggle="modal"
-                                                                    data-target="#inv_view_details">
+                                                                <a href="javascript:void(0);" id="{{list._id}}_view" (click)="prescriptionDetailsView(list._id)" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#inv_view_details">
                                                                     <i class="far fa-eye"></i> View
                                                                 </a>
                                                                 <!-- <a href="javascript:void(0);" id="{{list._id}}_print" (click)="prescriptionDetailsView(list._id)" class="btn btn-sm bg-primary-light" data-toggle="modal" data-target="#pres_print_details">
                                                                     <i class="far fa-eye"></i> Print
                                                                 </a> -->
-                                                                <a href="javascript:void(0);"
-                                                                    class="btn btn-sm bg-primary-light"
-                                                                    (click)="invoicePrint(list?.pdfId)">
+                                                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light" (click)="invoicePrint(list?.pdfId)">
                                                                     <i class="fas fa-print"></i> Print
                                                                 </a>
                                                             </div>
@@ -338,15 +273,10 @@
                                         </div>
                                         <div class="row result-str" *ngIf="total !== 0">
                                             <div class="col-sm-12 col-md-5 ">
-                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
-                                                    * perPage), total) }} of {{ total }} entries </p>
+                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage * perPage), total) }} of {{ total }} entries </p>
                                             </div>
                                             <div class="col-sm-12 col-md-7 text-right">
-                                                <pagination-controls [directionLinks]="directionLinks"
-                                                    [autoHide]="autoHide" [responsive]="responsive"
-                                                    [previousLabel]="labels.previousLabel"
-                                                    [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)"
-                                                    id="third">
+                                                <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)" id="third">
                                                 </pagination-controls>
                                             </div>
                                         </div>
@@ -391,18 +321,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-right">
-                                        <button *ngIf="individualDetails?.currentStatus === 'Accept' " type="button"
-                                            disabled class="btn bg-confirm-light btn-sm"
-                                            id="topup_status">Confirmed</button>
-                                        <button *ngIf="individualDetails?.currentStatus === 'Completed' " type="button"
-                                            disabled class="btn bg-success-light btn-sm"
-                                            id="topup_status">Completed</button>
-                                        <button *ngIf="individualDetails?.currentStatus === 'Reallocate' " type="button"
-                                            disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">ReSchedule</button>
-                                        <button *ngIf="individualDetails?.currentStatus === 'Pending' " type="button"
-                                            disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">Pending</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Accept' " type="button" disabled class="btn bg-confirm-light btn-sm" id="topup_status">Confirmed</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Completed' " type="button" disabled class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Reallocate' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">ReSchedule</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Pending' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">Pending</button>
                                     </div>
                                 </div>
                             </div>
@@ -452,18 +374,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-right">
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button"
-                                            disabled class="btn bg-confirm-light btn-sm"
-                                            id="topup_status">Confirmed</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' "
-                                            type="button" disabled class="btn bg-success-light btn-sm"
-                                            id="topup_status">Completed</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' "
-                                            type="button" disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">ReSchedule</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button"
-                                            disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">Pending</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button" disabled class="btn bg-confirm-light btn-sm" id="topup_status">Confirmed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' " type="button" disabled class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">ReSchedule</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">Pending</button>
                                     </div>
                                 </div>
                             </div>
@@ -473,8 +387,7 @@
                         <span class="title">Status:</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Accept' ">Confirmed</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Completed' ">Completed</span>
-                        <span class="text"
-                            *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Pending' ">Pending</span>
                     </li>
                     <li>
@@ -514,18 +427,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-right">
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button"
-                                            disabled class="btn bg-confirm-light btn-sm"
-                                            id="topup_status">Confirmed</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' "
-                                            type="button" disabled class="btn bg-success-light btn-sm"
-                                            id="topup_status">Completed</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' "
-                                            type="button" disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">ReSchedule</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button"
-                                            disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">Pending</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button" disabled class="btn bg-confirm-light btn-sm" id="topup_status">Confirmed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' " type="button" disabled class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">ReSchedule</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">Pending</button>
                                     </div>
                                 </div>
                             </div>
@@ -535,8 +440,7 @@
                         <span class="title">Status:</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Accept' ">Confirmed</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Completed' ">Completed</span>
-                        <span class="text"
-                            *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Pending' ">Pending</span>
                     </li>
                     <li>
@@ -545,8 +449,7 @@
                     </li>
                     <li>
                         <span class="title">Attachments</span>
-                        <span *ngFor="let attachment of prescriptionDetails?.prescriptionAttach; let i = index;"
-                            class="text">
+                        <span *ngFor="let attachment of prescriptionDetails?.prescriptionAttach; let i = index;" class="text">
                             <a href="{{attachment}}" target="_blank"> Prescription {{i+1}}
                             </a>
                         </span>
@@ -580,18 +483,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-right">
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button"
-                                            disabled class="btn bg-confirm-light btn-sm"
-                                            id="topup_status">Confirmed</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' "
-                                            type="button" disabled class="btn bg-success-light btn-sm"
-                                            id="topup_status">Completed</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' "
-                                            type="button" disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">ReSchedule</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button"
-                                            disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">Pending</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button" disabled class="btn bg-confirm-light btn-sm" id="topup_status">Confirmed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' " type="button" disabled class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">ReSchedule</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">Pending</button>
                                     </div>
                                 </div>
                             </div>
@@ -601,8 +496,7 @@
                         <span class="title">Status:</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Accept' ">Confirmed</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Completed' ">Completed</span>
-                        <span class="text"
-                            *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Pending' ">Pending</span>
                     </li>
                     <li>
@@ -642,18 +536,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-right">
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button"
-                                            disabled class="btn bg-confirm-light btn-sm"
-                                            id="topup_status">Confirmed</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' "
-                                            type="button" disabled class="btn bg-success-light btn-sm"
-                                            id="topup_status">Completed</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' "
-                                            type="button" disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">ReSchedule</button>
-                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button"
-                                            disabled class="btn btn-sm bg-danger-light"
-                                            id="topup_status">Pending</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button" disabled class="btn bg-confirm-light btn-sm" id="topup_status">Confirmed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' " type="button" disabled class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">ReSchedule</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button" disabled class="btn btn-sm bg-danger-light" id="topup_status">Pending</button>
                                     </div>
                                 </div>
                             </div>
@@ -663,8 +549,7 @@
                         <span class="title">Status:</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Accept' ">Confirmed</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Completed' ">Completed</span>
-                        <span class="text"
-                            *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
                         <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Pending' ">Pending</span>
                     </li>
                     <li>
@@ -685,5 +570,3 @@
     </div>
 </div>
 <!-- /Medical View Details Modal -->
-
-

@@ -26,16 +26,18 @@
                             <div>
                                 <img src="assets/img/oralself/img1.svg" class="oralimg" alt="Oralimg">
                             </div>
-                            <ul class="progressbar">
-                                <li class="active">Oral Hygiene</li>
-                                <li>Dental Condition</li>
-                                <li>Habit History</li>
+                            <ul class="progressbar" id="tab-list">
+                                <li class="tab-form active">Oral Hygiene</li>
+                                <li class="tab-form" [ngClass]="currentSteps === 'step2' || currentSteps === 'step3'? 'active': ''">Dental Condition</li>
+                                <li class="tab-form" [ngClass]="currentSteps === 'step3'? 'active': ''">Habit History</li>
 
                             </ul>
                             <div class="questiondiv">
 
                                 <form>
-                                    <div>
+
+                                    <!-- step 1 div start -->
+                                    <div *ngIf="tabSteps.step1">
                                         <h5 class="q1">Q1. When do you normally brush your teeth?</h5>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="queastion1" id="radio1" value="a">
@@ -168,7 +170,7 @@
 
 
                                     <!-- step 2 div start -->
-                                    <div>
+                                    <div *ngIf="tabSteps.step2">
                                         <h5 class="q2">Q.1 Does your teeth ever get sensitive to hot and cold? <span class="sel_span">(Select multiple)</span></h5>
                                         <div class="formcheck">
                                             <div class="form-check form-check-inline boxchek">
@@ -326,7 +328,7 @@
                                     <!-- step 2 div end -->
 
                                     <!-- step 3 div start -->
-                                    <div>
+                                    <div *ngIf="tabSteps.step3">
                                         <h5 class="q1">Q1. Do you have high frequency sugar intake & acidic drinks ?</h5>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="queastion1" id="rad1" value="a">
@@ -437,8 +439,8 @@
                                         <p class="for4of4">4 of 4 Questions</p>
                                     </div>
                                     <div class="col-sm-4 btnrow">
-                                        <div class="pre">PRE</div>
-                                        <div class="submitbt">NEXT</div>
+                                        <div class="pre" (click)="changeBtnSteps('pre')">PRE</div>
+                                        <div class="submitbt" (click)="changeBtnSteps('next')">NEXT</div>
                                         <div class="submitbt" (click)="show()">SUBMIT</div>
                                     </div>
                                 </div>
@@ -496,7 +498,7 @@
                             <div class="buttonsdiv form-group">
                                 <button type="button" class="btn btn-dark goback" data-dismiss="modal" (click)="hide()">GO
                                     BACK</button>
-                                <button type="submit" class="btn btn-primary viewr">VIEW RESULT</button>
+                                <button type="submit" class="btn btn-primary viewr" routerLink="/web-panel/assessment-result">VIEW RESULT</button>
                             </div>
 
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutUsComponent } from '../about-us/about-us.component';
+import { AssessmentResultComponent } from '../assessment-result/assessment-result.component';
 import { OnlineConsultGuard } from '../auth-guard/online-consult/online-consult.guard';
 import { BlogComponent } from '../blog/blog.component';
 import { BookAnAppointmentComponent } from '../book-an-appointment/book-an-appointment.component';
@@ -74,6 +75,10 @@ const routes: Routes = [
       {
         path: 'oral-self-assessment',
         component: OralSelfAsessmentComponent,
+      },
+      {
+        path: 'assessment-result',
+        component: AssessmentResultComponent
       },
       {
         path: '',
