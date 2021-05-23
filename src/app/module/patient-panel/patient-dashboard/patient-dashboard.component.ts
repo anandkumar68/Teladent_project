@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Constants } from 'src/app/shared/constant';
 import { WebApiService } from 'src/app/shared/web-api/web-api.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { WebApiService } from 'src/app/shared/web-api/web-api.service';
   styleUrls: ['./patient-dashboard.component.css']
 })
 export class PatientDashboardComponent implements OnInit {
-  @ViewChild('htmlData') htmlData:ElementRef;
+  @ViewChild('htmlData') htmlData: ElementRef;
   math = Math;
 
   currentPage = 1;
@@ -37,7 +38,11 @@ export class PatientDashboardComponent implements OnInit {
     description: ""
   }
   total = 0;
-  
+
+  // FOR SORTING
+  reverse: boolean = true;
+
+
 
   public directionLinks: boolean = true;
   public autoHide: boolean = false;
@@ -48,7 +53,7 @@ export class PatientDashboardComponent implements OnInit {
   };
   dashboardTab = 'appointment';
   invoicePdfDetails = {};
-  
+
   constructor(
     private api: WebApiService,
     public ngxLoader: NgxUiLoaderService,
@@ -66,7 +71,13 @@ export class PatientDashboardComponent implements OnInit {
   getDashboardDetails(value: any) {
     try {
       this.ngxLoader.startLoader('loader-02');
-      this.api.getPatientDashboardDetails(this.perPage, (this.currentPage * this.perPage) - this.perPage, value).subscribe((res: any) => {
+      this.api.getPatientDashboardDetails(
+        this.perPage,
+        (this.currentPage * this.perPage) - this.perPage,
+        value,
+        `${Constants.sortType === undefined ? '' : Constants.sortType}`,
+        `${Constants.sortBy === undefined ? '' : Constants.sortBy}`,
+      ).subscribe((res: any) => {
         this.ngxLoader.stopLoader('loader-02');
         if (res.status === 'success') {
           this.dashboardData = [];
@@ -91,7 +102,7 @@ export class PatientDashboardComponent implements OnInit {
   checkTabValue(value) {
     try {
       this.currentPage = 1;
-      if(value === 'appointment'){
+      if (value === 'appointment') {
         this.dashboardTab = 'appointment';
         this.getDashboardDetails(value);
       }
@@ -101,12 +112,12 @@ export class PatientDashboardComponent implements OnInit {
         this.getDashboardDetails(value);
       }
 
-      if(value === 'invoice'){
+      if (value === 'invoice') {
         this.dashboardTab = 'invoice';
         this.getDashboardDetails(value);
       }
 
-      if(value === 'booking'){
+      if (value === 'booking') {
         this.dashboardTab = 'booking';
         this.getDashboardDetails(value);
       }
@@ -116,33 +127,33 @@ export class PatientDashboardComponent implements OnInit {
     }
   }
 
-    // INDIVIDUAL APPOINTMENT DETAILS
+  // INDIVIDUAL APPOINTMENT DETAILS
   individualAppointmentDetails(appointId) {
-      try {
-        
-        let body = {
-          appointId: appointId
-        }
-  
-        this.ngxLoader.startLoader('loader-02');
-        this.api.individualAppointmentPatDetails(body).subscribe((res: any) => {
-          this.ngxLoader.stopLoader('loader-02');
-          if (res.status === 'success') {
-  
-            this.individualDetails = res.data;
-  
-          }
-          if (res.status === 'error') {
-            this.toastr.error(res.message);
-          }
-        }, (error: any) => {
-          console.log(error);
-          this.ngxLoader.stopLoader('loader-02');
-        });
-  
-      } catch (error) {
-        console.log(error);
+    try {
+
+      let body = {
+        appointId: appointId
       }
+
+      this.ngxLoader.startLoader('loader-02');
+      this.api.individualAppointmentPatDetails(body).subscribe((res: any) => {
+        this.ngxLoader.stopLoader('loader-02');
+        if (res.status === 'success') {
+
+          this.individualDetails = res.data;
+
+        }
+        if (res.status === 'error') {
+          this.toastr.error(res.message);
+        }
+      }, (error: any) => {
+        console.log(error);
+        this.ngxLoader.stopLoader('loader-02');
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
@@ -157,7 +168,7 @@ export class PatientDashboardComponent implements OnInit {
   //PRESCRIPTION DETAILS
   prescriptionDetailsView(appointId) {
     try {
-      
+
       let body = {
         appointId: appointId
       }
@@ -181,12 +192,12 @@ export class PatientDashboardComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
-}
+  }
 
   //BILLING DETAILS
   billingDetailsView(appointId) {
     try {
-      
+
       let body = {
         appointId: appointId
       }
@@ -210,7 +221,7 @@ export class PatientDashboardComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
-}
+  }
 
   invoicePrint(pdfId) {
     try {
@@ -226,6 +237,15 @@ export class PatientDashboardComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+
+
+  // FOR SORTING
+  setOrder(value: string) {
+    this.reverse = !this.reverse;
+    Constants.sortType = this.reverse === true ? '-1' : '1';
+    Constants.sortBy = value;
+    this.getDashboardDetails(this.dashboardTab);
   }
 
 }

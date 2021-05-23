@@ -27,6 +27,7 @@ import {
 } from 'angularx-social-login';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../../environments/environment';
+import { OrderModule } from 'ngx-order-pipe';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
   fgsColor: '#00d0f1',
@@ -79,6 +80,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxPaginationModule,
     NgCircleProgressModule.forRoot(),
     SocialLoginModule,
+    OrderModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

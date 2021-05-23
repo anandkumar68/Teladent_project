@@ -36,6 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AssessmentResultComponent } from '../assessment-result/assessment-result.component';
 import { TermConditionsComponent } from '../term-conditions/term-conditions.component';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
+import { OrderModule } from 'ngx-order-pipe';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
@@ -105,7 +106,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgCircleProgressModule.forRoot(),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OrderModule,
 
   ]
 })

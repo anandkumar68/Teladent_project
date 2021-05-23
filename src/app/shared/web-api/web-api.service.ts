@@ -230,7 +230,7 @@ export class WebApiService {
   /********************************* FOR PATIENT DASHBOARD DETAILS *******************/
 
   //GET PATIENT DASHBOARD DETAILS
-  getPatientDashboardDetails(limit: any, skip: any, dashboardType: any): Observable<any> {
+  getPatientDashboardDetails(limit: any, skip: any, dashboardType: any, sortType:any, sortBy:any): Observable<any> {
     try {
       let token: any;
       token = localStorage.getItem('token');
@@ -238,7 +238,7 @@ export class WebApiService {
       return this.http.get(apiUrl, {
         headers: new HttpHeaders()
           .set('Authorization', `Bearer ${Constants.credentialsDecrypt(token)}`),
-        params: new HttpParams().set('limit', limit).set('skip', skip).set('dashboardType', dashboardType)
+        params: new HttpParams().set('limit', limit).set('skip', skip).set('dashboardType', dashboardType).set('sortType', sortType).set('sortBy', sortBy)
       });
     } catch (error) {
       console.log(error.message);
