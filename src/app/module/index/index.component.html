@@ -310,11 +310,21 @@
                             <form>
                                 <div class="d-flex align-items-center mbflex">
                                     <div>
-                                        <input type="email" name="email" placeholder="Enter Your Email Address">
+                                        <input type="email" name="email" id="newLetterEmail" placeholder="Enter Your Email Address">
                                     </div>
-                                    <div>
-                                        <input class="btn btn-grad kk2 w100" type="button" value="subscribe">
+                                    <div *ngIf="isNewsLetterSubscribed === true">
+                                        <input class="btn btn-grad kk2 w100" type="button" value="subscribe" (click)="newLetter()">
                                     </div>
+                                    <div *ngIf="isNewsLetterSubscribed === false" class="newsLetterDisable">
+                                        <input class="btn btn-grad kk2 w100" type="button" value="subscribing...">
+                                    </div>
+                                    
+                                </div>
+                                <div *ngIf="newLetterErrMsg.length > 0" class="section-title pb-2 grapemail">
+                                    <p class="newLetterErr">{{newLetterErrMsg}}</p>
+                                </div>
+                                <div *ngIf="newLetterSuccMsg.length > 0" class="section-title pb-2 grapemail">
+                                    <p class="newLetterSucc">{{newLetterSuccMsg}}</p>
                                 </div>
                             </form>
                         </div>

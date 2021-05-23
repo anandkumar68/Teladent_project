@@ -53,24 +53,65 @@
             <div class="col-md-6 ">
 
                 <!-- contact form  -->
-                <form action="#">
+                <form [formGroup]="contactInfoForm">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Name">
+                        <input type="text" class="form-control" placeholder="Your Name"
+                            [ngClass]="submitted && validation.name.errors ? 'is-invalid' : ''" formControlName="name">
+                        <div *ngIf="submitted && validation.name.errors" class="invalid-feedback">
+                            <div *ngIf="validation.name.errors.required">Name is Mandatory
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Email">
+                        <input type="text" class="form-control" placeholder="Your Email"
+                            [ngClass]="submitted && validation.email.errors ? 'is-invalid' : ''"
+                            formControlName="email">
+                        <div *ngIf="submitted && validation.email.errors" class="invalid-feedback">
+                            <div *ngIf="validation.email.errors.required">Email is Mandatory
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && validation.email.errors" class="invalid-feedback">
+                            <div *ngIf="validation.email.errors.pattern">Invalid Email
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Contact Number">
+                        <input type="text" class="form-control" placeholder="Your Contact Number"
+                            [ngClass]="submitted && validation.phone.errors ? 'is-invalid' : ''"
+                            formControlName="phone">
+                        <div *ngIf="submitted && validation.phone.errors" class="invalid-feedback">
+                            <div *ngIf="validation.phone.errors.required">Phone Number is Mandatory
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && validation.phone.errors" class="invalid-feedback">
+                            <div *ngIf="validation.phone.errors.pattern">Invalid Phone Number (Please Add Country Code Before Phone Number. For eg: +91)
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Subject">
+                        <input type="text" class="form-control" placeholder="Subject"
+                            [ngClass]="submitted && validation.subject.errors ? 'is-invalid' : ''"
+                            formControlName="subject">
+                        <div *ngIf="submitted && validation.subject.errors" class="invalid-feedback">
+                            <div *ngIf="validation.subject.errors.required">Subject is Mandatory
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                        <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"
+                            [ngClass]="submitted && validation.message.errors ? 'is-invalid' : ''"
+                            formControlName="message"></textarea>
+                        <div *ngIf="submitted && validation.message.errors" class="invalid-feedback">
+                            <div *ngIf="validation.message.errors.required">Message is Mandatory
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5 btn-grad">
+                    <div *ngIf="isSending === true" class="form-group">
+                        <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5 btn-grad"
+                            (click)="onSubmit()">
+                    </div>
+                    <div *ngIf="isSending === false" class="form-group">
+                        <input type="submit" value="Sending..." class="btn btn-primary py-3 px-5 btn-grad">
                     </div>
                 </form>
                 <!-- /contact form -->
@@ -81,7 +122,8 @@
             <div class="col-md-6">
 
                 <div class="map-view">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.101847243413!2d77.11250531516517!3d28.536658295164436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd309eebed77%3A0xb122512dfb18ffad!2sCelebration%20Gardens!5e0!3m2!1sen!2sin!4v1615982932581!5m2!1sen!2sin"
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.101847243413!2d77.11250531516517!3d28.536658295164436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd309eebed77%3A0xb122512dfb18ffad!2sCelebration%20Gardens!5e0!3m2!1sen!2sin!4v1615982932581!5m2!1sen!2sin"
                         width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
 

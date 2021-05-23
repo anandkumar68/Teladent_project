@@ -438,4 +438,56 @@ export class WebApiService {
       console.log(error.message);
     }
   }
+
+ /**********************************************************************************/
+  /********************************* NEWS LETTER ****************************/
+  /**********************************************************************************/
+
+  subscribeNewsLetter(data): Observable<any> {
+    try {
+      const apiUrl = `${this.BASE_URL}/web/send-grab-newasltter-email`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  webAddContactInfo(data): Observable<any> {
+    try {
+      const apiUrl = `${this.BASE_URL}/web/add-contact-info`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+/**********************************************************************************/
+  /********************************* ORAL ASSESSMENT **************************/
+  /**********************************************************************************/
+
+  addOralAssesment(data): Observable<any> {
+    try {
+      const apiUrl = `${this.BASE_URL}/web/add-oral-assesment`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  getAssessmentResult(data): Observable<any> {
+    try {
+      const apiUrl = `${this.BASE_URL}/web/get-oral-assesment-result`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 }

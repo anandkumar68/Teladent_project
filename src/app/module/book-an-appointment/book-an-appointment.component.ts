@@ -224,6 +224,7 @@ export class BookAnAppointmentComponent implements OnInit {
           this.sessionValue.userId = this.userDetailsInfo._id;
 
           this.sessionValue.id = resolve.data.id;
+          this.sessionValue.razorDbId = resolve.data.razorDbId;
 
           // Session Storage
           let sessionValue = resolve.data;

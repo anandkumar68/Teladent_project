@@ -284,3 +284,18 @@ span.tt {
     color: white !important;
     border-radius: 100px;
 }
+
+.newLetterErr {
+    color: brown;
+    font: bolder;
+}
+
+.newsLetterDisable {
+    cursor: none;
+    pointer-events: none;
+}
+
+.newLetterSucc {
+    color: green;
+    font: bolder;
+}

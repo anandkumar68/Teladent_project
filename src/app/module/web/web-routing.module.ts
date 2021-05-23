@@ -79,7 +79,7 @@ const routes: Routes = [
         component: OralSelfAsessmentComponent,
       },
       {
-        path: 'assessment-result',
+        path: 'assessment-result/:assesmentId',
         component: AssessmentResultComponent
       },
       {

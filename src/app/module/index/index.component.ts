@@ -17,6 +17,9 @@ export class IndexComponent implements OnInit {
 
   webBlogDetails = [];
   modelData = new LoginModal();
+  isNewsLetterSubscribed = true;
+  newLetterErrMsg = "";
+  newLetterSuccMsg = "";
 
   constructor(
     private apiService: WebApiService,
@@ -40,10 +43,10 @@ export class IndexComponent implements OnInit {
 
   blogDetails() {
     try {
-      
-      this.apiService.blogDetailsWeb(0,4).subscribe((resolve: any) => {
 
-        if(resolve.status === 'success') {
+      this.apiService.blogDetailsWeb(0, 4).subscribe((resolve: any) => {
+
+        if (resolve.status === 'success') {
 
           this.webBlogDetails = resolve.data.list;
 
@@ -134,6 +137,42 @@ export class IndexComponent implements OnInit {
     } catch (error) {
       console.log(error.message);
     }
+  }
+
+  // Subscribe New Letter
+  newLetter() {
+    this.isNewsLetterSubscribed = false;
+    let body = {
+      email: (document.getElementById('newLetterEmail') as HTMLInputElement).value
+    }
+
+    this.apiService.subscribeNewsLetter(body).subscribe((resolve) => {
+      if (resolve.status === 'success') {
+        this.newLetterSuccMsg = resolve.message;
+        setTimeout(() => {
+          this.newLetterSuccMsg = "";
+        }, 3000);
+        this.isNewsLetterSubscribed = true;
+      }
+
+      if (resolve.status === 'error') {
+        this.newLetterErrMsg = resolve.message;
+        setTimeout(() => {
+          this.newLetterErrMsg = "";
+        }, 3000);
+        this.isNewsLetterSubscribed = true;
+      }
+
+    },
+      (err) => {
+        this.newLetterErrMsg = err.message;
+        setTimeout(() => {
+          this.newLetterErrMsg = "";
+        }, 3000);
+        this.isNewsLetterSubscribed = true;
+      }
+    )
+
   }
 
 }
