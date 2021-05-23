@@ -35,6 +35,7 @@ import { OralSelfAsessmentComponent } from '../oral-self-asessment/oral-self-ase
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AssessmentResultComponent } from '../assessment-result/assessment-result.component';
 import { TermConditionsComponent } from '../term-conditions/term-conditions.component';
+import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // For Simple Loader
@@ -81,7 +82,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     BookAnAppointmentComponent,
     OralSelfAsessmentComponent,
     AssessmentResultComponent,
-    TermConditionsComponent
+    TermConditionsComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     CommonModule,
