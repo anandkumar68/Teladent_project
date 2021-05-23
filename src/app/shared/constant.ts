@@ -13,6 +13,9 @@ export class Constants {
 
   public static password = 'watchingyou';
   static router: Router;
+  public static sortType:any;
+  public static sortBy:any;
+
   constructor(
   ) { }
 
