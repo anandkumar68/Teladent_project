@@ -17,9 +17,7 @@
                             <!-- <img src="assets/img/teladent_2.png " alt="logo "> -->
                         </div>
                         <div class="footer-about-content ">
-                            <p>Indi’s first tele dentistry platform that provides virtual advice and expert opinion for
-                                all your
-                                dental problems.</p>
+                            <p>Indi’s first tele dentistry platform that provides virtual advice and expert opinion for all your dental problems.</p>
                             <div class="social-icon ">
                                 <ul>
                                     <li>
@@ -51,14 +49,10 @@
                         <h2 class="footer-title ">For Patients</h2>
                         <ul>
                             <!-- <li><a href="search.html ">Search for Clinics</a></li> -->
-                            <li><a (click)="patientRouter('login', 'login-modal', '/web-panel/index', 'user')"
-                                    href="javascript:void(0); ">Login</a></li>
-                            <li><a (click)="patientRouter('signup', 'login-modal', '/web-panel/index', 'user')"
-                                    href="javascript:void(0);">Register</a></li>
-                            <li><a (click)="patientRouter('booking', 'login-modal', '/web-panel/online-consultation?limit=10&skip=0', 'user')"
-                                    href="javascript:void(0);">Book an Appointment</a></li>
-                            <li><a (click)="patientRouter('patientDash', 'login-modal', '/web-panel/patient-panel/patient-dashboard', 'user')"
-                                    href="javascript:void(0);">Patient Dashboard</a></li>
+                            <li><a (click)="patientRouter('login', 'login-modal', '/web-panel/index', 'user')" href="javascript:void(0); ">Login</a></li>
+                            <li><a (click)="patientRouter('signup', 'login-modal', '/web-panel/index', 'user')" href="javascript:void(0);">Register</a></li>
+                            <li><a (click)="patientRouter('booking', 'login-modal', '/web-panel/online-consultation?limit=10&skip=0', 'user')" href="javascript:void(0);">Book an Appointment</a></li>
+                            <li><a (click)="patientRouter('patientDash', 'login-modal', '/web-panel/patient-panel/patient-dashboard', 'user')" href="javascript:void(0);">Patient Dashboard</a></li>
                             <app-login-modal></app-login-modal>
                         </ul>
                     </div>
@@ -72,14 +66,10 @@
                     <div class="footer-widget footer-menu ">
                         <h2 class="footer-title ">For Dentist</h2>
                         <ul>
-                            <li><a (click)="densitRouter('login', 'login-modal', '/web-panel/index', 'onlineDoctors')"
-                                    href="javascript:void(0);">Login</a></li>
-                            <li><a (click)="densitRouter('signup', 'login-modal', '/web-panel/index', 'onlineDoctors')"
-                                    href="javascript:void(0);">Register</a></li>
-                            <li><a (click)="densitRouter('appointment', 'login-modal', '/web-panel/doctors-panel/doctor-appointments', 'onlineDoctors')"
-                                    href="javascript:void(0);">Appointments</a></li>
-                            <li><a (click)="densitRouter('doctorDash', 'login-modal', '/web-panel/doctor-dashboard', 'onlineDoctors')"
-                                    href="javascript:void(0);">Dentist Dashboard</a></li>
+                            <li><a (click)="densitRouter('login', 'login-modal', '/web-panel/index', 'onlineDoctors')" href="javascript:void(0);">Login</a></li>
+                            <li><a (click)="densitRouter('signup', 'login-modal', '/web-panel/index', 'onlineDoctors')" href="javascript:void(0);">Register</a></li>
+                            <li><a (click)="densitRouter('appointment', 'login-modal', '/web-panel/doctors-panel/doctor-appointments', 'onlineDoctors')" href="javascript:void(0);">Appointments</a></li>
+                            <li><a (click)="densitRouter('doctorDash', 'login-modal', '/web-panel/doctor-dashboard', 'onlineDoctors')" href="javascript:void(0);">Dentist Dashboard</a></li>
                         </ul>
                     </div>
                     <!-- /Footer Widget -->
@@ -132,10 +122,9 @@
                         <!-- Copyright Menu -->
                         <div class="copyright-menu ">
                             <ul class="policy-menu ">
-                                <li><a (click)="footerRouter('/web-panel/covid-guidelines')"
-                                        href="javascript:void(0);">Covid 19 Information</a></li>
-                                <li><a href="#">Terms</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a (click)="footerRouter('/web-panel/covid-guidelines')" href="javascript:void(0);">Covid 19 Information</a></li>
+                                <li><a href="javascript:void(0);" (click)="footerRouter('/web-panel/term-conditions')">Terms</a></li>
+                                <li><a href="javascript:void(0);" (click)="footerRouter('/web-panel/privacy-policy')">Privacy Policy</a></li>
                             </ul>
                         </div>
                         <!-- /Copyright Menu -->

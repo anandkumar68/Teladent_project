@@ -16,6 +16,8 @@ import { InfobytesComponent } from '../infobytes/infobytes.component';
 import { OnlineConsultationComponent } from '../online-consultation/online-consultation.component';
 import { OralSelfAsessmentComponent } from '../oral-self-asessment/oral-self-asessment.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
+import { TermConditionsComponent } from '../term-conditions/term-conditions.component';
 import { WebComponent } from './web.component';
 
 const routes: Routes = [
@@ -79,6 +81,14 @@ const routes: Routes = [
       {
         path: 'assessment-result',
         component: AssessmentResultComponent
+      },
+      {
+        path: 'term-conditions',
+        component: TermConditionsComponent
+      },
+      {
+        path: 'privacy-policy',
+        component: PrivacyPolicyComponent
       },
       {
         path: '',
