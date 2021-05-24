@@ -343,7 +343,7 @@ export class BookAnAppointmentComponent implements OnInit {
           "currency": "INR",
           "name": "Tela Dent",
           "description": "Dentistry Anytime Anywhere",
-          "image": "/assets/img/tela-square-logo.jpg",
+          "image": "https://get-media.s3.ap-south-1.amazonaws.com/td_assets/razorpay/tela-square-logo.jpg",
           "order_id": `${this.sessionValue.id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
           "theme": {
             "color": "#3399cc"

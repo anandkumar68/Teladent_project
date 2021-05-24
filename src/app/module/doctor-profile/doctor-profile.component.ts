@@ -14,6 +14,12 @@ import { WebApiService } from 'src/app/shared/web-api/web-api.service';
 export class DoctorProfileComponent implements OnInit {
   doctorId: any;
   doctorDetail: any;
+  reviewInfo = {
+    list: [],
+    count: 0
+  };
+  limit = 10;
+  skip = 0;
 
   constructor(
     public apiService: WebApiService,
@@ -26,7 +32,7 @@ export class DoctorProfileComponent implements OnInit {
   ngOnInit(): void {
     this.doctorId = this.activatedRouter.snapshot.params.doctorId;
     this.doctorDetails();
-
+    this.reviewDetails();
   }
 
   doctorDetails() {
@@ -40,7 +46,6 @@ export class DoctorProfileComponent implements OnInit {
         if(resolve.status === 'success') {
 
           this.doctorDetail = resolve.data;
-          console.log(this.doctorDetail);
           this.ngxLoader.stopLoader('loader-01');
 
         }
@@ -79,6 +84,24 @@ export class DoctorProfileComponent implements OnInit {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  // Review Details
+  reviewDetails() {
+    try {
+      
+      this.apiService.getReviewDetails(this.doctorId, this.skip, this.limit).subscribe((resolve) => {
+        
+        if(resolve.status === 'success') {
+          this.reviewInfo = resolve.data;
+        }
+
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
 }

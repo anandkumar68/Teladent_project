@@ -18,7 +18,7 @@ const routes: Routes = [
     component: PageNotFoundComponent,
   },
   {
-    path: 'web-review',
+    path: 'web-review/:appointId',
     component: ReviewComponent,
   },
   {

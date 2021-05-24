@@ -5311,7 +5311,7 @@ section.iq-features {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    position: absolute;
+    /* position: absolute; */
     top: 3px;
     right: 0;
     width: auto;

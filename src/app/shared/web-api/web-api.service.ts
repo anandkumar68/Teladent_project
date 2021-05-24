@@ -490,4 +490,31 @@ export class WebApiService {
       console.log(error.message);
     }
   }
+
+/**********************************************************************************/
+  /********************************* FEEDBACK **************************/
+  /**********************************************************************************/
+
+  addAppointFeedback(data): Observable<any> {
+    try {
+      const apiUrl = `${this.BASE_URL}/web/add-appoint-review`;
+      return this.http.post(apiUrl, data, {
+        headers: new HttpHeaders()
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // BLOG INDIVIDUAL LIST API
+  getReviewDetails(doctorId: any, skip: any, limit: any): any {
+    try {
+      let token: any;
+      token = localStorage.getItem('adminToken');
+      const apiUrl = `${this.BASE_URL}/web/get-appoint-review?doctorId=${doctorId}&skip=${skip}&limit=${limit}`;
+      return this.http.get(apiUrl);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 }

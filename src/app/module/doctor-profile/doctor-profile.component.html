@@ -374,26 +374,55 @@
                             <ul class="comments-list">
 
                                 <!-- Comment List -->
-                                <li>
+                                <li *ngFor="let review of reviewInfo?.list">
                                     <div class="comment">
-                                        <img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient.jpg">
+                                        <img class="avatar avatar-sm rounded-circle" alt="User Image" src="{{review?.imageUrl}}">
                                         <div class="comment-body">
                                             <div class="meta-data">
-                                                <span class="comment-author">Richard Wilson</span>
-                                                <span class="comment-date">Reviewed 2 Days ago</span>
-                                                <div class="review-count rating">
+                                                <span class="comment-author">{{review?.firstName}} {{review?.lastName}}</span>
+                                                <span class="comment-date">Reviewed on {{review?.createdAt | date: 'dd-MM-YYYY'}}</span>
+                                                
+                                                <div *ngIf="review?.feedbackSmiley === 1" class="review-count rating">
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div *ngIf="review?.feedbackSmiley === 2" class="review-count rating">
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div *ngIf="review?.feedbackSmiley === 3" class="review-count rating">
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div *ngIf="review?.feedbackSmiley === 4" class="review-count rating">
                                                     <i class="fas fa-star filled"></i>
                                                     <i class="fas fa-star filled"></i>
                                                     <i class="fas fa-star filled"></i>
                                                     <i class="fas fa-star filled"></i>
                                                     <i class="fas fa-star"></i>
                                                 </div>
+                                                <div *ngIf="review?.feedbackSmiley === 5" class="review-count rating">
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                </div>
                                             </div>
-                                            <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
+                                            <!-- <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p> -->
                                             <p class="comment-content">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Curabitur non nulla sit amet nisl tempus
+                                                {{review?.feedbackReviewTxt}}
                                             </p>
-                                            <div class="comment-reply">
+                                            <!-- <div class="comment-reply">
                                                 <a class="comment-btn" href="#">
                                                     <i class="fas fa-reply"></i> Reply
                                                 </a>
@@ -406,12 +435,12 @@
                                                         <i class="far fa-thumbs-down"></i> No
                                                     </a>
                                                 </p>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
 
                                     <!-- Comment Reply -->
-                                    <ul class="comments-reply">
+                                    <!-- <ul class="comments-reply">
                                         <li>
                                             <div class="comment">
                                                 <img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient1.jpg">
@@ -447,14 +476,14 @@
                                                 </div>
                                             </div>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                     <!-- /Comment Reply -->
 
                                 </li>
                                 <!-- /Comment List -->
 
                                 <!-- Comment List -->
-                                <li>
+                                <!-- <li>
                                     <div class="comment">
                                         <img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient2.jpg">
                                         <div class="comment-body">
@@ -488,27 +517,26 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li>
+                                </li> -->
                                 <!-- /Comment List -->
 
                             </ul>
 
                             <!-- Show All -->
-                            <div class="all-feedback text-center">
+                            <!-- <div class="all-feedback text-center">
                                 <a href="#" class="btn btn-primary btn-sm">
                                             Show all feedback <strong>(167)</strong>
                                         </a>
-                            </div>
+                            </div> -->
                             <!-- /Show All -->
 
                         </div>
                         <!-- /Review Listing -->
 
                         <!-- Write Review -->
-                        <div class="write-review">
+                        <!-- <div class="write-review">
                             <h4>Write a review for <strong>Dr. Darren Elder</strong></h4>
 
-                            <!-- Write Review Form -->
                             <form>
                                 <div class="form-group">
                                     <label>Review</label>
@@ -558,9 +586,8 @@
                                     <button type="submit" class="btn btn-primary submit-btn">Add Review</button>
                                 </div>
                             </form>
-                            <!-- /Write Review Form -->
 
-                        </div>
+                        </div> -->
                         <!-- /Write Review -->
 
                     </div>
