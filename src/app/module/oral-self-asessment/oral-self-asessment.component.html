@@ -591,7 +591,7 @@
 
                                         <div class="form-check form-check-inline" id="step3_smoke_regularly"
                                             [ngClass]=" stepData?.checked?.step3?.question2?.label3?.checkedValue === true ? 'activeborder' : ''">
-                                            <input class="form-check-input" type="radio" name="queastion3"
+                                            <input class="form-check-input" type="radio" name="queastion2"
                                                 id="step3_once_question2_label3" value="0"
                                                 [checked]="stepData?.checked?.step3?.question2?.label3?.checkedValue"
                                                 (click)="step1('step3_smoke_regularly', 'step3_once_question2_label3', 'step3', 'question2', 'label3')">
@@ -676,7 +676,7 @@
                                         <p class="for4of4">4 of 4 Questions</p>
                                     </div>
                                     <div class="col-sm-4 btnrow">
-                                        <div class="pre" (click)="changeBtnSteps('pre')">PRE</div>
+                                        <div class="pre" (click)="changeBtnSteps('pre')">PREV</div>
                                         <div class="submitbt" (click)="changeBtnSteps('next')">NEXT</div>
                                         <div *ngIf="this.currentSteps === 'step3' " class="submitbt" (click)="show()">
                                             SUBMIT</div>
@@ -700,7 +700,7 @@
                     <div class="modalheader text-center">
                         <img src="assets/img/oralself/teeth.svg" class="teethimg" />
                         <h4 class="modal-title modalhead" id="myModalLabel">Thank you for your responses. Please provide
-                            below detail in order to view your result.</h4>
+                            below details in order to view your result.</h4>
                     </div>
                     <div class="modal-body modalbody">
                         <form [formGroup]='oralModalForm' (submit)="onSubmit()">
@@ -715,13 +715,19 @@
                             </div>
                             <div class="form-group">
                                 <label class="lebc">Mobile Number*</label>
-                                <input type="text" formControlName="number" class="form-control"
+                                <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+                                    [searchCountryFlag]="true" [customPlaceholder]="'Enter Mobile Number'"
+                                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                                    [selectFirstCountry]="false" [selectedCountryISO]="setCountry" [tooltipField]="TooltipLabel.Name"
+                                    [phoneValidation]="true" [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                                </ngx-intl-tel-input>
+                                <!-- <input type="text" formControlName="number" class="form-control"
                                     placeholder="Enter Mobile Number"
                                     [ngClass]="submitted && validation.number.errors ? 'is-invalid' : ''" />
                                 <div *ngIf="submitted && validation.number.errors" class="invalid-feedback">
                                     <div *ngIf="validation.number.errors.required">Phone Number is Mandatory
                                     </div>
-                                </div>
+                                </div> -->
                                 <div *ngIf="submitted && validation.number.errors" class="invalid-feedback">
                                     <div *ngIf="validation.number.errors.pattern">Invalid Phone Number (Please Add
                                         Country Code Before Phone Number. For eg: +91)
@@ -793,7 +799,7 @@
 
 
 
-        <section class="section section-lg bg-image-21">
+        <!-- <section class="section section-lg bg-image-21">
             <div class="container text-center">
                 <div class="row justify-content-center">
                     <div class="col-xl-10 d-flex flex-column align-items-center">
@@ -816,7 +822,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
 
 

@@ -76,13 +76,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Contact Number"
+                        <ngx-intl-tel-input [cssClass]="'form-control custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+                            [searchCountryFlag]="true" [customPlaceholder]="'Your Contact Number'"
+                            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                            [selectFirstCountry]="false" [selectedCountryISO]="setCountry" [tooltipField]="TooltipLabel.Name"
+                            [phoneValidation]="true" [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                        </ngx-intl-tel-input>
+                     
+                        <!-- <input type="text" class="form-control" placeholder="Your Contact Number"
                             [ngClass]="submitted && validation.phone.errors ? 'is-invalid' : ''"
                             formControlName="phone">
                         <div *ngIf="submitted && validation.phone.errors" class="invalid-feedback">
                             <div *ngIf="validation.phone.errors.required">Phone Number is Mandatory
                             </div>
-                        </div>
+                        </div> -->
                         <div *ngIf="submitted && validation.phone.errors" class="invalid-feedback">
                             <div *ngIf="validation.phone.errors.pattern">Invalid Phone Number (Please Add Country Code Before Phone Number. For eg: +91)
                             </div>

@@ -1,3 +1,21 @@
 li {
     list-style: none;
 }
+p.stb {
+    font-size: 30px;
+    font-weight: bolder;
+    line-height: 39px;
+    color: #272b41;
+    font-weight: 600;
+}
+.terms-text h4 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.terms-text p {
+    color: #666;
+    display: inline-block;
+    font-size: 14px;
+}
+

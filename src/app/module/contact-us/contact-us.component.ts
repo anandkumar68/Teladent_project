@@ -1,14 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators,  } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { WebApiService } from 'src/app/shared/web-api/web-api.service';
+import {
+  CountryISO,
+  SearchCountryField,
+  TooltipLabel,
+} from 'ngx-intl-tel-input';
 
+import { WebApiService } from 'src/app/shared/web-api/web-api.service';
+declare const $: any;
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css']
 })
+
 export class ContactUsComponent implements OnInit {
+
+  separateDialCode = true;
+  SearchCountryField = SearchCountryField;
+  TooltipLabel = TooltipLabel;
+  CountryISO = CountryISO;
+  setCountry: any;
+  
+
+
   contactInfoForm: FormGroup;
   submitted = false;
   isSending = true;
@@ -17,8 +33,10 @@ export class ContactUsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private apiService: WebApiService,
     public toastr: ToastrService,
-    ) { }
+  ) { this.setCountry = CountryISO.India;}
 
+
+  
   ngOnInit(): void {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     (document.getElementById('home') as HTMLAnchorElement).classList.remove('active');
@@ -47,6 +65,7 @@ export class ContactUsComponent implements OnInit {
     });
   }
 
+  
   // FOR GET VALIDATION ERRORS
   get validation() {
     return this.contactInfoForm.controls;

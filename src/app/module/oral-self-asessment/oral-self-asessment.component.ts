@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import {
+  CountryISO,
+  SearchCountryField,
+  TooltipLabel,
+} from 'ngx-intl-tel-input';
 import { WebApiService } from 'src/app/shared/web-api/web-api.service';
 
 @Component({
@@ -10,6 +15,13 @@ import { WebApiService } from 'src/app/shared/web-api/web-api.service';
   styleUrls: ['./oral-self-asessment.component.css']
 })
 export class OralSelfAsessmentComponent implements OnInit {
+
+  
+  separateDialCode = true;
+  SearchCountryField = SearchCountryField;
+  TooltipLabel = TooltipLabel;
+  CountryISO = CountryISO;
+  setCountry: any;
 
   step: any = 1;
 
@@ -274,7 +286,7 @@ export class OralSelfAsessmentComponent implements OnInit {
     public toastr: ToastrService,
     private apiService: WebApiService,
     private router: Router
-  ) { }
+  ) { this.setCountry = CountryISO.India;}
   show() {
 
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
